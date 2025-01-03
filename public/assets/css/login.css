@@ -1,0 +1,139 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+
+.right-grid {
+    width: 400px;
+    height: 80%;
+    margin-top: 75px;
+    margin-left: 55px;
+    -webkit-box-shadow: 0px -1px 9px 0px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0px -1px 9px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px -1px 9px 0px rgba(0, 0, 0, 0.2);
+}
+
+.image-header {
+    position: absolute;
+    left: 50%;
+    top: 7%;
+    transform: translate(-50%, -50%);
+}
+
+.image-header img {
+    height: 2.7rem;
+}
+
+.homepage {
+    margin-left: 100px;
+    margin-top: 6.4rem;
+}
+
+.homepage img {
+    margin-left: 50px;
+    margin-bottom: .5rem;
+}
+
+.homepage p,h5 {
+    text-align: center;
+}
+
+.homepage p {
+    font-size: 14px;
+}
+
+/* instagram image css */
+.instagram img {
+    width: 100%;
+    margin-top: 41px;
+    margin-left: 80px;
+}
+
+.instagram h4, p {
+    text-align: center;
+}
+
+.instagram p {
+    font-size: 13px;
+    margin-top: -.3rem;
+}
+
+.instagram .btn {
+    background-color: transparent;
+    color: #333;
+    margin-top: .5rem;
+    border: 1px solid #343a40;
+}
+
+
+.instagram .btn:hover {
+    background-color: #343a40;
+    color: #fff;
+}
+
+.account p {
+    font-size: 12px;
+}
+
+/* form css */
+.form input::placeholder {
+    font-size: 12px;
+    color: grey;
+}
+
+.facebook-login .login {
+    margin-left: 120px;
+    margin-top: 20px;
+    font-size: 13px;
+    color: #385185;
+}
+
+.password {
+    margin-left: 140px;
+    font-size: 12px;
+}
+
+/* Apply styles for small screens */
+@media only screen and (max-width: 767px) {
+    .homepage {
+        margin-left: 5px;
+        margin-right: 100px;
+    }
+
+    .homepage img{
+        height: 100%;
+        width: 100%;
+        margin-left: 46px;
+    }
+
+    .home-image {
+        margin-right: 90px;
+    }
+
+    .right-grid {
+        width: 352px;
+        height: 80%;
+        margin-top: 75px;
+        margin: 0 auto;
+    }
+    .right-grid span{
+       display: none;
+    }
+    .facebook-login{
+        text-align: center;
+    }
+    .facebook-login .login,.facebook-login .password{
+        margin-left: 0;
+    }
+}
+/* Apply styles for tablet  */
+@media (min-width: 768px) and (max-width: 1199px) {
+    .right-grid {
+        margin: 0 auto;
+    }
+    .homepage img{
+        height: 100%;
+        width: 100%;
+        margin-left: 0;
+    }
+}
