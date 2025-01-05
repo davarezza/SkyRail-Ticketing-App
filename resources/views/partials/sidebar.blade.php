@@ -6,38 +6,53 @@
         </div>
         <ul class="sidebar-nav">
             <li class="sidebar-header">
-                Management
+                Management Data
             </li>
             <li class="sidebar-item">
                 <a href="#" class="sidebar-link"><i class='bx bx-list-ul'></i> Dashboard</a>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link collapsed" data-bs-target="#user" data-bs-toggle="collapse" aria-expanded="false"><i class='bx bxs-user pe-2'></i> User Management</a>
+                <a href="#" class="sidebar-link collapsed" data-bs-target="#user" data-bs-toggle="collapse" aria-expanded="false"><i class='bx bxs-user pe-2'></i> Master Data</a>
                 <ul id="user" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Customer</a>
+                        <a href="#" class="sidebar-link">Transportation</a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Seller</a>
+                        <a href="#" class="sidebar-link">Travel Route</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">Discount Coupon</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">Officer</a>
                     </li>
                 </ul>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link collapsed" data-bs-target="#post" data-bs-toggle="collapse" aria-expanded="false"><i class='bx bx-slider pe-2'></i> Posts Management</a>
-                <ul id="post" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Accepted Posts</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Pending Posts</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Rejected Posts</a>
-                    </li>
-                </ul>
+                <a href="#" class="sidebar-link"><i class='bx bxs-megaphone'></i> Promo Campaigns</a>
+            </li>
+
+            <li class="sidebar-header">
+                Booking Management
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link"><i class='bx bxs-plane-alt'></i> Airplane Tickets</a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link"><i class='bx bxs-train'></i> Train Tickets</a>
             </li>
             <li class="sidebar-header">
-                Operations
+                Analytics & Reports
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link"><i class='bx bxs-bar-chart-alt-2'></i> Sales Overview</a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link"><i class='bx bx-line-chart'></i> Popular Routes</a>
+            </li>
+                     
+            <li class="sidebar-header">
+                Operation
             </li>
             <li class="sidebar-item">
                 <a href="#" class="sidebar-link"><i class='bx bxs-report'></i> Activity Log</a>
@@ -45,34 +60,8 @@
             <li class="sidebar-item">
                 <a href="#" class="sidebar-link"><i class='bx bxs-cog'></i> Settings</a>
             </li>
-            <li class="sidebar-header">
-                Management
-            </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link"><i class='bx bx-list-ul'></i> Dashboard</a>
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link collapsed" data-bs-target="#user" data-bs-toggle="collapse" aria-expanded="false"><i class='bx bx-package'></i> Product Management</a>
-                <ul id="user" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Uploaded Products</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Pending Products</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Rejected Products</a>
-                    </li>
-                </ul>
-            </li>
-            <li class="sidebar-header">
-                Operations
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link"><i class='bx bxs-cog'></i> Settings</a>
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link"><i class='bx bx-no-entry'></i></i> Violation</a>
+                <a href="#" class="sidebar-link"><i class='bx bx-lock'></i> Role Access</a>
             </li>
         </ul>
     </div>

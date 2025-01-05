@@ -69,16 +69,13 @@
                         <div class="col-6 text-end">
                             <ul class="list-inline">
                                 <li class="list-inline-item">
-                                    <a href="#" class="text-muted">Contact</a>
+                                    <a href="#" class="text-muted">Help Center</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a href="#" class="text-muted">About Us</a>
+                                    <a href="#" class="text-muted">FAQ</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a href="#" class="text-muted">Terms</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#" class="text-muted">Booking</a>
+                                    <a href="#" class="text-muted">Contact Us</a>
                                 </li>
                             </ul>
                         </div>
