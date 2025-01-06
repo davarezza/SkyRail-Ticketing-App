@@ -9,7 +9,8 @@
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
-        "livewire/livewire": "^3.5"
+        "livewire/livewire": "^3.5",
+        "prettus/l5-repository": "^2.9"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

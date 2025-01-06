@@ -9,10 +9,10 @@
                 Management Data
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link"><i class='bx bx-list-ul'></i> Dashboard</a>
+                <a href="{{ route('dashboard.index') }}" class="sidebar-link"><i class='bx bx-list-ul'></i> Dashboard</a>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link collapsed" data-bs-target="#user" data-bs-toggle="collapse" aria-expanded="false"><i class='bx bxs-user pe-2'></i> Master Data</a>
+                <a href="#" class="sidebar-link collapsed" data-bs-target="#user" data-bs-toggle="collapse" aria-expanded="false"><i class='bx bxs-file pe-2'></i> Master Data</a>
                 <ul id="user" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link">Transportation</a>
@@ -22,6 +22,9 @@
                     </li>
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link">Discount Coupon</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">Ticket</a>
                     </li>
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link">Officer</a>
