@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories;
+namespace App\Repositories\Master;
 
 use App\Models\Transportasi;
 use Prettus\Repository\Eloquent\BaseRepository;
@@ -15,22 +15,18 @@ class TransportationRepository extends BaseRepository
     }
 
     /**
-     * Specify the model class name.
+     * Specify Model class name
      *
      * @return string
      */
     public function model()
     {
-        return get_class($this->model);
+        return $this->model;
     }
 
-    /**
-     * Boot up the repository, pushing criteria.
-     *
-     * @throws \Prettus\Repository\Exceptions\RepositoryException
-     */
-    public function boot()
-    {
-        // Add your boot logic here
+    public function table($request){
+        $opr = $this->model->setView('v_transportasis');
+
+        return $opr->draw();
     }
 }

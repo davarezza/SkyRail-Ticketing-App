@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @yield('title')
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,6 +24,7 @@
     @stack('styles')
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('assets/css/admin.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 
@@ -58,6 +60,11 @@
                     </ul> --}}
                 </div>
             </nav>
+
+            <div class="container-fluid px-3">
+                @yield('breadcrumb')
+            </div>
+
             <main class="content px-3 py-2">
                 <div class="container-fluid">
                     @yield('container')
@@ -96,10 +103,19 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{{ asset('assets/js/master.js') }}"></script>
     <script>
         var hostUrl = "assets/";
+        const BASEURL = '{{ url('/') }}';
+        const APP_URL = "{{ config('app.url') }}/";
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
     </script>
     <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
@@ -113,8 +129,6 @@
     <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZonesLow.js"></script>
     <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
     <script src="{!! asset('assets/plugins/custom/datatables/datatables.bundle.js') !!}"></script>
-    <script src="{!! asset('assets/js/widgets.bundle.js') !!}"></script>
-    <script src="{!! asset('assets/js/custom/widgets.js') !!}"></script>
     <script src="{!! asset('assets/js/custom/helper/sanitize.js') !!}"></script>
     <script src="{!! asset('assets/js/custom/helper/js.cookie.js') !!}"></script>
     <script defer src="{!! asset('assets/js/custom/helper/helper.js') !!}?v={{ time() }}"></script>
@@ -126,6 +140,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.6.0/glide.min.js"
         integrity="sha512-2sI5N95oT62ughlApCe/8zL9bQAXKsPPtZZI2KE3dznuZ8HpE2gTMHYzyVN7OoSPJCM1k9ZkhcCo3FvOirIr2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @stack('scripts')
 </body>
 
 </html>

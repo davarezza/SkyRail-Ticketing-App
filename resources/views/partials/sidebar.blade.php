@@ -15,7 +15,7 @@
                 <a href="#" class="sidebar-link collapsed" data-bs-target="#user" data-bs-toggle="collapse" aria-expanded="false"><i class='bx bxs-file pe-2'></i> Master Data</a>
                 <ul id="user" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Transportation</a>
+                        <a href="{{ route('master.transportation.index') }}" class="sidebar-link">Transportation</a>
                     </li>
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link">Travel Route</a>
