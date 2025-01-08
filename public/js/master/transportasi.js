@@ -30,6 +30,12 @@ initTableTransportation = () => {
             destroyAble: true,
             responsive: false,
             pageLength: 10,
+            language: {
+                paginate: {
+                    previous: "<",
+                    next: ">"
+                }
+            },
             columns: [
                 {
                     data: "id",
@@ -100,7 +106,7 @@ initTableTransportation = () => {
                 {
                     targets: 4,
                     render: function (data, type, full, meta) {
-                        return full.type_name;
+                        return full.keterangan;
                     },
                 },             
                 {
