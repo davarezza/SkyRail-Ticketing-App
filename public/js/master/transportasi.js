@@ -6,6 +6,12 @@ $(() => {
         update: APP_URL + "master/transportation/update",
         delete: APP_URL + "master/transportation/delete",
         getDataSelect: APP_URL + "master/transportation/get-data-select",
+
+        tableTransportType: APP_URL + "master/transport-type/table",
+        saveTransportType: APP_URL + "master/transport-type/store",
+        editTransportType: APP_URL + "master/transport-type/edit",
+        updateTransportType: APP_URL + "master/transport-type/update",
+        deleteTransportType: APP_URL + "master/transport-type/delete",
     };
 
     init();
@@ -66,7 +72,7 @@ initTableTransportation = () => {
                 },
                 {
                     data: "keterangan",
-                    searchable: false,
+                    searchable: true,
                     orderable: false,
                     className: "align-middle",
                 },
@@ -471,6 +477,340 @@ deleteTransport = (id) => {
                         });
                     }
                 });
+            }
+        }
+    });
+}
+
+toggleModalAddTransportType = (show) => {
+    if (show) {
+        $("#modal-add-transport").modal("hide");
+        $("#modal-add-transport").on("hidden.bs.modal", function () {
+            $("#modal-add-transport-type").modal("show");
+            formValidationAddTransportType();
+            initTableTransportType();
+            $(this).off("hidden.bs.modal");
+        });
+    } else {
+        $("#modal-add-transport-type").modal("hide");
+        $("#modal-title").text("Add Transportation Type");
+        $('#transport-type-name').val('');
+        if (validatorAddTransportType) {
+            validatorAddTransportType.resetForm();
+        }
+    }
+};
+
+var validatorAddTransportType;
+
+formValidationAddTransportType = () => {
+    const form = document.getElementById('form-add-transport-type');
+    const submitButton = document.getElementById('btn-save-transport-type');
+
+    if (validatorAddTransportType) {
+        validatorAddTransportType.destroy();
+    }
+
+    validatorAddTransportType = FormValidation.formValidation(
+        form,
+        {
+            fields: {
+                'transport-type-name': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Name is required'
+                        }
+                    }
+                },
+            },
+
+            plugins: {
+                trigger: new FormValidation.plugins.Trigger(),
+                bootstrap: new FormValidation.plugins.Bootstrap5({
+                    rowSelector: '.fv-row',
+                    eleInvalidClass: '',
+                    eleValidClass: ''
+                })
+            }
+        }
+    );
+
+    submitButton.removeEventListener('click', handleSubmitFormTransportType);
+
+    submitButton.addEventListener('click', handleSubmitFormTransportType);
+}
+
+function handleSubmitFormTransportType(e) {
+    e.preventDefault();
+
+    if (validatorAddTransportType) {
+        validatorAddTransportType.validate().then(function (status) {
+            if (status == 'Valid') {
+                if($('#id_transport_type').val() != '' && $('#id_transport_type').val() != null){
+                    updateTransportType();
+                } else {
+                    saveTransportType();
+                }
+            }
+        });
+    }
+}
+
+saveTransportType = () => {
+    var formData = new FormData();
+    formData.append('name', $('#transport-type-name').val());
+    formData.append('_token', $('[name="_token"]').val());
+
+    $("#modal-add-transport-type").modal("hide");
+    HELPER.confirm({
+        title: 'Save Transportation Type',
+        message: 'Are you sure you want to save this transport type?',
+        callback: function (result) {
+            if (result) {
+                HELPER.block();
+                HELPER.ajax({
+                    url: HELPER.api.saveTransportType,
+                    type: 'post',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: (res) => {
+                        getDataSelect();
+                        toggleModalAddTransportType(true);
+                        initTableTransportType();
+                        initTableTransportation();
+                        $('#transport-type-name').val('');
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: true,
+                            title: 'Success',
+                            message: 'Transportation Type has been saved'
+                        })
+                    },
+                    error: (err) => {
+                        toggleModalAddTransportType(false);
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: false,
+                            title: 'Failed',
+                            message: 'System error, please contact the Administrator'
+                        });
+                    }
+                });
+            } else {
+                $("#modal-add-transport-type").modal("show");
+                formValidationAddTransportType();
+            }
+        }
+    });
+}
+
+initTableTransportType = () => {
+    return new Promise((resolve, reject) => {
+        var initTableTransportType = HELPER.initTable({
+            el: "transport-type-table",
+            url: HELPER.api.tableTransportType,
+            data: {
+                _token: $('[name="_token"]').val()
+            },
+            clickAble: false,
+            index: 0,
+            sorting: "desc",
+            destroyAble: true,
+            responsive: false,
+            pageLength: 5,
+            columns: [
+                {
+                    data: "id",
+                    searchable: false,
+                    orderable: false,
+                    width: "5%",
+                },
+                {
+                    data: "name",
+                    searchable: true,
+                    orderable: true,
+                },
+                {
+                    data: "id",
+                    searchable: false,
+                    orderable: false,
+                },
+            ],
+            columnDefs: [
+                {
+                    orderable: true,
+                    targets: [0, 2],
+                },
+                {
+                    targets: 0,
+                    render: function (data, type, full, meta) {
+                        return meta.row + 1;
+                    },
+                },
+                {
+                    targets: 1,
+                    render: function (data, type, full, meta) {
+                        return `
+                            <div>
+                                <div>${full.name}</div>
+                            </div>
+                        `;
+                    },
+                },                
+                {
+                    targets: 2,
+                    render: function (data, type, full, meta) {
+                        var html = `
+                            <button type="button" class="btn btn-sm btn-icon btn-outline btn-outline-warning" onclick="EditTransportType('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Transportation Type">
+                                <i class="ki-outline ki-pencil"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-icon btn-outline btn-outline-danger" onclick="deleteTransportType('${full.id}')">
+                                <i class="ki-outline ki-trash"></i>
+                            </button>
+                        `
+
+                        return html;
+                    },
+                },
+            ],
+            fnCreatedRow: function (nRow, aData, iDataIndex) {
+                $(nRow).attr("id", aData[0]);
+            },
+            fnInitComplete: function (oSettings, data) {
+                var debounceTimer;
+                $("#searchTransportType").on("input", function () {
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(function () {
+                        initTableTransportType
+                            .search($("#searchTransportType").val())
+                            .draw();
+                    }, 300);
+                });
+                if (initTableTransportType.state.loaded()) {
+                    $("#searchTransportType").val(
+                        initTableTransportType.state.loaded().search.search
+                    );
+                }
+                resolve(true);
+            },
+        });
+    });
+}
+
+EditTransportType = (id) => {
+    HELPER.ajax({
+        url: HELPER.api.editTransportType,
+        type: 'post',
+        data: {
+            id: id,
+            _token: $('[name="_token"]').val()
+        },
+        success: (res) => {
+            $('#modal-title').text('Edit Transportation Type');
+            $('#id_transport_type').val(res.id_type_transportasi);
+            $('#transport-type-name').val(res.nama_type_transportasi);
+            toggleModalAddTransportType(true);
+        },
+        error: (err) => {
+            HELPER.showMessage({
+                success: false,
+                title: 'Failed',
+                message: 'System error, please contact the Administrator'
+            });
+        }
+    });
+}
+
+updateTransportType = () => {
+    var formData = new FormData();
+    formData.append('name', $('#transport-type-name').val());
+    formData.append('id', $('#id_transport_type').val());
+    formData.append('_token', $('[name="_token"]').val());
+
+    $("#modal-add-transport-type").modal("hide");
+    HELPER.confirm({
+        title: 'Update Transportation Type',
+        message: 'Are you sure you want to update this transport type?',
+        callback: function (result) {
+            if (result) {
+                HELPER.block();
+                HELPER.ajax({
+                    url: HELPER.api.updateTransportType,
+                    type: 'post',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: (res) => {
+                        getDataSelect();
+                        toggleModalAddTransportType(true);
+                        initTableTransportType();
+                        initTableTransportation();
+                        $('#id_transport_type').val('');
+                        $('#transport-type-name').val('');
+                        $('#modal-title').text('Add Transportation Type');
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: true,
+                            title: 'Success',
+                            message: 'Transportation Type has been updated'
+                        })
+                    },
+                    error: (err) => {
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: false,
+                            title: 'Failed',
+                            message: 'System error, please contact the Administrator'
+                        });
+                    }
+                });
+            } else {
+                $("#modal-add-transport-type").modal("show");
+                formValidationAddTransportType();
+            }
+        }
+    });
+}
+
+deleteTransportType = (id) => {
+    $("#modal-add-transport-type").modal("hide");
+    HELPER.confirm({
+        title: 'Delete Transportation Type',
+        message: 'Are you sure you want to delete this transport type?',
+        callback: function (result) {
+            if (result) {
+                HELPER.block();
+                HELPER.ajax({
+                    url: HELPER.api.deleteTransportType,
+                    type: 'post',
+                    data: {
+                        id: id,
+                        _token: $('[name="_token"]').val()
+                    },
+                    success: (res) => {
+                        getDataSelect();
+                        toggleModalAddTransportType(true);
+                        initTableTransportType();
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: true,
+                            title: 'Success',
+                            message: 'Transportation Type has been deleted'
+                        });
+                    },
+                    error: (err) => {
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: false,
+                            title: 'Failed',
+                            message: 'System error, please contact the Administrator'
+                        });
+                    }
+                });
+            } else {
+                $("#modal-add-transport-type").modal("show");
+                formValidationAddTransportType();
             }
         }
     });

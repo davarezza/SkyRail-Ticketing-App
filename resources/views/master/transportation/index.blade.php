@@ -39,7 +39,7 @@
                                     <th>Kode</th>
                                     <th>Name</th>
                                     <th>Transportation Type</th>
-                                    <th>Keterangan</th>
+                                    <th>Description</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>

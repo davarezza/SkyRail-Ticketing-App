@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class TypeTransportasi extends Model
+class TypeTransportasi extends BaseModel
 {
     use HasFactory;
 
