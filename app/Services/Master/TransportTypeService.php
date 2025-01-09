@@ -28,6 +28,7 @@ class TransportTypeService
         try {
             $dataTransportType = [
                 'nama_type_transportasi' => $request->name,
+                'keterangan' => $request->keterangan,
             ];
 
             $opr = $this->repository->create($dataTransportType);
@@ -53,6 +54,7 @@ class TransportTypeService
         try {
             $dataTransportType = [
                 'nama_type_transportasi' => $request->name,
+                'keterangan' => $request->keterangan,
             ];
 
             $opr = $this->repository->update($dataTransportType, $request->id);

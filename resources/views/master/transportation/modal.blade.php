@@ -63,7 +63,7 @@
                         <textarea class="form-control bg-light-subtle" 
                                   id="transport-description" 
                                   name="transport-description" 
-                                  rows="3" 
+                                  rows="5" 
                                   placeholder="Enter description"
                                   style="--bs-bg-opacity: .6;"></textarea>
                     </div>
@@ -133,6 +133,15 @@
                                        placeholder="Input Type Name" 
                                        autocomplete="off" 
                                        style="--bs-bg-opacity: .6;" />
+                            </div>
+                            <div class="fv-row mb-4">
+                                <label for="transport-type-description" class="form-label fs-9 fw-medium mb-2">Description</label>
+                                <textarea class="form-control bg-light-subtle" 
+                                          id="transport-type-description" 
+                                          name="transport-type-description" 
+                                          rows="4" 
+                                          placeholder="Enter description"
+                                          style="--bs-bg-opacity: .6;"></textarea>
                             </div>
                             <div class="d-flex justify-content-end gap-3">
                                 <button type="button" class="btn btn-light px-3 py-2" onclick="toggleModalAddTransportType(false)">

@@ -495,6 +495,7 @@ toggleModalAddTransportType = (show) => {
         $("#modal-add-transport-type").modal("hide");
         $("#modal-title").text("Add Transportation Type");
         $('#transport-type-name').val('');
+        $('#transport-type-description').val('');
         if (validatorAddTransportType) {
             validatorAddTransportType.resetForm();
         }
@@ -516,6 +517,13 @@ formValidationAddTransportType = () => {
         {
             fields: {
                 'transport-type-name': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Name is required'
+                        }
+                    }
+                },
+                'transport-type-description': {
                     validators: {
                         notEmpty: {
                             message: 'Name is required'
@@ -559,6 +567,7 @@ function handleSubmitFormTransportType(e) {
 saveTransportType = () => {
     var formData = new FormData();
     formData.append('name', $('#transport-type-name').val());
+    formData.append('keterangan', $('#transport-type-description').val());
     formData.append('_token', $('[name="_token"]').val());
 
     $("#modal-add-transport-type").modal("hide");
@@ -580,6 +589,7 @@ saveTransportType = () => {
                         initTableTransportType();
                         initTableTransportation();
                         $('#transport-type-name').val('');
+                        $('#transport-type-description').val('');
                         HELPER.unblock();
                         HELPER.showMessage({
                             success: true,
@@ -619,6 +629,12 @@ initTableTransportType = () => {
             destroyAble: true,
             responsive: false,
             pageLength: 5,
+            language: {
+                paginate: {
+                    previous: "<",
+                    next: ">"
+                }
+            },
             columns: [
                 {
                     data: "id",
@@ -710,6 +726,7 @@ EditTransportType = (id) => {
             $('#modal-title').text('Edit Transportation Type');
             $('#id_transport_type').val(res.id_type_transportasi);
             $('#transport-type-name').val(res.nama_type_transportasi);
+            $('#transport-type-description').val(res.keterangan);
             toggleModalAddTransportType(true);
         },
         error: (err) => {
@@ -725,6 +742,7 @@ EditTransportType = (id) => {
 updateTransportType = () => {
     var formData = new FormData();
     formData.append('name', $('#transport-type-name').val());
+    formData.append('keterangan', $('#transport-type-description').val());
     formData.append('id', $('#id_transport_type').val());
     formData.append('_token', $('[name="_token"]').val());
 
@@ -748,6 +766,7 @@ updateTransportType = () => {
                         initTableTransportation();
                         $('#id_transport_type').val('');
                         $('#transport-type-name').val('');
+                        $('#transport-type-description').val('');
                         $('#modal-title').text('Add Transportation Type');
                         HELPER.unblock();
                         HELPER.showMessage({
