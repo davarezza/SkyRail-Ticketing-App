@@ -1,5 +1,5 @@
 <div class="modal fade" tabindex="-1" id="modal-add-transport" data-bs-backdrop="static">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-sm rounded-3 border-0">
             <form id="form-add-transport" method="POST">
                 @csrf
@@ -37,6 +37,9 @@
 
                     <div class="fv-row mb-4">
                         <label for="transport-type" class="form-label fs-9 fw-medium mb-2 required">Transportation Type</label>
+                        <button class="btn btn-icon btn-active-color-muted ms-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Transport Type" onclick="toggleModalAddTransportType(true)">
+                            <i class='bx bx-pencil'></i>
+                        </button>
                         <select class="form-select bg-light-subtle" 
                                 id="transport-type" 
                                 name="transport-type"

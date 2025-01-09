@@ -109,7 +109,7 @@ initTableTransportation = () => {
                 {
                     targets: 4,
                     render: function (data, type, full, meta) {
-                        return full.keterangan;
+                        return full.keterangan.length > 40 ? full.keterangan.substring(0, 40) + '...' : full.keterangan;
                     },
                 },             
                 {
@@ -117,13 +117,13 @@ initTableTransportation = () => {
                     render: function (data, type, full, meta) {
                         var html = `
                             <div class="d-flex justify-content-center gap-2">
-                                <button class="btn btn-sm btn-icon btn-outline btn-outline-warning" onclick="editSubsidiary('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                <button class="btn btn-sm btn-icon btn-outline btn-outline-warning" onclick="editTransport('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
                                     <i class="bx bx-pencil"></i>
                                 </button>
                                 <a class="btn btn-sm btn-icon btn-outline btn-outline-primary" href="${APP_URL}master/subsidiary/detail/${full.id}" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
                                     <i class="bx bx-show"></i>
                                 </a>
-                                <button class="btn btn-sm btn-icon btn-outline btn-outline-danger" onclick="deleteSubsidiary('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                <button class="btn btn-sm btn-icon btn-outline btn-outline-danger" onclick="deleteTransport('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
                                     <i class="bx bx-trash"></i>
                                 </button>
                             </div>
@@ -289,7 +289,7 @@ function handleSubmitFormTransport(e) {
         validatorAddTransport.validate().then(function (status) {
             if (status == 'Valid') {
                 if($('#id').val() != '' && $('#id').val() != null){
-                    null
+                    updateTransport();
                 } else {
                     saveTransport();
                 }
@@ -348,6 +348,129 @@ saveTransport = () => {
             } else {
                 $("#modal-add-transport").modal("show");
                 formValidationAddTransport();
+            }
+        }
+    });
+}
+
+editTransport = (id) => {
+    HELPER.ajax({
+        url: HELPER.api.edit,
+        type: 'post',
+        data: {
+            id: id,
+            _token: $('[name="_token"]').val()
+        },
+        success: (res) => {
+            console.log(res)
+            $('#title-form-transport').text('Edit Transportation');
+            $('#id').val(res.id_transportasi);
+            $('#transport-name').val(res.nama);
+            $('#transport-code').val(res.kode);
+            $('#transport-description').val(res.keterangan);
+            $('#total-seat').val(res.jumlah_kursi);
+            $('#transport-type').val(res.id_type_transportasi).trigger('change');
+            toggleAddTransport(true);
+        },
+        error: (err) => {
+            HELPER.showMessage({
+                success: false,
+                title: 'Failed',
+                message: 'System error, please contact the Administrator'
+            });
+        }
+    });
+}
+
+updateTransport = () => {
+    var formData = new FormData();
+    formData.append('name', $('#transport-name').val());
+    formData.append('kode', $('#transport-code').val());
+    formData.append('id_type_transportasi', $('#transport-type').val());
+    formData.append('jumlah_kursi', $('#total-seat').val());
+    formData.append('keterangan', $('#transport-description').val());
+    formData.append('id_transportasi', $('#id').val());
+    formData.append('_token', $('[name="_token"]').val());
+
+    $("#modal-add-transport").modal("hide");
+    HELPER.confirm({
+        title: 'Update Transportation',
+        message: 'Are you sure you want to update this transport?',
+        callback: function (result) {
+            if (result) {
+                HELPER.block();
+                HELPER.ajax({
+                    url: HELPER.api.update,
+                    type: 'post',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: (res) => {
+                        initTableTransportation();
+                        toggleAddTransport(false);
+                        $('#transport-name').val('');
+                        $('#transport-code').val('');
+                        $('#transport-type').val('');
+                        $('#total-seat').val('');
+                        $('#transport-description').val('');
+                        $('#title-form-transport').text('Add Transportation');
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: true,
+                            title: 'Success',
+                            message: 'Transportation has been updated'
+                        })
+                    },
+                    error: (err) => {
+                        toggleAddTransport(false);
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: false,
+                            title: 'Failed',
+                            message: 'System error, please contact the Administrator'
+                        });
+                    }
+                });
+            } else {
+                $("#modal-add-transport").modal("show");
+                formValidationAddTransport();
+            }
+        }
+    });
+}
+
+deleteTransport = (id) => {
+    HELPER.confirm({
+        title: 'Delete Transportation',
+        message: 'Are you sure you want to delete this transportation?',
+        callback: function (result) {
+            if (result) {
+                HELPER.block();
+                HELPER.ajax({
+                    url: HELPER.api.delete,
+                    type: 'post',
+                    data: {
+                        id: id,
+                        _token: $('[name="_token"]').val()
+                    },
+                    success: (res) => {
+                        initTableTransportation();
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: true,
+                            title: 'Success',
+                            message: 'Transportation has been deleted'
+                        })
+                    },
+                    error: (err) => {
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: false,
+                            title: 'Failed',
+                            message: 'System error, please contact the Administrator'
+                        });
+                    }
+                });
             }
         }
     });

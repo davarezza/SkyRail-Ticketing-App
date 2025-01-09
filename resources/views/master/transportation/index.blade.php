@@ -35,12 +35,12 @@
                         <table id="transportation-table" class="table custom-table table-hover" style="min-width: 800px; width: auto;">
                             <thead>
                                 <tr>
-                                    <th style="width: 50px;">No</th>
-                                    <th style="width: 150px;">Kode</th>
-                                    <th style="width: 250px;">Name</th>
-                                    <th style="width: 150px;">Transportation Type</th>
-                                    <th style="width: 250px;">Keterangan</th>
-                                    <th class="text-center" style="width: 100px;">Action</th>
+                                    <th>No</th>
+                                    <th>Kode</th>
+                                    <th>Name</th>
+                                    <th>Transportation Type</th>
+                                    <th>Keterangan</th>
+                                    <th class="text-center">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
