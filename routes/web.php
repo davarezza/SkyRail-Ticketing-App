@@ -20,5 +20,6 @@ Route::prefix('master')->group(function () {
         Route::post('edit', [TransportationController::class, 'edit'])->name('master.transportation.edit');
         Route::post('update', [TransportationController::class, 'update'])->name('master.transportation.update');
         Route::get('detail/{id}', [TransportationController::class, 'detail'])->name('master.transportation.detail');
+        Route::post('get-data-select', [TransportationController::class, 'getDataSelect'])->name('master.transportation.get-data-select');
     });
 });

@@ -13,6 +13,7 @@ class Transportasi extends BaseModel
     protected $primaryKey = 'id_transportasi';
     protected $fillable = [
         'kode',
+        'nama',
         'jumlah_kursi',
         'keterangan',
         'id_type_transportasi',

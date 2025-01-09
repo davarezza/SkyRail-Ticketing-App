@@ -5,6 +5,7 @@ $(() => {
         edit: APP_URL + "master/transportation/edit",
         update: APP_URL + "master/transportation/update",
         delete: APP_URL + "master/transportation/delete",
+        getDataSelect: APP_URL + "master/transportation/get-data-select",
     };
 
     init();
@@ -12,7 +13,9 @@ $(() => {
 
 init = async () => {
     await HELPER.block();
+    await getDataSelect();
     await initTableTransportation();
+    await formValidationAddTransport();
     await HELPER.unblock();
 };
 
@@ -63,8 +66,8 @@ initTableTransportation = () => {
                 },
                 {
                     data: "keterangan",
-                    searchable: true,
-                    orderable: true,
+                    searchable: false,
+                    orderable: false,
                     className: "align-middle",
                 },
                 {
@@ -94,7 +97,7 @@ initTableTransportation = () => {
                 {
                     targets: 2,
                     render: function (data, type, full, meta) {
-                        return "Nama Pesawat";
+                        return full.name;
                     },
                 },             
                 {
@@ -150,5 +153,202 @@ initTableTransportation = () => {
                 resolve(true);
             },
         });
+    });
+}
+
+getDataSelect = () => {
+    HELPER.ajax({
+        url: HELPER.api.getDataSelect,
+        data: {
+            _token: $('[name="_token"]').val()
+        },
+        type: 'POST',
+        success: (response) => {
+            HELPER.setDataMultipleCombo([{
+                data: response.transport_type,
+                el: 'transport-type',
+                valueField: 'id_type_transportasi',
+                displayField: 'nama_type_transportasi',
+                placeholder: 'Select Transport Type'
+            },
+        ]);
+        },
+        error: (err) => {
+            HELPER.showMessage({
+                success: false,
+                title: 'Failed',
+                message: 'System error, please contact the Administrator'
+            });
+        }
+    })
+}
+
+toggleAddTransport = (show) => {
+    if (show) {
+        $("#modal-add-transport").modal("show");
+        formValidationAddTransport();
+    } else {
+        $("#modal-add-transport").modal("hide");
+        $('#transport-name').val('');
+        $('#transport-code').val('');
+        $('#transport-type').val('');
+        $('#transport-description').val('');
+        $('#total-seat').val('');
+        $('#id').val('');
+        $('#title-form-transport').text('Add Transportation');
+        if(validatorAddTransport){
+            validatorAddTransport.resetForm();
+        }
+    }
+}
+
+var validatorAddTransport;
+
+formValidationAddTransport = () => {
+    const form = document.getElementById('form-add-transport');
+    const submitButton = document.getElementById('btn-save-transport');
+
+    if (!form) {
+        console.error('Form #form-add-transport not found');
+        return;
+    }
+    
+    if (!submitButton) {
+        console.error('Button #btn-save-transport not found');
+        return;
+    }
+
+    if (validatorAddTransport) {
+        validatorAddTransport.destroy();
+    }
+
+    validatorAddTransport = FormValidation.formValidation(
+        form,
+        {
+            fields: {
+                'transport-name': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Name is required'
+                        }
+                    }
+                },
+                'transport-code': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Code is required'
+                        }
+                    }
+                },
+                'transport-type': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Transport Type is required'
+                        }
+                    }
+                },
+                'total-seat': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Total Seat is required'
+                        },
+                        integer: {
+                            message: 'This field must be Number'
+                        }
+                    }
+                },
+                'transport-description': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Description is required'
+                        }
+                    }
+                },
+            },
+
+            plugins: {
+                trigger: new FormValidation.plugins.Trigger(),
+                bootstrap: new FormValidation.plugins.Bootstrap5({
+                    rowSelector: '.fv-row',
+                    eleInvalidClass: '',
+                    eleValidClass: ''
+                })
+            }
+        }
+    );
+
+    form.removeEventListener('submit', handleSubmitFormTransport);
+
+    form.addEventListener('submit', handleSubmitFormTransport);
+}
+
+function handleSubmitFormTransport(e) {
+    e.preventDefault();
+
+    if (validatorAddTransport) {
+        validatorAddTransport.validate().then(function (status) {
+            if (status == 'Valid') {
+                if($('#id').val() != '' && $('#id').val() != null){
+                    null
+                } else {
+                    saveTransport();
+                }
+            }
+        });
+    }
+}
+
+saveTransport = () => {
+    var formData = new FormData();
+    formData.append('name', $('#transport-name').val());
+    formData.append('kode', $('#transport-code').val());
+    formData.append('id_type_transportasi', $('#transport-type').val());
+    formData.append('jumlah_kursi', $('#total-seat').val());
+    formData.append('keterangan', $('#transport-description').val());
+    formData.append('_token', $('[name="_token"]').val());
+
+    $("#modal-add-transport").modal("hide");
+    HELPER.confirm({
+        title: 'Save Transportation',
+        message: 'Are you sure you want to save this transport?',
+        callback: function (result) {
+            if (result) {
+                HELPER.block();
+                HELPER.ajax({
+                    url: HELPER.api.save,
+                    type: 'post',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: (res) => {
+                        initTableTransportation();
+                        toggleAddTransport(false);
+                        $('#transport-name').val('');
+                        $('#transport-code').val('');
+                        $('#transport-type').val('');
+                        $('#total-seat').val('');
+                        $('#transport-description').val('');
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: true,
+                            title: 'Success',
+                            message: 'Transportation has been saved'
+                        });
+                    },
+                    error: (err) => {
+                        toggleAddTransport(false);
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: false,
+                            title: 'Failed',
+                            message: 'System error, please contact the Administrator'
+                        });
+                    }
+                });
+            } else {
+                $("#modal-add-transport").modal("show");
+                formValidationAddTransport();
+            }
+        }
     });
 }

@@ -24,9 +24,9 @@
                             <i class='bx bx-search position-absolute search-icon'></i>
                             <input type="text" id="searchTransportation" class="form-control search-input" placeholder="Type to Search" />
                         </div>
-                        <button type="button" class="btn btn-modern btn-primary d-flex align-items-center gap-2" onclick="toggleAddTransport(true)">
+                        <button type="button" class="btn btn-primary d-flex align-items-center" onclick="toggleAddTransport(true)">
                             <i class='bx bx-plus fs-5'></i>
-                            <span>Tambah Transportasi</span>
+                            <span>Add New</span>
                         </button>
                     </div>
                 </div>
@@ -51,6 +51,7 @@
             </div>
         </div>
     </div>
+    @include('master.transportation.modal')
 @endsection
 
 @push('scripts')
