@@ -2,6 +2,7 @@ $(() => {
     HELPER.api = {
         table: APP_URL + "master/transportation/table",
         save: APP_URL + "master/transportation/store",
+        detail: APP_URL + "master/transportation/detail",
         edit: APP_URL + "master/transportation/edit",
         update: APP_URL + "master/transportation/update",
         delete: APP_URL + "master/transportation/delete",
@@ -126,9 +127,6 @@ initTableTransportation = () => {
                                 <button class="btn btn-sm btn-icon btn-outline btn-outline-warning" onclick="editTransport('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
                                     <i class="bx bx-pencil"></i>
                                 </button>
-                                <a class="btn btn-sm btn-icon btn-outline btn-outline-primary" href="${APP_URL}master/subsidiary/detail/${full.id}" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
-                                    <i class="bx bx-show"></i>
-                                </a>
                                 <button class="btn btn-sm btn-icon btn-outline btn-outline-danger" onclick="deleteTransport('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
                                     <i class="bx bx-trash"></i>
                                 </button>
@@ -140,6 +138,9 @@ initTableTransportation = () => {
             ],
             fnCreatedRow: function (nRow, aData, iDataIndex) {
                 $(nRow).attr("id", aData[0]);
+                $(nRow).on('click', function () {
+                    detailTransport(aData.id);
+                });
             },
             fnInitComplete: function (oSettings, data) {
                 var debounceTimer;
@@ -205,6 +206,15 @@ toggleAddTransport = (show) => {
         if(validatorAddTransport){
             validatorAddTransport.resetForm();
         }
+    }
+}
+
+toggleDetailTransport = (show) => {
+    if (show) {
+        $("#modal-detail-transport").modal("show");
+    } else {
+        $("#modal-detail-transport").modal("hide");
+        $('#title-form-transport').text('Add Transportation');
     }
 }
 
@@ -355,6 +365,32 @@ saveTransport = () => {
                 $("#modal-add-transport").modal("show");
                 formValidationAddTransport();
             }
+        }
+    });
+}
+
+detailTransport = (id) => {
+    HELPER.ajax({
+        url: HELPER.api.detail + '/' + id,
+        type: 'get',
+        data: {
+            id: id,
+            _token: $('[name="_token"]').val()
+        },
+        success: (response) => {
+            $('#detail-name').text(response.detail.name);
+            $('#detail-code').text(response.detail.kode);
+            $('#detail-type').text(response.detail.type_name);
+            $('#detail-total-seat').text(response.detail.jumlah_kursi);
+            $('#detail-description').text(response.detail.keterangan);
+            toggleDetailTransport(true);
+        },
+        error: (err) => {
+            HELPER.showMessage({
+                success: false,
+                title: 'Failed',
+                message: 'System error, please contact the Administrator'
+            });
         }
     });
 }

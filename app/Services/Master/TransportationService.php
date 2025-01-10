@@ -2,6 +2,7 @@
 
 namespace App\Services\Master;
 use App\Core\BaseResponse;
+use App\Models\ViewModels\TransportationView;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,10 +11,12 @@ use App\Repositories\Master\TransportationRepository;
 class TransportationService
 {
     protected $repository;
+    protected $modelView;
 
     public function __construct()
     {
         $this->repository = new TransportationRepository();
+        $this->modelView = new TransportationView();
     }
 
     public function table($request)
@@ -43,6 +46,13 @@ class TransportationService
             DB::rollBack();
             return BaseResponse::errorTransaction($e);
         }
+    }
+
+    public function detail($id) {
+        $data = [];
+        $data['detail'] = $this->modelView->find($id);
+
+        return $data;
     }
 
     public function edit($request)

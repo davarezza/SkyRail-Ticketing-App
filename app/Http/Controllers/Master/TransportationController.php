@@ -37,6 +37,13 @@ class TransportationController extends Controller
         return $opr;
     }
 
+    public function detail($id)
+    {
+        $opr = $this->service->detail($id);
+
+        return $opr;
+    }
+    
     public function edit(Request $request)
     {
         $opr = $this->service->edit($request);
