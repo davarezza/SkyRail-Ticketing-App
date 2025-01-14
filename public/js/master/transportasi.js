@@ -10,6 +10,7 @@ $(() => {
 
         tableTransportType: APP_URL + "master/transport-type/table",
         saveTransportType: APP_URL + "master/transport-type/store",
+        detailTransportType: APP_URL + "master/transport-type/detail",
         editTransportType: APP_URL + "master/transport-type/edit",
         updateTransportType: APP_URL + "master/transport-type/update",
         deleteTransportType: APP_URL + "master/transport-type/delete",
@@ -538,6 +539,15 @@ toggleModalAddTransportType = (show) => {
     }
 };
 
+toggleDetailTransportType = (show) => {
+    if (show) {
+        $("#modal-detail-type-transport").modal("show");
+    } else {
+        $("#modal-detail-type-transport").modal("hide");
+        $('#title-form-type-transport').text('Add Transportation Type');
+    }
+}
+
 var validatorAddTransportType;
 
 formValidationAddTransportType = () => {
@@ -728,6 +738,9 @@ initTableTransportType = () => {
             ],
             fnCreatedRow: function (nRow, aData, iDataIndex) {
                 $(nRow).attr("id", aData[0]);
+                $(nRow).on('click', function () {
+                    detailTransportType(aData.id);
+                });
             },
             fnInitComplete: function (oSettings, data) {
                 var debounceTimer;
@@ -747,6 +760,29 @@ initTableTransportType = () => {
                 resolve(true);
             },
         });
+    });
+}
+
+detailTransportType = (id) => {
+    HELPER.ajax({
+        url: HELPER.api.detailTransportType + '/' + id,
+        type: 'get',
+        data: {
+            id: id,
+            _token: $('[name="_token"]').val()
+        },
+        success: (response) => {
+            $('#detail-type-name').text(response.detail.name);
+            $('#detail-type-description').text(response.detail.description);
+            toggleDetailTransportType(true);
+        },
+        error: (err) => {
+            HELPER.showMessage({
+                success: false,
+                title: 'Failed',
+                message: 'System error, please contact the Administrator'
+            });
+        }
     });
 }
 

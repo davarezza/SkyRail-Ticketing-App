@@ -37,7 +37,7 @@
 
                     <div class="fv-row mb-4">
                         <label for="transport-type" class="form-label fs-9 fw-medium mb-2 required">Transportation Type</label>
-                        <button class="btn btn-icon btn-active-color-muted ms-2" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Transport Type" onclick="toggleModalAddTransportType(true)">
+                        <button class="btn btn-icon btn-active-color-muted" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Transport Type" onclick="toggleModalAddTransportType(true)">
                             <i class='bx bx-pencil'></i>
                         </button>
                         <select class="form-select bg-light-subtle" 
@@ -200,6 +200,36 @@
             </div>
             <div class="modal-footer border-top-0 px-3 pb-3 pt-0">
                 <button type="button" class="btn btn-light px-3 py-2" onclick="toggleDetailTransport(false)">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="modal-detail-type-transport" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content shadow-sm rounded-3 border-0">
+            <div class="modal-header bg-light py-3 px-4 border-bottom-0 rounded-top-3">
+                <h5 class="modal-title fs-5 fw-medium" id="modal-title-detail-type-transport">Detail Transport Type</h5>
+                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" onclick="toggleDetailTransportType(false)">
+                    <i class="ki-outline ki-cross fs-3"></i>
+                </div>
+            </div>
+            <div class="modal-body p-4">
+                <!-- Row 1: Name, Code, Type -->
+                <div class="row mb-4">
+                    <div class="col-4">
+                        <p class="fw-bold mb-1">Name</p>
+                        <p class="text-gray-700" id="detail-type-name"></p>
+                    </div>
+                    <div class="col-8">
+                        <p class="fw-bold mb-1">Description</p>
+                        <p class="text-gray-700" id="detail-type-description">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer border-top-0 px-3 pb-3 pt-0">
+                <button type="button" class="btn btn-light px-3 py-2" onclick="toggleDetailTransportType(false)">Close</button>
             </div>
         </div>
     </div>

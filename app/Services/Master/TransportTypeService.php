@@ -4,15 +4,18 @@ namespace App\Services\Master;
 
 use App\Repositories\Master\TransportTypeRepository;
 use App\Core\BaseResponse;
+use App\Models\ViewModels\TransportTypeView;
 use Illuminate\Support\Facades\DB;
 
 class TransportTypeService
 {
     protected $repository;
+    protected $modelView;
 
     public function __construct()
     {
         $this->repository = new TransportTypeRepository();
+        $this->modelView = new TransportTypeView();
     }
 
     public function table($request)
@@ -39,6 +42,13 @@ class TransportTypeService
             DB::rollBack();
             return BaseResponse::errorTransaction($e);
         }
+    }
+
+    public function detail($id) {
+        $data = [];
+        $data['detail'] = $this->modelView->find($id);
+
+        return $data;
     }
 
     public function edit($request)

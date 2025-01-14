@@ -31,6 +31,7 @@ Route::prefix('master')->group(function () {
         Route::post('edit', [TransportTypeController::class, 'edit'])->name('transport-type.edit');
         Route::post('update', [TransportTypeController::class, 'update'])->name('transport-type.update');
         Route::post('delete', [TransportTypeController::class, 'delete'])->name('transport-type.delete');
+        Route::get('detail/{id}', [TransportTypeController::class, 'detail'])->name('master.transport-type.detail');
         // Route::post('get-data', [TransportTypeController::class, 'getData'])->name('transport-type.get-data');
     });
 });
