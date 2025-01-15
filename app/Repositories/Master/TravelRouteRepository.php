@@ -2,20 +2,20 @@
 
 namespace App\Repositories\Master;
 
-use App\Models\Transportasi;
+use App\Models\Rute;
 use Prettus\Repository\Eloquent\BaseRepository;
 
-class TransportationRepository extends BaseRepository
+class TravelRouteRepository extends BaseRepository
 {
     protected $model;
 
     public function __construct()
     {
-        $this->model = new Transportasi();
+        $this->model = new Rute();
     }
 
     /**
-     * Specify Model class name
+     * Specify the model class name.
      *
      * @return string
      */
@@ -25,7 +25,7 @@ class TransportationRepository extends BaseRepository
     }
 
     public function table($request){
-        $opr = $this->model->setView('v_transportasis');
+        $opr = $this->model->setView('v_travel_route');
 
         return $opr->draw();
     }
@@ -49,13 +49,7 @@ class TransportationRepository extends BaseRepository
     }
 
     public function delete($request){
-        $opr = $this->model->where('id_transportasi', $request)->delete();
-
-        return $opr;
-    }
-
-    public function getData($request){
-        $opr = $this->model->get();
+        $opr = $this->model->where('id_rute', $request)->delete();
 
         return $opr;
     }

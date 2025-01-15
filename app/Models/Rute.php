@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Rute extends Model
+class Rute extends BaseModel
 {
     use HasFactory;
 
@@ -26,5 +26,11 @@ class Rute extends Model
     public function pemesanans()
     {
         return $this->hasMany(Pemesanan::class, 'id_rute', 'id_rute');
+    }
+
+    public function useView()
+    {
+        $this->setView('v_travel_route');
+        return $this;
     }
 }

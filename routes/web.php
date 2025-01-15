@@ -3,6 +3,7 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\TransportationController;
 use App\Http\Controllers\Master\TransportTypeController;
+use App\Http\Controllers\Master\TravelRouteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,12 +27,21 @@ Route::prefix('master')->group(function () {
 
     Route::prefix('/transport-type')->group(function () {
         Route::post('table', [TransportTypeController::class, 'table'])->name('transport-type.table');
-        // Route::post('table-job', [TransportTypeController::class, 'tableJob'])->name('transport-type.tableJob');
         Route::post('store', [TransportTypeController::class, 'store'])->name('transport-type.store');
         Route::post('edit', [TransportTypeController::class, 'edit'])->name('transport-type.edit');
         Route::post('update', [TransportTypeController::class, 'update'])->name('transport-type.update');
         Route::post('delete', [TransportTypeController::class, 'delete'])->name('transport-type.delete');
         Route::get('detail/{id}', [TransportTypeController::class, 'detail'])->name('master.transport-type.detail');
-        // Route::post('get-data', [TransportTypeController::class, 'getData'])->name('transport-type.get-data');
+    });
+
+    Route::prefix('/travel-route')->group(function () {
+        Route::get('/', [TravelRouteController::class, 'index'])->name('master.travel-route.index');
+        Route::post('table', [TravelRouteController::class, 'table'])->name('master.travel-route.table');
+        Route::post('store', [TravelRouteController::class, 'store'])->name('master.travel-route.store');
+        Route::post('delete', [TravelRouteController::class, 'delete'])->name('master.travel-route.delete');
+        Route::post('edit', [TravelRouteController::class, 'edit'])->name('master.travel-route.edit');
+        Route::post('update', [TravelRouteController::class, 'update'])->name('master.travel-route.update');
+        Route::get('detail/{id}', [TravelRouteController::class, 'detail'])->name('master.travel-route.detail');
+        Route::post('get-data-select', [TravelRouteController::class, 'getDataSelect'])->name('master.travel-route.get-data-select');
     });
 });

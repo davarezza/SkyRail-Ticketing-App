@@ -1,22 +1,21 @@
 <?php
 
 namespace App\Services\Master;
+
+use App\Models\ViewModels\TravelRouteView;
+use App\Repositories\Master\TravelRouteRepository;
 use App\Core\BaseResponse;
-use App\Models\ViewModels\TransportationView;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 
-use App\Repositories\Master\TransportationRepository;
-
-class TransportationService
+class TravelRouteService
 {
     protected $repository;
     protected $modelView;
 
     public function __construct()
     {
-        $this->repository = new TransportationRepository();
-        $this->modelView = new TransportationView();
+        $this->repository = new TravelRouteRepository();
+        $this->modelView = new TravelRouteView();
     }
 
     public function table($request)
@@ -30,15 +29,15 @@ class TransportationService
     {
         DB::beginTransaction();
         try {
-            $dataTransport = [
-                'nama' => $request->name,
-                'kode' => $request->kode,
-                'id_type_transportasi' => $request->id_type_transportasi,
-                'jumlah_kursi' => $request->jumlah_kursi,
-                'keterangan' => $request->keterangan,
+            $dataTravel = [
+                'tujuan' => $request->objective,
+                'rute_awal' => $request->first_route,
+                'rute_akhir' => $request->first_route,
+                'harga' => $request->price,
+                'id_transportasi' => $request->id_transportasi,
             ];
 
-            $opr = $this->repository->create($dataTransport);
+            $opr = $this->repository->create($dataTravel);
 
             DB::commit();
             return BaseResponse::created($opr);
@@ -66,15 +65,15 @@ class TransportationService
     {
         DB::beginTransaction();
         try {
-            $dataTransport = [
-                'nama' => $request->name,
-                'kode' => $request->kode,
-                'id_type_transportasi' => $request->id_type_transportasi,
-                'jumlah_kursi' => $request->jumlah_kursi,
-                'keterangan' => $request->keterangan,
+            $dataTravel = [
+                'tujuan' => $request->objective,
+                'rute_awal' => $request->first_route,
+                'rute_akhir' => $request->first_route,
+                'harga' => $request->price,
+                'id_transportasi' => $request->id_transportasi,
             ];
 
-            $opr = $this->repository->update($request->id_transportasi, $dataTransport);
+            $opr = $this->repository->update($request->id_rute, $dataTravel);
 
             DB::commit();
             return BaseResponse::updated($opr);
@@ -97,12 +96,5 @@ class TransportationService
             dd($e->getMessage());
             return BaseResponse::errorTransaction($e);
         }
-    }
-
-    public function getData($request)
-    {
-        $opr = $this->repository->getData($request);
-
-        return $opr;
     }
 }

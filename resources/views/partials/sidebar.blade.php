@@ -12,13 +12,15 @@
                 <a href="{{ route('dashboard.index') }}" class="sidebar-link"><i class='bx bx-list-ul'></i> Dashboard</a>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link collapsed" data-bs-target="#user" data-bs-toggle="collapse" aria-expanded="false"><i class='bx bxs-file pe-2'></i> Master Data</a>
-                <ul id="user" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                <a href="#file" class="sidebar-link collapsed" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="file">
+                    <i class='bx bxs-file pe-2'></i> Master Data
+                </a>
+                <ul id="file" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item">
                         <a href="{{ route('master.transportation.index') }}" class="sidebar-link">Transportation</a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Travel Route</a>
+                        <a href="{{ route('master.travel-route.index') }}" class="sidebar-link">Travel Route</a>
                     </li>
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link">Discount Coupon</a>
@@ -30,7 +32,7 @@
                         <a href="#" class="sidebar-link">Officer</a>
                     </li>
                 </ul>
-            </li>
+            </li>            
             <li class="sidebar-item">
                 <a href="#" class="sidebar-link"><i class='bx bxs-megaphone'></i> Promo Campaigns</a>
             </li>
