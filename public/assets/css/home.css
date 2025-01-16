@@ -1,0 +1,111 @@
+:root {
+    --primary-color: #3d5cb8;
+    --primary-color-dark: #334c99;
+    --text-dark: #0f172a;
+    --text-light: #64748b;
+    --extra-light: #f1f5f9;
+    --white: #ffffff;
+    --max-width: 1200px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@media (width < 1200px) {
+    .section__container.header__container,
+    .section__container.plan__container,
+    .section__container.lounge__container {
+        overflow: hidden;
+    }
+
+    .memories__grid {
+        gap: 3rem;
+    }
+}
+
+@media (width < 900px) {
+    nav .btn {
+        display: none;
+    }
+
+    .header__container img {
+        min-width: 900px;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .booking__container form {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .plan__grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .plan__image {
+        min-height: 600px;
+        grid-area: 1/1/2/2;
+    }
+
+    .memories__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+
+    .lounge__container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .lounge__image {
+        min-height: 600px;
+    }
+
+    .travellers__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .footer__container {
+        gap: 2rem;
+    }
+}
+@media (width < 600px) {
+    .nav__links {
+        display: none;
+    }
+
+    .booking__nav span {
+        padding: 1rem 0.5rem;
+    }
+
+    .booking__container form {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .memories__header {
+        flex-direction: column;
+    }
+
+    .memories__grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .lounge__grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .travellers__grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .footer__container {
+        grid-template-columns: 1fr;
+    }
+
+    .footer__bar {
+        flex-direction: column;
+        text-align: center;
+    }
+}

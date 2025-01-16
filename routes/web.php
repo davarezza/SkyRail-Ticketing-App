@@ -1,19 +1,17 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MainController;
 use App\Http\Controllers\Master\TransportationController;
 use App\Http\Controllers\Master\TransportTypeController;
 use App\Http\Controllers\Master\TravelRouteController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return redirect()->route('dashboard.index');
-});
+Route::get('/', [MainController::class, 'home'])->name('home');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
 Route::prefix('master')->group(function () {
-
     Route::prefix('/transportation')->group(function () {
         Route::get('/', [TransportationController::class, 'index'])->name('master.transportation.index');
         Route::post('table', [TransportationController::class, 'table'])->name('master.transportation.table');
