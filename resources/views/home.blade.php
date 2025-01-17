@@ -14,6 +14,8 @@
 
     @include('partials.booking')
 
+    @include('partials.card')
+
     <section class="bg-extra-light py-12 memories my-8">
         <div class="max-w-screen-lg mx-auto px-6 memories__container">
             <div class="flex flex-col md:flex-row items-center justify-between gap-8 memories__header">
@@ -60,7 +62,7 @@
         </div>
     </section>
 
-    @include('partials.award')
+    @include('partials.card')
 
     @include('partials.footer')
 @endsection

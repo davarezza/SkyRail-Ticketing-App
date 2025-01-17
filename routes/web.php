@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\Master\OfficerController;
 use App\Http\Controllers\Master\TransportationController;
 use App\Http\Controllers\Master\TransportTypeController;
 use App\Http\Controllers\Master\TravelRouteController;
@@ -41,5 +42,16 @@ Route::prefix('master')->group(function () {
         Route::post('update', [TravelRouteController::class, 'update'])->name('master.travel-route.update');
         Route::get('detail/{id}', [TravelRouteController::class, 'detail'])->name('master.travel-route.detail');
         Route::post('get-data-select', [TravelRouteController::class, 'getDataSelect'])->name('master.travel-route.get-data-select');
+    });
+
+    Route::prefix('/officer')->group(function () {
+        Route::get('/', [OfficerController::class, 'index'])->name('master.officer.index');
+        Route::post('table', [OfficerController::class, 'table'])->name('master.officer.table');
+        Route::post('store', [OfficerController::class, 'store'])->name('master.officer.store');
+        Route::post('delete', [OfficerController::class, 'delete'])->name('master.officer.delete');
+        Route::post('edit', [OfficerController::class, 'edit'])->name('master.officer.edit');
+        Route::post('update', [OfficerController::class, 'update'])->name('master.officer.update');
+        Route::get('detail/{id}', [OfficerController::class, 'detail'])->name('master.officer.detail');
+        Route::post('get-data-select', [OfficerController::class, 'getDataSelect'])->name('master.officer.get-data-select');
     });
 });

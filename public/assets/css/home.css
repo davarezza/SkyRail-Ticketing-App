@@ -16,8 +16,7 @@
 
 @media (width < 1200px) {
     .section__container.header__container,
-    .section__container.plan__container,
-    .section__container.lounge__container {
+    .section__container.plan__container {
         overflow: hidden;
     }
 
@@ -55,14 +54,6 @@
         gap: 2rem;
     }
 
-    .lounge__container {
-        grid-template-columns: repeat(1, 1fr);
-    }
-
-    .lounge__image {
-        min-height: 600px;
-    }
-
     .travellers__grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -89,10 +80,6 @@
     }
 
     .memories__grid {
-        grid-template-columns: repeat(1, 1fr);
-    }
-
-    .lounge__grid {
         grid-template-columns: repeat(1, 1fr);
     }
 
