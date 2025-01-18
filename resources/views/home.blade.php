@@ -14,7 +14,10 @@
 
     @include('partials.booking')
 
-    @include('partials.card')
+    <section class="px-6 max-w-screen-lg mx-auto pt-8 travellers__container">
+        <h2 class="text-3xl md:text-4xl font-semibold text-center section__header">Best Destination</h2>
+        @include('partials.destination-card')
+    </section>
 
     <section class="bg-extra-light py-12 memories my-8">
         <div class="max-w-screen-lg mx-auto px-6 memories__container">

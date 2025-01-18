@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 class OfficerController extends Controller
 {
     protected $service; 
-
     public function __construct()
     {
         $this->service = new OfficerService();
