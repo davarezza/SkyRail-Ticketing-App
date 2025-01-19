@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SkyFlight | Login</title>
+    <title>SkyFlight | Register</title>
     <!-- BOXICONS -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
@@ -47,9 +47,9 @@
 </head>
 <body class="min-h-screen flex items-center justify-center p-5 bg-cover bg-center bg-no-repeat bg-fixed" style="background-image: url({{ asset('assets/img/cloud-bg.jpg') }})">
     <!-- Form Container -->
-    <div class="flex w-[900px] h-[500px] border-2 border-white/30 rounded-3xl backdrop-blur-lg">
-        <!-- Left Column -->
-        <div class="flex flex-col items-center justify-center w-[55%] bg-white/30 backdrop-blur-xl rounded-r-[25%] transition-all duration-300 md:hidden lg:flex">
+    <div class="flex w-full max-w-[900px] h-auto md:h-[500px] border-2 border-white/30 rounded-3xl backdrop-blur-lg">
+        <!-- Left Column - Hidden on mobile -->
+        <div class="hidden lg:flex lg:flex-col lg:items-center lg:justify-center lg:w-[55%] bg-white/30 backdrop-blur-xl rounded-r-[25%] transition-all duration-300">
             <div class="relative w-[350px] h-[350px]">
                 <!-- Layered images -->
                 <img src="{{ asset('assets/img/dots.png') }}" 
@@ -77,7 +77,7 @@
         </div>
 
         <!-- Right Column -->
-        <div class="relative w-full lg:w-[45%] p-4">
+        <div class="w-full lg:w-[45%] p-4 py-8">
             <div class="flex justify-center gap-2 mt-4">
                 <a href="{{ route('login') }}" 
                    class="font-medium px-6 py-1 rounded-full bg-white/20 text-white shadow-md hover:opacity-85 transition-opacity">
@@ -89,7 +89,7 @@
                 </a>
             </div>
 
-            <div class="flex flex-col items-center w-full px-[3vw] transition-all duration-300">
+            <div class="flex flex-col items-center w-full px-4 md:px-[3vw] transition-all duration-300">
                 <h2 class="my-8 text-white text-2xl font-semibold">Register</h2>
                 
                 <div class="w-full space-y-2">
@@ -106,15 +106,15 @@
                                placeholder="Email" name="email" id="email"
                                class="w-full h-12 px-3 text-white bg-white/20 rounded-lg outline-none backdrop-blur-md shadow-md placeholder:text-white placeholder:text-sm"
                                required>
-                        <i class="bx bx-user absolute right-3 top-1/2 -translate-y-1/2 text-white"></i>
+                        <i class="bx bx-envelope absolute right-3 top-1/2 -translate-y-1/2 text-white"></i>
                     </div>
 
                     <div class="relative">
-                        <input type="password" 
-                               placeholder="Password" name="password" id="password"
-                               class="w-full h-12 px-3 text-white bg-white/20 rounded-lg outline-none backdrop-blur-md shadow-md placeholder:text-white placeholder:text-sm"
-                               required>
-                        <i class="bx bx-lock-alt absolute right-3 top-1/2 -translate-y-1/2 text-white"></i>
+                        <input type="password" placeholder="Password" name="password" id="password"
+                            class="w-full h-12 px-3 text-white bg-white/20 rounded-lg outline-none backdrop-blur-md shadow-md placeholder:text-white placeholder:text-sm"
+                            required>
+                        <i class="bx bx-hide absolute right-3 top-1/2 -translate-y-1/2 text-white cursor-pointer" 
+                            id="togglePassword"></i>
                     </div>
 
                     <button class="flex items-center justify-center gap-2 w-full h-12 px-3 text-white bg-[#21264D] rounded-lg shadow-md hover:gap-3 transition-all duration-300">
@@ -130,3 +130,15 @@
     <script src="{{ asset('js/auth/auth.js') }}"></script>
 </body>
 </html>
+<script>
+    const togglePassword = document.getElementById('togglePassword');
+    const password = document.getElementById('password');
+
+    togglePassword.addEventListener('click', function() {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        
+        this.classList.toggle('bx-hide');
+        this.classList.toggle('bx-show');
+    });
+</script>
