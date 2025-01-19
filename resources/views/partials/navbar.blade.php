@@ -12,6 +12,5 @@
         <li><a href="#"
                 class="font-medium text-text-light hover:text-text-dark transition duration-300">Destinations</a></li>
     </ul>
-    <button
-        class="px-8 py-3 text-white bg-blue-600 rounded-lg font-bold hover:bg-blue-700 transition duration-300">Login</button>
+    <a href="{{ route('login') }}" class="px-8 py-3 text-white bg-blue-600 rounded-lg font-bold hover:bg-blue-700 transition duration-300">Login</a>
 </nav>

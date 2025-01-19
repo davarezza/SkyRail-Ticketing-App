@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\Master\OfficerController;
@@ -7,6 +8,12 @@ use App\Http\Controllers\Master\TransportationController;
 use App\Http\Controllers\Master\TransportTypeController;
 use App\Http\Controllers\Master\TravelRouteController;
 use Illuminate\Support\Facades\Route;
+
+Route::middleware('guest')->group(function () {
+    Route::get('login', [AuthController::class, 'loginPage'])->name('login');
+    Route::get('register', [AuthController::class, 'registerPage'])->name('register');
+    Route::post('login', [AuthController::class, 'store'])->name('login.store');
+});
 
 Route::get('/', [MainController::class, 'home'])->name('home');
 
@@ -54,4 +61,8 @@ Route::prefix('master')->group(function () {
         Route::get('detail/{id}', [OfficerController::class, 'detail'])->name('master.officer.detail');
         Route::post('get-data-select', [OfficerController::class, 'getDataSelect'])->name('master.officer.get-data-select');
     });
+});
+
+Route::middleware('auth')->group(function () {
+    Route::post('logout', [AuthController::class, 'destroy'])->name('logout');
 });
