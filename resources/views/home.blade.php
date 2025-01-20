@@ -2,7 +2,17 @@
 
 @section('title')
     <title>Home | {{ config('app.name') }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" integrity="sha512-3pIirOrwegjM6erE5gPSwkUzO+3cTjpnV9lexlNZqvupR64iZBnOOTiiLPb9M36zpMScbmUNIcHUqKD47M719g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endsection
+
+@push('styles')
+<style>
+    #toast-container {
+        top: 1rem;
+        opacity: 1;
+    }
+  </style>
+@endpush
 
 @section('container')
     <header class="max-w-screen-lg mx-auto py-20 px-4">

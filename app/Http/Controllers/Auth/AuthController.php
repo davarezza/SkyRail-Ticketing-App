@@ -16,27 +16,38 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|string|email',
-            'password' => 'required|string',
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
-            return response()->json([
-                'success' => true,
-                'redirect' => url('dashboard')
-            ]);
+        if(Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            session()->flash('success', 'Login successful, enjoy the website!');
+
+            return redirect('/');
         }
 
-        return response()->json([
-            'success' => false,
-            'message' => 'Username or password is incorrect'
-        ], 401);
+        return back()->with('loginError', 'Login Failed');
     }
 
     public function registerPage()
     {
         return view('auth.register');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        request()->session()->invalidate();
+
+        request()->session()->regenerateToken();
+
+        session()->flash('success', 'Thank you for visiting this website');
+
+        return redirect('/');
     }
 }

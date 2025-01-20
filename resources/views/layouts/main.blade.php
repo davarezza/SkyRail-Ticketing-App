@@ -26,5 +26,26 @@
         @yield('container')
     </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    var hostUrl = "assets/";
+    const BASEURL = '{{ url('/') }}';
+    const APP_URL = "{{ config('app.url') }}/";
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    @if (Session::has('success'))
+    toastr.options = {
+        "positionClass": "toast-top-right",
+    };
+    toastr.success("{{ Session::get('success') }}");
+    @endif
+</script>
+@stack('scripts')
 
 </html>
