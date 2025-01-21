@@ -108,9 +108,18 @@
     @endif
     
     const togglePassword = document.getElementById('togglePassword');
+    const togglePasswordConfirmation = document.getElementById('togglePasswordConfirmation');
     const password = document.getElementById('password');
 
     togglePassword.addEventListener('click', function() {
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        
+        this.classList.toggle('bx-hide');
+        this.classList.toggle('bx-show');
+    });
+
+    togglePasswordConfirmation.addEventListener('click', function() {
         const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
         password.setAttribute('type', type);
         

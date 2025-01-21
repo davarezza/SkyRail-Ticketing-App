@@ -44,7 +44,7 @@
                 <i class="bx bx-envelope absolute right-3 top-1/2 -translate-y-1/2 text-white"></i>
             </div>
         
-            <div class="relative pb-2">
+            <div class="relative">
                 <input 
                     type="password" 
                     placeholder="Password" 
@@ -53,7 +53,7 @@
                     class="w-full h-12 px-3 text-white bg-white/20 rounded-lg outline-none backdrop-blur-md shadow-md placeholder:text-white placeholder:text-sm"
                     required autocomplete="off">
                 <i class="bx bx-hide absolute right-3 top-1/2 -translate-y-1/2 text-white cursor-pointer" id="togglePassword"></i>
-            </div>
+            </div><br>
         
             <button 
                 type="submit" 

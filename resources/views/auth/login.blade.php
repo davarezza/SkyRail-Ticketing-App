@@ -20,9 +20,9 @@
     <div class="flex flex-col items-center w-full px-4 md:px-[3vw] transition-all duration-300">
         <h2 class="my-4 text-white text-2xl font-semibold">Login</h2>
         
-        <form action="{{ route('login') }}" method="POST" class="w-full space-y-2">
+        <form action="{{ route('login.authenticate') }}" method="POST" class="w-full space-y-2">
             @csrf
-            <div class="relative pb-2">
+            <div class="relative py-2">
                 <input 
                     type="email" 
                     placeholder="Email" 
@@ -30,7 +30,7 @@
                     id="email" value="{{ old('email') }}"
                     class="w-full h-12 px-3 text-white bg-white/20 rounded-lg outline-none backdrop-blur-md shadow-md placeholder:text-white placeholder:text-sm"
                     autocomplete="off">
-                <i class="bx bx-user absolute right-3 top-1/2 -translate-y-1/2 text-white"></i>
+                <i class="bx bx-envelope absolute right-3 top-1/2 -translate-y-1/2 text-white"></i>
             </div>
             @error('email')
                 <p class="text-xs text-red-600">{{ $message }}</p>
@@ -46,13 +46,13 @@
                     autocomplete="off">
                 <i class="bx bx-hide absolute right-3 top-1/2 -translate-y-1/2 text-white cursor-pointer" 
                     id="togglePassword"></i>
-                </div>
-                @error('password')
-                    <p class="text-xs text-red-600">{{ $message }}</p>
-                @enderror
+            </div>
+            @error('password')
+                <p class="text-xs text-red-600">{{ $message }}</p>
+            @enderror
         
             <div class="flex justify-end p-2">
-                <a href="#" class="text-white text-xs hover:underline">Forgot Password?</a>
+                <a href="{{ route('password.request') }}" class="text-white text-xs hover:underline">Forgot Password?</a>
             </div>
         
             <button 

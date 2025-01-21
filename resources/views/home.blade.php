@@ -11,21 +11,28 @@
         top: 1rem;
         opacity: 1;
     }
+
+    .multiple-text {
+        display: inline-block; 
+        line-height: normal;
+        vertical-align: middle; 
+        font-size: inherit;
+    }
   </style>
 @endpush
 
 @section('container')
     <header class="max-w-screen-lg mx-auto py-20 px-4">
-        <h1 class="text-center text-4xl leading-16 font-semibold text-text-dark">
-            Find And Book<br />A Great Experience
+        <h1 class="text-center text-4xl leading-18 font-semibold text-text-dark">
+            Discover and Book<br /><span class="multiple-text"></span>
         </h1>
         <img src="{{ asset('assets/img/header.jpg') }}" alt="header" class="w-full" />
     </header>
 
     @include('partials.booking')
 
-    <section class="px-6 max-w-screen-lg mx-auto pt-8 travellers__container">
-        <h2 class="text-3xl md:text-4xl font-semibold text-center section__header">Best Destination</h2>
+    <section class="px-6 max-w-screen-lg mx-auto pt-8">
+        <h2 class="text-3xl md:text-4xl font-semibold text-center mb-8">Best Destination</h2>
         @include('partials.destination-card')
     </section>
 
@@ -79,3 +86,16 @@
 
     @include('partials.footer')
 @endsection
+
+@push('scripts')
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script>
+    const typed = new Typed('.multiple-text', {
+        strings: ['Your Next Adventure Today', 'Ultimate Travel Experience', 'Unique Exploration Today'],
+        typeSpeed: 80,
+        backSpeed: 80,
+        backDelay: 80,
+        loop: true
+        });
+    </script>
+@endpush
