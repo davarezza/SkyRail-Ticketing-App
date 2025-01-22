@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Master\DestinationController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\Master\OfficerController;
 use App\Http\Controllers\Master\TransportationController;
@@ -56,6 +57,16 @@ Route::prefix('master')->group(function () {
         Route::post('update', [TravelRouteController::class, 'update'])->name('master.travel-route.update');
         Route::get('detail/{id}', [TravelRouteController::class, 'detail'])->name('master.travel-route.detail');
         Route::post('get-data-select', [TravelRouteController::class, 'getDataSelect'])->name('master.travel-route.get-data-select');
+    });
+
+    Route::prefix('/destination')->group(function () {
+        Route::get('/', [DestinationController::class, 'index'])->name('master.destination.index');
+        Route::post('table', [DestinationController::class, 'table'])->name('master.destination.table');
+        Route::post('store', [DestinationController::class, 'store'])->name('master.destination.store');
+        Route::post('delete', [DestinationController::class, 'delete'])->name('master.destination.delete');
+        Route::post('edit', [DestinationController::class, 'edit'])->name('master.destination.edit');
+        Route::post('update', [DestinationController::class, 'update'])->name('master.destination.update');
+        Route::get('detail/{id}', [DestinationController::class, 'detail'])->name('master.destination.detail');
     });
 
     Route::prefix('/officer')->group(function () {

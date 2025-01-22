@@ -23,6 +23,9 @@
                         <a href="{{ route('master.travel-route.index') }}" class="sidebar-link">Travel Route</a>
                     </li>
                     <li class="sidebar-item">
+                        <a href="{{ route('master.destination.index') }}" class="sidebar-link">Destination</a>
+                    </li>
+                    <li class="sidebar-item">
                         <a href="#" class="sidebar-link">Discount Coupon</a>
                     </li>
                     <li class="sidebar-item">

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    <title>Transportation Data | {{ config('app.name') }}</title>
+    <title>Transportation | {{ config('app.name') }}</title>
 @endsection
 
 @section('breadcrumb')
