@@ -14,21 +14,18 @@
             @csrf
             <input type="hidden" name="token" value="{{ $token }}">
 
-            <div class="relative pb-2">
+            <div class="relative py-2">
                 <input 
                     type="email" 
-                    placeholder="Email" 
                     name="email" 
-                    id="email" value="{{ old('email') }}"
-                    class="w-full h-12 px-3 text-white bg-white/20 rounded-lg outline-none backdrop-blur-md shadow-md placeholder:text-white placeholder:text-sm"
-                    autocomplete="off" required>
+                    value="{{ request('email', old('email')) }}" 
+                    placeholder="Email"
+                    class="w-full h-12 px-3 text-white bg-gray-600 rounded-lg"
+                    autocomplete="off" readonly required>
                 <i class="bx bx-envelope absolute right-3 top-1/2 -translate-y-1/2 text-white"></i>
             </div>
-            @error('email')
-                <p class="text-xs text-red-600">{{ $message }}</p>
-            @enderror
 
-            <div class="relative pb-2">
+            <div class="relative py-2">
                 <input 
                     type="password" 
                     placeholder="New Password" 
@@ -39,11 +36,8 @@
                 <i class="bx bx-hide absolute right-3 top-1/2 -translate-y-1/2 text-white cursor-pointer" 
                     id="togglePassword"></i>
             </div>
-            @error('password')
-                <p class="text-xs text-red-600">{{ $message }}</p>
-            @enderror
 
-            <div class="relative pb-2">
+            <div class="relative py-2">
                 <input 
                     type="password" 
                     placeholder="Confirm Password" 
@@ -54,9 +48,6 @@
                 <i class="bx bx-hide absolute right-3 top-1/2 -translate-y-1/2 text-white cursor-pointer" 
                     id="togglePasswordConfirmation"></i>
             </div>
-            @error('password_confirmation')
-                <p class="text-xs text-red-600">{{ $message }}</p>
-            @enderror
 
             <div class="flex justify-between gap-4">
                 <button 
@@ -77,15 +68,6 @@
 <!-- SweetAlert2 Library -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    @if(session('status'))
-        Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: '{{ session("status") }}',
-            confirmButtonText: 'OK'
-        });
-    @endif
-
     @if($errors->has('email'))
         Swal.fire({
             icon: 'error',

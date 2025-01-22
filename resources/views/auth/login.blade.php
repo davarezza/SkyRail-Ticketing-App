@@ -63,12 +63,20 @@
             </button>
         </form>                
 
-        <div class="flex items-center gap-2 px-4 py-2 mt-4 border rounded-full cursor-pointer shadow-md bg-black/20 hover:bg-black/30 hover:scale-105 transition-all duration-200">
-            <div class="flex items-center justify-center h-8 w-8 text-white bg-black/40 rounded-full">
-                <i class="bx bxl-google"></i>
-            </div>
-            <span class="text-white font-medium">Google</span>
-        </div>                
+        <div class="flex gap-4 mt-4">
+            <a href="#" class="flex items-center gap-2 px-4 py-2 border rounded-full cursor-pointer shadow-md bg-black/20 hover:bg-black/30 hover:scale-105 transition-all duration-200">
+                <div class="flex items-center justify-center h-8 w-8 text-white bg-black/40 rounded-full">
+                    <i class="bx bxl-google"></i>
+                </div>
+                <span class="text-white font-medium">Google</span>
+            </a>                
+            <a href="{{ route('home') }}" class="flex items-center gap-2 px-4 py-2 border rounded-full cursor-pointer shadow-md bg-black/20 hover:bg-black/30 hover:scale-105 transition-all duration-200">
+                <div class="flex items-center justify-center h-8 w-8 text-white bg-black/40 rounded-full">
+                    <i class="bx bx-arrow-back"></i>
+                </div>
+                <span class="text-white font-medium">Back</span>
+            </a>
+        </div>
     </div>
 </div>
 @endsection

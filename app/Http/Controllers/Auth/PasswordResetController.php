@@ -25,7 +25,7 @@ class PasswordResetController extends Controller
         $status = Password::sendResetLink($request->only('email'));
     
         return $status === Password::RESET_LINK_SENT
-            ? back()->with(['status' => 'We have sent you a password reset link. Please check your email!'])
+            ? redirect()->route('login')->with('success', 'We have sent you a password reset link. Please check your email!')
             : back()->withErrors(['email' => 'Failed to send the password reset link. Please try again later.']);
     }      
 
@@ -39,7 +39,7 @@ class PasswordResetController extends Controller
         $request->validate([
             'token' => 'required',
             'email' => 'required|email|exists:users,email',
-            'password' => 'required|confirmed|min:8',
+            'password' => 'required|confirmed|min:3',
         ]);
 
         $status = Password::reset(
@@ -51,7 +51,7 @@ class PasswordResetController extends Controller
         );
 
         return $status === Password::PASSWORD_RESET
-            ? redirect()->route('login')->with('status', __($status))
+            ? redirect()->route('login')->with('success', 'Your password has been successfully reset!')
             : back()->withErrors(['email' => [__($status)]]);
     }
 }

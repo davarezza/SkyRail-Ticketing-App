@@ -106,6 +106,13 @@
     };
     toastr.error("{{ Session::get('loginError') }}");
     @endif
+
+    @if (Session::has('email'))
+    toastr.options = {
+        "positionClass": "toast-top-right",
+    };
+    toastr.error("{{ Session::get('email') }}");
+    @endif
     
     const togglePassword = document.getElementById('togglePassword');
     const togglePasswordConfirmation = document.getElementById('togglePasswordConfirmation');

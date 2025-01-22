@@ -8,7 +8,7 @@
 <div class="w-full lg:w-[45%] p-4 py-8">
     <div class="flex flex-col items-center w-full px-4 md:px-[3vw] transition-all duration-300">
         <h2 class="my-6 text-white text-2xl font-semibold">Forgot Password?</h2>
-        <h4 class="mb-4 mt-12 text-gray-200 text-center text-2xl font-semibold">Enter your email to reset your password.?</h4>
+        <h4 class="mb-4 mt-12 text-gray-200 text-center text-2xl font-semibold">Enter your email to reset password</h4>
         
         <form action="{{ route('password.email') }}" method="POST" class="w-full space-y-2">
             @csrf
@@ -22,9 +22,6 @@
                     autocomplete="off">
                 <i class="bx bx-envelope absolute right-3 top-1/2 -translate-y-1/2 text-white"></i>
             </div>
-            @error('email')
-                <p class="text-xs text-red-600">{{ $message }}</p>
-            @enderror
         
             <div class="flex justify-between gap-4">
                 <button 
@@ -44,15 +41,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-    @if(session('status'))
-        Swal.fire({
-            icon: 'success',
-            title: 'Success!',
-            text: '{{ session("status") }}',
-            confirmButtonText: 'OK'
-        });
-    @endif
-
     @if($errors->has('email'))
         Swal.fire({
             icon: 'error',
