@@ -32,7 +32,7 @@
                         <a href="#" class="sidebar-link">Ticket</a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Officer</a>
+                        <a href="{{ route('master.officer.index') }}" class="sidebar-link">Officer</a>
                     </li>
                 </ul>
             </li>          
@@ -45,20 +45,7 @@
             </li>
             <li class="sidebar-item">
                 <a href="#" class="sidebar-link"><i class='bx bxs-plane-alt'></i> Airplane Tickets</a>
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link"><i class='bx bxs-train'></i> Train Tickets</a>
-            </li>
-            <li class="sidebar-header">
-                Analytics & Reports
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link"><i class='bx bxs-bar-chart-alt-2'></i> Sales Overview</a>
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link"><i class='bx bx-line-chart'></i> Popular Routes</a>
-            </li>
-                     
+            </li>    
             <li class="sidebar-header">
                 Operation
             </li>
@@ -69,7 +56,7 @@
                 <a href="#" class="sidebar-link"><i class='bx bxs-cog'></i> Settings</a>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link"><i class='bx bx-lock'></i> Role Access</a>
+                <a href="{{ route('management.role.index') }}" class="sidebar-link"><i class='bx bx-lock'></i> Role Access</a>
             </li>
         </ul>
     </div>

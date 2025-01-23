@@ -23,7 +23,7 @@
 
 @section('container')
     <header class="max-w-screen-lg mx-auto py-20 px-4">
-        <h1 class="text-center text-4xl leading-18 font-semibold text-text-dark">
+        <h1 class="text-center text-4xl sm:text-3xl leading-18 font-semibold text-text-dark">
             Discover and Book<br /><span class="multiple-text"></span>
         </h1>
         <img src="{{ asset('assets/img/header.jpg') }}" alt="header" class="w-full" />

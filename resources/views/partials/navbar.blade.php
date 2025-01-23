@@ -39,13 +39,13 @@
                 @auth
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="w-full px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition duration-300">Logout</button>
+                        <button type="submit" class="w-full mt-6 px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition duration-300">Logout</button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="w-full px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition duration-300">Login</a>
+                    <a href="{{ route('login') }}" class="block w-full mt-6 px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition duration-300">Login</a>
                 @endauth
             </div>
-        </div>
+        </div>        
     </div>
 </nav>
 

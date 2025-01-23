@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordResetController;
+use App\Http\Controllers\Management\RoleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\DestinationController;
 use App\Http\Controllers\MainController;
@@ -81,6 +82,20 @@ Route::prefix('master')->group(function () {
     });
 });
 
+Route::prefix('management')->group(function () {
+    Route::prefix('role')->group(function () {
+        Route::get('/', [RoleController::class, 'index'])->name('management.role.index');
+        Route::post('/table', [RoleController::class, 'table'])->name('management.role.table');
+        Route::post('/store', [RoleController::class, 'store'])->name('management.role.store');
+        Route::post('/delete', [RoleController::class, 'delete'])->name('management.role.delete');
+        Route::post('edit', [RoleController::class, 'edit'])->name('management.role.edit');
+        Route::post('update', [RoleController::class, 'update'])->name('management.role.update');
+    });
+});
+
 Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
+
+Route::get('/get-permission/{id}', [RoleController::class, 'getPermission'])->name('get-permission');
+Route::post('/{role}/store-permission', [RoleController::class, 'storePermission'])->name('management.role.store-permission');
