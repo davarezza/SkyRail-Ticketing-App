@@ -75,8 +75,8 @@
                         </div>
                         <div class="col-md-5">
                             <div class="mb-2" id="save" style="display: none">
-                                <h4 class="mb-2">Access</h4>
-                                <button class="btn btn-primary mt-3" id="save-button">Save</button>
+                                <h5 class="my-3">Access</h5>
+                                <button class="btn btn-primary mt-2" id="save-button">Save</button>
                             </div>
                             <div id="kt_docs_jstree_checkable" class="mt-4"></div>
                         </div>

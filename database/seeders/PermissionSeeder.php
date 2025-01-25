@@ -27,8 +27,8 @@ class PermissionSeeder extends Seeder
         foreach ($permissions as $permission) {
             $data[] = [
                 'name' => $permission,
-                'menu_title' => 'Menu Title',
-                'group' => 'Group',
+                'menu_title' => 'Menu Title', // Example: Master
+                'group' => 'Group', // Example: Travel Route
                 'guard_name' => 'web',
                 'created_at' => $now,
                 'updated_at' => $now,
