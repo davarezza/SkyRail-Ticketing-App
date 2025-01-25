@@ -14,6 +14,7 @@ class Petugas extends BaseModel
         'username',
         'password',
         'nama_petugas',
+        'email',
         'id_level',
     ];
 
