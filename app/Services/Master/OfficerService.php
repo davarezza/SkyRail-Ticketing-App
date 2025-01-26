@@ -116,13 +116,9 @@ class OfficerService
     {
         DB::beginTransaction();
         try {
-            $fullNameParts = explode(' ', $request->nama_petugas);
-            $username = $this->generateUsername($fullNameParts);
-    
             $dataOfficer = [
                 'nama_petugas' => $request->nama_petugas,
                 'email' => $request->email,
-                'username' => $username,
                 'role_id' => $request->role_id,
             ];
     
@@ -141,16 +137,23 @@ class OfficerService
         DB::beginTransaction();
         try {
             $dataOfficer = $this->officer->find($request->id);
-            $opr = $this->user->where('id', $dataOfficer->user_id)->delete();
-
-            $opr = $this->repository->delete($request->id);
-
-            DB::commit();
-            return BaseResponse::deleted($opr);
+    
+            if ($dataOfficer) {
+                $this->user->where('id', $dataOfficer->user_id)->delete();
+                $opr = $this->repository->delete($request->id);
+    
+                DB::commit();
+                return BaseResponse::deleted($opr);
+            }
+    
+            throw new \Exception("Officer data not found");
+    
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e->getMessage());
-            return BaseResponse::errorTransaction($e);
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 422);
         }
-    }
+    }    
 }

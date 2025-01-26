@@ -41,11 +41,25 @@
             </li>
 
             <li class="sidebar-header">
-                Booking Management
+                Management
             </li>
             <li class="sidebar-item">
                 <a href="#" class="sidebar-link"><i class='bx bxs-plane-alt'></i> Airplane Tickets</a>
-            </li>    
+            </li>
+            <li class="sidebar-item">
+                <a href="#user" class="sidebar-link collapsed" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="user">
+                    <i class='bx bxs-user pe-2'></i> User Management
+                </a>
+                <ul id="user" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">Passenger</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('master.officer.index') }}" class="sidebar-link">Officer</a>
+                    </li>
+                </ul>
+            </li>  
+            
             <li class="sidebar-header">
                 Operation
             </li>

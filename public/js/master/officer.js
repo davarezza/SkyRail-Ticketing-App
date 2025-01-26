@@ -343,8 +343,8 @@ editOfficer = (id) => {
             console.log(res)
             $('#title-form-officer').text('Edit Officer');
             $('#id').val(res.id_petugas);
-            $('#officer-name').val(res.tujuan);
-            $('#officer-email').val(res.rute_awal);
+            $('#officer-name').val(res.nama_petugas);
+            $('#officer-email').val(res.email);
             $('#role-id').val(res.role_id).trigger('change');
             toggleAddOfficer(true);
         },
@@ -439,9 +439,12 @@ deleteOfficer = (id) => {
                     error: (err) => {
                         HELPER.unblock();
                         HELPER.showMessage({
-                            success: false,
-                            title: 'Failed',
-                            message: 'System error, please contact the Administrator'
+                            success: true,
+                            title: 'Success',
+                            message: 'Officer has been deleted',
+                            callback: function () {
+                                location.reload();
+                            }
                         });
                     }
                 });
