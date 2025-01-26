@@ -110,4 +110,10 @@ class RoleRepository extends BaseRepository
             ];
         })->values()->toArray();
     }
+
+    public function getData($request){
+        $opr = $this->model->get();
+
+        return $opr;
+    }
 }

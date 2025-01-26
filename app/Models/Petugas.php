@@ -13,14 +13,15 @@ class Petugas extends BaseModel
     protected $fillable = [
         'username',
         'password',
+        'user_id',
+        'role_id',
         'nama_petugas',
         'email',
-        'id_level',
     ];
 
-    public function level()
+    public function role()
     {
-        return $this->belongsTo(Level::class, 'id_level', 'id_level');
+        return $this->belongsTo(Role::class, 'role_id', 'id');
     }
 
     public function pemesanans()

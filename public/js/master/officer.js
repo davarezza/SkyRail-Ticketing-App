@@ -6,7 +6,7 @@ $(() => {
         edit: APP_URL + "master/officer/edit",
         update: APP_URL + "master/officer/update",
         delete: APP_URL + "master/officer/delete",
-        // getDataSelect: APP_URL + "master/officer/get-data-select",
+        getDataSelect: APP_URL + "master/officer/get-data-select",
     };
 
     init();
@@ -14,9 +14,9 @@ $(() => {
 
 init = async () => {
     await HELPER.block();
-    // await getDataSelect();
+    await getDataSelect();
     await initTableOfficer();
-    // await formValidationAddOfficer();
+    await formValidationAddOfficer();
     await HELPER.unblock();
 };
 
@@ -104,13 +104,13 @@ initTableOfficer = () => {
                 {
                     targets: 3,
                     render: function (data, type, full, meta) {
-                        return full.password;
+                        return full.email;
                     },
                 },                                       
                 {
                     targets: 4,
                     render: function (data, type, full, meta) {
-                        return full.email;
+                        return full.password;
                     },
                 },             
                 {
@@ -151,5 +151,301 @@ initTableOfficer = () => {
                 resolve(true);
             },
         });
+    });
+}
+
+getDataSelect = () => {
+    HELPER.ajax({
+        url: HELPER.api.getDataSelect,
+        data: {
+            _token: $('[name="_token"]').val()
+        },
+        type: 'POST',
+        success: (response) => {
+            HELPER.setDataMultipleCombo([{
+                data: response.role,
+                el: 'role-id',
+                valueField: 'id',
+                displayField: 'name',
+                placeholder: 'Select Level'
+            },
+        ]);
+        },
+        error: (err) => {
+            HELPER.showMessage({
+                success: false,
+                title: 'Failed',
+                message: 'System error, please contact the Administrator'
+            });
+        }
+    })
+}
+
+toggleAddOfficer = (show) => {
+    if (show) {
+        $("#modal-add-officer").modal("show");
+        formValidationAddOfficer();
+    } else {
+        $("#modal-add-officer").modal("hide");
+        $('#officer-name').val('');
+        $('#officer-email').val('');
+        $('#role-id').val('');
+        $('#id').val('');
+        $('#title-form-officer').text('Add Officer');
+        if(validatorAddOfficer){
+            validatorAddOfficer.resetForm();
+        }
+    }
+}
+
+var validatorAddOfficer;
+
+formValidationAddOfficer = () => {
+    const form = document.getElementById('form-add-officer');
+    const submitButton = document.getElementById('btn-save-officer');
+
+    if (!form) {
+        console.error('Form #form-add-officer not found');
+        return;
+    }
+    
+    if (!submitButton) {
+        console.error('Button #btn-save-officer not found');
+        return;
+    }
+
+    if (validatorAddOfficer) {
+        validatorAddOfficer.destroy();
+    }
+
+    validatorAddOfficer = FormValidation.formValidation(
+        form,
+        {
+            fields: {
+                'officer-name': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Name is required'
+                        }
+                    }
+                },
+                'officer-email': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Email is required'
+                        },
+                        emailAddress: {
+                            message: 'The value is not a valid email address'
+                        }
+                    }
+                },
+                'role-id': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Transport is required'
+                        }
+                    }
+                },
+            },
+
+            plugins: {
+                trigger: new FormValidation.plugins.Trigger(),
+                bootstrap: new FormValidation.plugins.Bootstrap5({
+                    rowSelector: '.fv-row',
+                    eleInvalidClass: '',
+                    eleValidClass: ''
+                })
+            }
+        }
+    );
+
+    form.removeEventListener('submit', handleSubmitFormOfficer);
+
+    form.addEventListener('submit', handleSubmitFormOfficer);
+}
+
+function handleSubmitFormOfficer(e) {
+    e.preventDefault();
+
+    if (validatorAddOfficer) {
+        validatorAddOfficer.validate().then(function (status) {
+            if (status == 'Valid') {
+                if($('#id').val() != '' && $('#id').val() != null){
+                    updateOfficer();
+                } else {
+                    saveOfficer();
+                }
+            }
+        });
+    }
+}
+
+saveOfficer = () => {
+    var formData = new FormData();
+    formData.append('nama_petugas', $('#officer-name').val());
+    formData.append('email', $('#officer-email').val());
+    formData.append('role_id', $('#role-id').val());
+    formData.append('_token', $('[name="_token"]').val());
+
+    $("#modal-add-officer").modal("hide");
+    HELPER.confirm({
+        title: 'Save Officer',
+        message: 'Are you sure you want to save this officer?',
+        callback: function (result) {
+            if (result) {
+                HELPER.block();
+                HELPER.ajax({
+                    url: HELPER.api.save,
+                    type: 'post',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: (res) => {
+                        initTableOfficer();
+                        toggleAddOfficer(false);
+                        $('#officer-name').val('');
+                        $('#officer-email').val('');
+                        $('#role-id').val('');
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: true,
+                            title: 'Success',
+                            message: 'Officer has been saved'
+                        });
+                    },
+                    error: (err) => {
+                        toggleAddOfficer(false);
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: false,
+                            title: 'Failed',
+                            message: 'System error, please contact the Administrator'
+                        });
+                    }
+                });
+            } else {
+                $("#modal-add-officer").modal("show");
+                formValidationAddOfficer();
+            }
+        }
+    });
+}
+
+editOfficer = (id) => {
+    HELPER.ajax({
+        url: HELPER.api.edit,
+        type: 'post',
+        data: {
+            id: id,
+            _token: $('[name="_token"]').val()
+        },
+        success: (res) => {
+            console.log(res)
+            $('#title-form-officer').text('Edit Officer');
+            $('#id').val(res.id_petugas);
+            $('#officer-name').val(res.tujuan);
+            $('#officer-email').val(res.rute_awal);
+            $('#role-id').val(res.role_id).trigger('change');
+            toggleAddOfficer(true);
+        },
+        error: (err) => {
+            HELPER.showMessage({
+                success: false,
+                title: 'Failed',
+                message: 'System error, please contact the Administrator'
+            });
+        }
+    });
+}
+
+updateOfficer = () => {
+    var formData = new FormData();
+    formData.append('nama_petugas', $('#officer-name').val());
+    formData.append('email', $('#officer-email').val());
+    formData.append('role_id', $('#role-id').val());
+    formData.append('_token', $('[name="_token"]').val());
+    formData.append('id_petugas', $('#id').val());
+    formData.append('_token', $('[name="_token"]').val());
+
+    $("#modal-add-officer").modal("hide");
+    HELPER.confirm({
+        title: 'Update Officer',
+        message: 'Are you sure you want to update this officer?',
+        callback: function (result) {
+            if (result) {
+                HELPER.block();
+                HELPER.ajax({
+                    url: HELPER.api.update,
+                    type: 'post',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: (res) => {
+                        initTableOfficer();
+                        toggleAddOfficer(false);
+                        $('#id').val('');
+                        $('#officer-name').val('');
+                        $('#officer-email').val('');
+                        $('#role-id').val('');
+                        $('#title-form-officer').text('Add Officer');
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: true,
+                            title: 'Success',
+                            message: 'Officer has been updated'
+                        })
+                    },
+                    error: (err) => {
+                        toggleAddOfficer(false);
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: false,
+                            title: 'Failed',
+                            message: 'System error, please contact the Administrator'
+                        });
+                    }
+                });
+            } else {
+                $("#modal-add-officer").modal("show");
+                formValidationAddOfficer();
+            }
+        }
+    });
+}
+
+deleteOfficer = (id) => {
+    HELPER.confirm({
+        title: 'Delete Officer',
+        message: 'Are you sure you want to delete this officer?',
+        callback: function (result) {
+            if (result) {
+                HELPER.block();
+                HELPER.ajax({
+                    url: HELPER.api.delete,
+                    type: 'post',
+                    data: {
+                        id: id,
+                        _token: $('[name="_token"]').val()
+                    },
+                    success: (res) => {
+                        initTableOfficer();
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: true,
+                            title: 'Success',
+                            message: 'Officer has been deleted'
+                        })
+                    },
+                    error: (err) => {
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: false,
+                            title: 'Failed',
+                            message: 'System error, please contact the Administrator'
+                        });
+                    }
+                });
+            }
+        }
     });
 }

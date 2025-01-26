@@ -3,15 +3,17 @@
 namespace App\Http\Controllers\Master;
 
 use App\Http\Controllers\Controller;
+use App\Services\Management\RoleService;
 use App\Services\Master\OfficerService;
 use Illuminate\Http\Request;
 
 class OfficerController extends Controller
 {
-    protected $service; 
+    protected $service, $serviceRole; 
     public function __construct()
     {
         $this->service = new OfficerService();
+        $this->serviceRole = new RoleService();
     }
 
     public function index()
@@ -57,6 +59,14 @@ class OfficerController extends Controller
     public function delete(Request $request)
     {
         $opr = $this->service->delete($request);
+
+        return $opr;
+    }
+
+    public function getDataSelect(Request $request)
+    {
+        $opr = [];
+        $opr['role'] = $this->serviceRole->getData($request);
 
         return $opr;
     }

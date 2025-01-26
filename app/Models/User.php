@@ -25,9 +25,8 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'plain_password',
     ];
-
-    protected $primaryKey = 'id';
 
     /**
      * The attributes that should be hidden for serialization.
@@ -62,5 +61,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class, 'model_has_roles', 'model_id', 'role_id')
             ->with('permission')
             ->using(ModelHasRole::class);
+    }
+
+    public function petugas()
+    {
+        return $this->hasOne(Petugas::class, 'user_id');
     }
 }
