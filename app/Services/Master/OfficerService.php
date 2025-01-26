@@ -5,6 +5,7 @@ namespace App\Services\Master;
 use App\Models\ViewModels\OfficerView;
 use App\Repositories\Master\OfficerRepository;
 use App\Core\BaseResponse;
+use App\Models\Petugas;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -13,13 +14,14 @@ class OfficerService
 {
     protected $repository;
     protected $modelView;
-    protected $user;
+    protected $user, $officer;
 
     public function __construct()
     {
         $this->repository = new OfficerRepository();
         $this->modelView = new OfficerView();
         $this->user = new User();
+        $this->officer = new Petugas();
     }
 
     private function generateUsername($fullNameParts)
@@ -67,14 +69,15 @@ class OfficerService
     
             $password = Str::random(8);
     
-            // $dataUser = [
-            //     'username' => $username,
-            //     'email' => $request->email,
-            //     'password' => bcrypt($password),
-            //     'plain_password' => $password,
-            // ];
-            // $user = $this->user->create($dataUser);
-            // $userId = $user->id;
+            $dataUser = [
+                'name' => $request->nama_petugas,
+                'username' => $username,
+                'email' => $request->email,
+                'password' => bcrypt($password),
+                'plain_password' => $password,
+            ];
+            $user = $this->user->create($dataUser);
+            $userId = $user->id;
     
             $dataOfficer = [
                 'nama_petugas' => $request->nama_petugas,
@@ -82,6 +85,7 @@ class OfficerService
                 'username' => $username,
                 'password' => $password,
                 'role_id' => $request->role_id,
+                'user_id' => $userId,
             ];
             $opr = $this->repository->create($dataOfficer);
     
@@ -136,6 +140,9 @@ class OfficerService
     {
         DB::beginTransaction();
         try {
+            $dataOfficer = $this->officer->find($request->id);
+            $opr = $this->user->where('id', $dataOfficer->user_id)->delete();
+
             $opr = $this->repository->delete($request->id);
 
             DB::commit();
