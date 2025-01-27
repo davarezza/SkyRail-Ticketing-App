@@ -20,6 +20,11 @@ class Penumpang extends Model
         'telephone',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
     public function rutes()
     {
         return $this->hasMany(Rute::class, 'id_penumpang', 'id_penumpang');

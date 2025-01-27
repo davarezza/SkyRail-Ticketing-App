@@ -67,4 +67,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Petugas::class, 'user_id');
     }
+
+    public function penumpang()
+    {
+        return $this->hasOne(Penumpang::class, 'user_id');
+    }
 }
