@@ -48,7 +48,7 @@
             </li>
             <li class="sidebar-item">
                 <a href="#user" class="sidebar-link collapsed" data-bs-toggle="collapse" role="button" aria-expanded="false" aria-controls="user">
-                    <i class='bx bxs-user pe-2'></i> User Management
+                    <i class='bx bxs-user'></i> User Management
                 </a>
                 <ul id="user" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item">

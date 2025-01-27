@@ -7,6 +7,7 @@ use App\Repositories\Master\OfficerRepository;
 use App\Core\BaseResponse;
 use App\Models\Petugas;
 use App\Models\User;
+use App\Notifications\NewOfficerNotification;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -89,6 +90,8 @@ class OfficerService
             ];
             $opr = $this->repository->create($dataOfficer);
     
+            $user->notify(new NewOfficerNotification($request->nama_petugas, $username, $password));
+    
             DB::commit();
             return BaseResponse::created($opr);
         } catch (\Exception $e) {
@@ -96,7 +99,7 @@ class OfficerService
             dd($e->getMessage(), $e->getCode());
             return BaseResponse::errorTransaction($e);
         }
-    }    
+    }           
 
     public function detail($id) {
         $data = [];
@@ -137,16 +140,14 @@ class OfficerService
         DB::beginTransaction();
         try {
             $dataOfficer = $this->officer->find($request->id);
-    
             if ($dataOfficer) {
                 $this->user->where('id', $dataOfficer->user_id)->delete();
-                $opr = $this->repository->delete($request->id);
-    
-                DB::commit();
-                return BaseResponse::deleted($opr);
             }
+
+            $opr = $this->repository->delete($request->id);
     
-            throw new \Exception("Officer data not found");
+            DB::commit();
+            return BaseResponse::deleted($opr);
     
         } catch (\Exception $e) {
             DB::rollBack();
