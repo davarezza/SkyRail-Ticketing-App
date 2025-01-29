@@ -86,10 +86,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('/passenger')->group(function () {
             Route::get('/', [PassengerController::class, 'index'])->name('master.passenger.index');
             Route::post('table', [PassengerController::class, 'table'])->name('master.passenger.table');
-            Route::post('store', [PassengerController::class, 'store'])->name('master.passenger.store');
             Route::post('delete', [PassengerController::class, 'delete'])->name('master.passenger.delete');
-            Route::post('edit', [PassengerController::class, 'edit'])->name('master.passenger.edit');
-            Route::post('update', [PassengerController::class, 'update'])->name('master.passenger.update');
             Route::get('detail/{id}', [PassengerController::class, 'detail'])->name('master.passenger.detail');
         });
     });

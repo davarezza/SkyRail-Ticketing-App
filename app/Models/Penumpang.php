@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Penumpang extends Model
+class Penumpang extends BaseModel
 {
     use HasFactory;
 
@@ -34,5 +34,11 @@ class Penumpang extends Model
     public function pemesanans()
     {
         return $this->hasMany(Pemesanan::class, 'id_penumpang', 'id_penumpang');
+    }
+
+    public function useView()
+    {
+        $this->setView('v_penumpang');
+        return $this;
     }
 }
