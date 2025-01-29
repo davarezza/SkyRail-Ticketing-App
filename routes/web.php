@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\DestinationController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\Master\OfficerController;
+use App\Http\Controllers\Master\PassengerController;
 use App\Http\Controllers\Master\TransportationController;
 use App\Http\Controllers\Master\TransportTypeController;
 use App\Http\Controllers\Master\TravelRouteController;
@@ -80,6 +81,16 @@ Route::middleware('auth')->group(function () {
             Route::post('update', [OfficerController::class, 'update'])->name('master.officer.update');
             Route::get('detail/{id}', [OfficerController::class, 'detail'])->name('master.officer.detail');
             Route::post('get-data-select', [OfficerController::class, 'getDataSelect'])->name('master.officer.get-data-select');
+        });
+
+        Route::prefix('/passenger')->group(function () {
+            Route::get('/', [PassengerController::class, 'index'])->name('master.passenger.index');
+            Route::post('table', [PassengerController::class, 'table'])->name('master.passenger.table');
+            Route::post('store', [PassengerController::class, 'store'])->name('master.passenger.store');
+            Route::post('delete', [PassengerController::class, 'delete'])->name('master.passenger.delete');
+            Route::post('edit', [PassengerController::class, 'edit'])->name('master.passenger.edit');
+            Route::post('update', [PassengerController::class, 'update'])->name('master.passenger.update');
+            Route::get('detail/{id}', [PassengerController::class, 'detail'])->name('master.passenger.detail');
         });
     });
 

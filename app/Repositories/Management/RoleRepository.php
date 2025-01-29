@@ -4,6 +4,7 @@ namespace App\Repositories\Management;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use App\Models\Role;
+use App\Models\User;
 use App\Models\ViewModels\RoleView;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
@@ -115,5 +116,12 @@ class RoleRepository extends BaseRepository
         $opr = $this->model->get();
 
         return $opr;
+    }
+
+    public function syncRole(array $data)
+    {
+        $user = User::find($data['id']);
+        $roles = $data['role'];
+        $user->roles()->sync($roles);
     }
 }

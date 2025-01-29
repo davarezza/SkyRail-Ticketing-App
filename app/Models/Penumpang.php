@@ -18,6 +18,7 @@ class Penumpang extends Model
         'tanggal_lahir',
         'jenis_kelamin',
         'telephone',
+        'user_id',
     ];
 
     public function user()

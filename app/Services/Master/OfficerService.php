@@ -88,6 +88,13 @@ class OfficerService
                 'role_id' => $request->role_id,
                 'user_id' => $userId,
             ];
+
+            $syncRole = [
+                'id' => $userId,
+                'role' => $request->role_id,
+            ];
+
+            $this->repository->syncRole($syncRole);
             $opr = $this->repository->create($dataOfficer);
     
             $user->notify(new NewOfficerNotification($request->nama_petugas, $username, $password));
@@ -141,9 +148,10 @@ class OfficerService
         try {
             $dataOfficer = $this->officer->find($request->id);
             if ($dataOfficer) {
-                $this->user->where('id', $dataOfficer->user_id)->delete();
+                $this->repository->deleteUser($dataOfficer->user_id);
             }
 
+            $this->repository->removeRole($dataOfficer->user_id);
             $opr = $this->repository->delete($request->id);
     
             DB::commit();

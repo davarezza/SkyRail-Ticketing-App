@@ -52,7 +52,7 @@
                 </a>
                 <ul id="user" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Passenger</a>
+                        <a href="{{ route('master.passenger.index') }}" class="sidebar-link">Passenger</a>
                     </li>
                     <li class="sidebar-item">
                         <a href="{{ route('master.officer.index') }}" class="sidebar-link">Officer</a>

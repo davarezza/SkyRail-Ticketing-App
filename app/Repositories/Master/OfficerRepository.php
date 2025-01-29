@@ -4,14 +4,17 @@ namespace App\Repositories\Master;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use App\Models\Petugas;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class OfficerRepository extends BaseRepository
 {
-    protected $model;
+    protected $model, $userModel;
 
     public function __construct()
     {
         $this->model = new Petugas();
+        $this->userModel = new User();
     }
 
     /**
@@ -52,5 +55,23 @@ class OfficerRepository extends BaseRepository
         $opr = $this->model->where('id_petugas', $request)->delete();
 
         return $opr;
+    }
+
+    public function deleteUser($request){
+        $opr = $this->userModel->where('id', $request)->delete();
+
+        return $opr;
+    }
+
+    public function syncRole(array $data)
+    {
+        $user = User::find($data['id']);
+        $roles = $data['role'];
+        $user->roles()->sync($roles);
+    }
+
+    public function removeRole(string $id)
+    {
+        return DB::table('model_has_roles')->where('model_id', $id)->delete();
     }
 }

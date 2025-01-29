@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Penumpang;
 use App\Models\User;
+use App\Repositories\Management\RoleRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -12,6 +13,12 @@ use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
+    protected $repository;
+    public function __construct()
+    {
+        $this->repository = new RoleRepository();
+    }
+
     public function loginPage()
     {
         return view('auth.login');
@@ -64,28 +71,37 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
-            'password' => 'required|min:8|confirmed',
+            'password' => 'required|min:8',
         ]);
-
+    
+        $username = $this->generateUsername(explode(' ', $request->name));
+    
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'username' => $this->generateUsername(explode(' ', $request->name)),
+            'username' => $username,
             'password' => Hash::make($request->password),
             'plain_password' => $request->password,
         ]);
-
+    
         $penumpang = Penumpang::create([
             'nama_penumpang' => $request->name,
+            'password' => $request->password,
             'user_id' => $user->id,
-            'username' => $this->generateUsername(explode(' ', $request->name)),
-            'jenis_kelamin' => $request->jenis_kelamin,
+            'username' => $username,
         ]);
-
+    
+        $syncRole = [
+            'id' => $user->id,
+            'role' => 2,
+        ];
+    
+        $this->repository->syncRole($syncRole);
+    
         session()->flash('success', 'Registration successful, please login!');
-
+    
         return redirect('/login');
-    }
+    }    
 
     public function logout()
     {
