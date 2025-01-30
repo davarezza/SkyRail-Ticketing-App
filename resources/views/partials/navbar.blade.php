@@ -6,17 +6,24 @@
             <ul class="hidden md:flex items-center gap-8">
                 <li><a href="#" class="font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Home</a></li>
                 <li><a href="#" class="font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">About</a></li>
-                <li><a href="#" class="font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Offers</a></li>
-                <li><a href="#" class="font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Seats</a></li>
-                <li><a href="#" class="font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Destinations</a></li>
+                <li><a href="#" class="font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Booking</a></li>
+                <li><a href="#" class="font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Destination</a></li>
             </ul>
 
-            <div class="hidden md:block">
+            <div class="hidden md:flex items-center gap-4">
                 @auth
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition duration-300">Logout</button>
-                    </form>
+                    <div class="relative" id="profile-menu">
+                        <button class="flex items-center gap-2 p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition" id="profile-button">
+                            <img src="https://via.placeholder.com/40" class="w-8 h-8 rounded-full" alt="Profile">
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300" id="profile-dropdown">
+                            <a href="{{ route('dashboard.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
+                            <form action="{{ route('logout') }}" method="POST" class="w-full">
+                                @csrf
+                                <button type="submit" class="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</button>
+                            </form>
+                        </div>
+                    </div>
                 @else
                     <a href="{{ route('login') }}" class="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition duration-300">Login</a>
                 @endauth
@@ -33,19 +40,21 @@
             <div class="py-4 space-y-4">
                 <a href="#" class="block font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Home</a>
                 <a href="#" class="block font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">About</a>
-                <a href="#" class="block font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Offers</a>
-                <a href="#" class="block font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Seats</a>
-                <a href="#" class="block font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Destinations</a>
+                <a href="#" class="block font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Booking</a>
+                <a href="#" class="block font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Destination</a>
                 @auth
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="w-full mt-6 px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition duration-300">Logout</button>
-                    </form>
+                    <div class="border-t pt-4 pb-2">
+                        <a href="{{ route('dashboard.index') }}" class="block font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Dashboard</a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="w-full mt-2 px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition duration-300">Logout</button>
+                        </form>
+                    </div>
                 @else
                     <a href="{{ route('login') }}" class="block w-full mt-6 px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition duration-300">Login</a>
                 @endauth
             </div>
-        </div>        
+        </div>
     </div>
 </nav>
 
@@ -54,22 +63,28 @@
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
     const menuIcon = mobileMenuButton.querySelector('svg');
+    const profileButton = document.getElementById('profile-button');
+    const profileDropdown = document.getElementById('profile-dropdown');
 
     mobileMenuButton.addEventListener('click', () => {
         const isHidden = mobileMenu.classList.contains('max-h-0');
-
         if (isHidden) {
             mobileMenu.classList.remove('max-h-0', 'opacity-0');
             mobileMenu.classList.add('max-h-screen', 'opacity-100');
-            menuIcon.innerHTML = `
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            `;
         } else {
             mobileMenu.classList.add('max-h-0', 'opacity-0');
             mobileMenu.classList.remove('max-h-screen', 'opacity-100');
-            menuIcon.innerHTML = `
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            `;
+        }
+    });
+
+    profileButton?.addEventListener('click', () => {
+        const isHidden = profileDropdown.classList.contains('invisible');
+        if (isHidden) {
+            profileDropdown.classList.remove('invisible', 'opacity-0');
+            profileDropdown.classList.add('opacity-100');
+        } else {
+            profileDropdown.classList.add('invisible', 'opacity-0');
+            profileDropdown.classList.remove('opacity-100');
         }
     });
 

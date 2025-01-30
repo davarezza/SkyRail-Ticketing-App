@@ -52,7 +52,6 @@ class PassengerService
     
             DB::commit();
             return BaseResponse::deleted($opr);
-    
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
