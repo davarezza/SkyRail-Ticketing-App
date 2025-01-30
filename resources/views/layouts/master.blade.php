@@ -39,25 +39,30 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse navbar">
-                    {{-- <ul class="navbar-nav">
+                    <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-                                @if($image)
-                                    <img src="{{ asset('userProfile/'.$image) }}" class="avatar img-fluid rounded" alt="">
-                                @else
-                                    <img src="{{ asset('assets/img/male.svg') }}" class="avatar img-fluid rounded" alt="">
-                                @endif
+                                <img src="{{ asset('assets/img/user/dava.jpg') }}" class="avatar img-fluid rounded-circle" alt="User Avatar" style="width: 40px; height: 40px; border: 2px solid #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="{{ route('profile') }}" class="dropdown-item" style="border-bottom: 1px solid #ccc; padding-bottom: 10px; text-align: center; font-weight: 600;"><i class='bx bxs-user mx-1'></i> Profile</a>
-                                <form action="/logout" method="post">
+                            <div class="dropdown-menu dropdown-menu-end shadow-lg" style="border: none; border-radius: 10px; padding: 10px; min-width: 200px;">
+                                <a href="#" class="dropdown-item d-flex align-items-center" style="padding: 10px; border-radius: 8px; transition: background-color 0.3s ease;">
+                                    <i class='bx bxs-user mx-2'></i>
+                                    <span>Profile</span>
+                                </a>
+                                <a href="{{ route('home') }}" class="dropdown-item d-flex align-items-center" style="padding: 10px; border-radius: 8px; transition: background-color 0.3s ease;">
+                                    <i class='bx bx-door-open mx-2'></i>
+                                    <span>Back</span>
+                                </a>
+                                <form action="{{ route('logout') }}" method="post">
                                     @csrf
-                                    <button type="submit" class="dropdown-item" style="text-align: center; font-weight: 600; padding-top: 10px;"><i
-                                            class='bx bx-log-out mx-1'></i> Logout</button>
+                                    <button type="submit" class="dropdown-item d-flex align-items-center" style="padding: 10px; border-radius: 8px; transition: background-color 0.3s ease;">
+                                        <i class='bx bx-log-out mx-2'></i>
+                                        <span>Logout</span>
+                                    </button>
                                 </form>
                             </div>
                         </li>
-                    </ul> --}}
+                    </ul>
                 </div>
             </nav>
 
@@ -104,20 +109,9 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> --}}
     <script src="{!! asset('assets/plugins/global/plugins.bundle.js') !!}"></script>
     <script src="{!! asset('assets/js/scripts.bundle.js') !!}"></script>
-    <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/geodata/continentsLow.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/geodata/usaLow.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZonesLow.js"></script>
-    <script src="https://cdn.amcharts.com/lib/5/geodata/worldTimeZoneAreasLow.js"></script>
     <script src="{!! asset('assets/plugins/custom/datatables/datatables.bundle.js') !!}"></script>
     <script src="{!! asset('assets/js/custom/helper/sanitize.js') !!}"></script>
     <script src="{!! asset('assets/js/custom/helper/js.cookie.js') !!}"></script>

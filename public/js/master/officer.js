@@ -365,7 +365,6 @@ updateOfficer = () => {
     formData.append('role_id', $('#role-id').val());
     formData.append('_token', $('[name="_token"]').val());
     formData.append('id_petugas', $('#id').val());
-    formData.append('_token', $('[name="_token"]').val());
 
     $("#modal-add-officer").modal("hide");
     HELPER.confirm({

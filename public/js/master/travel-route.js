@@ -374,7 +374,6 @@ updateTravelRoute = () => {
     formData.append('price', $('#travel-route-price').val());
     formData.append('_token', $('[name="_token"]').val());
     formData.append('id_rute', $('#id').val());
-    formData.append('_token', $('[name="_token"]').val());
 
     $("#modal-add-travel-route").modal("hide");
     HELPER.confirm({

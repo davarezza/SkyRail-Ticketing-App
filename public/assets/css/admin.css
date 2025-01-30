@@ -55,6 +55,33 @@ h4 {
     background: var(--bs-dark-bg-subtle);
 }
 
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #000;
+}
+
+.dropdown-menu {
+    background-color: #fff;
+}
+
+.dropdown-item {
+    color: #333;
+    font-weight: 500;
+}
+
+.dropdown-item i {
+    font-size: 1.2rem;
+}
+
+.avatar {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 /* sidebar elements */
 .sidebar-logo {
     padding: 1.15rem;

@@ -24,7 +24,7 @@
                             <i class='bx bx-search position-absolute search-icon'></i>
                             <input type="text" id="searchDestination" class="form-control search-input" placeholder="Type to Search" />
                         </div>
-                        <button type="button" class="btn btn-primary d-flex align-items-center" onclick="toggleAddTransport(true)">
+                        <button type="button" class="btn btn-primary d-flex align-items-center" onclick="toggleAddDestination(true)">
                             <i class='bx bx-plus fs-5'></i>
                             <span>Add New</span>
                         </button>
@@ -38,7 +38,7 @@
                                     <th>No</th>
                                     <th>Image</th>
                                     <th>Name</th>
-                                    <th>Location</th>
+                                    <th>City</th>
                                     <th>Link</th>
                                     <th>Popularity</th>
                                     <th class="text-center">Action</th>

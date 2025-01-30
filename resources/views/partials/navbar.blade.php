@@ -12,20 +12,20 @@
 
             <div class="hidden md:flex items-center gap-4">
                 @auth
-                    <div class="relative" id="profile-menu">
-                        <button class="flex items-center gap-2 p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition" id="profile-button">
-                            <img src="https://via.placeholder.com/40" class="w-8 h-8 rounded-full" alt="Profile">
-                        </button>
-                        <div class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300" id="profile-dropdown">
-                            <a href="{{ route('dashboard.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
-                            <form action="{{ route('logout') }}" method="POST" class="w-full">
-                                @csrf
-                                <button type="submit" class="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</button>
-                            </form>
-                        </div>
+                <div class="relative" id="profile-menu">
+                    <button class="flex items-center gap-2 p-2 rounded-full transition-transform duration-300 hover:scale-105" id="profile-button">
+                        <img src="{{ asset('assets/img/user/dava.jpg') }}" class="w-10 h-10 rounded-full" alt="Profile">
+                    </button>                        
+                    <div class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300" id="profile-dropdown">
+                        <a href="{{ route('dashboard.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
+                        <form action="{{ route('logout') }}" method="POST" class="w-full">
+                            @csrf
+                            <button type="submit" class="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</button>
+                        </form>
                     </div>
+                </div>
                 @else
-                    <a href="{{ route('login') }}" class="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition duration-300">Login</a>
+                <a href="{{ route('login') }}" class="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition duration-300">Login</a>
                 @endauth
             </div>
 

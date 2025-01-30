@@ -75,10 +75,10 @@ class RoleService
     {
         DB::beginTransaction();
         try {
-            $existingRole = $this->repository->findByName($request->name);
-            if ($existingRole && $existingRole->id !== $request->id) {
-                throw new \Exception("Role with the name '{$request->name}' already exists.");
-            }
+            // $existingRole = $this->repository->findByName($request->name);
+            // if ($existingRole && $existingRole->id !== $request->id) {
+            //     throw new \Exception("Role with the name '{$request->name}' already exists.");
+            // }
 
             $dataRole = [
                 'name' => $request->name,
