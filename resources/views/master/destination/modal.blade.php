@@ -71,6 +71,7 @@
                         <div class="mt-3 text-center">
                             <img id="image-preview" src="#" alt="Image Preview" class="img-fluid d-none" style="max-height: 200px; border-radius: 8px;" />
                         </div>
+                        <input type="hidden" id="existing-image" name="existing_image">
                     </div>
                 </div>
 

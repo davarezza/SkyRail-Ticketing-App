@@ -72,7 +72,7 @@ class DestinationService
     {
         DB::beginTransaction();
         try {
-            $destination = $this->repository->find($request->id);
+            $destination = $this->repository->findId($request->id);
             if (!$destination) {
                 dd('Not Found');
             }

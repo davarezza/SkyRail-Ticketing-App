@@ -33,7 +33,9 @@
 
     <section class="px-6 max-w-screen-lg mx-auto pt-8">
         <h2 class="text-3xl md:text-4xl font-semibold text-center mb-8">Best Destination</h2>
-        @include('partials.destination-card')
+        @foreach ($destination as $dest)
+            @include('partials.destination-card', ['dest' => $dest])
+        @endforeach
     </section>
 
     <section class="py-8 px-8 relative xl:mr-0 lg:mr-5 mr-0">

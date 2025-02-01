@@ -299,6 +299,7 @@ saveDestination = () => {
                         $('#destination-link').val('');
                         $('#destination-popularity').val('');
                         $('#destination-image').val('');
+                        $('#image-preview').attr('src', '#').addClass('d-none');
                         HELPER.unblock();
                         HELPER.showMessage({
                             success: true,
@@ -343,8 +344,10 @@ editDestination = (id) => {
             if (res.image) {
                 const imageUrl = `/assets/img/destination/${res.image}`;
                 $('#image-preview').attr('src', imageUrl).removeClass('d-none');
+                $('#existing-image').val(res.image);
             } else {
                 $('#image-preview').attr('src', '#').addClass('d-none');
+                $('#existing-image').val('');
             }
 
             toggleAddDestination(true);
@@ -365,7 +368,11 @@ updateDestination = () => {
     formData.append('location', $('#destination-location').val());
     formData.append('link', $('#destination-link').val());
     formData.append('popularity', $('#destination-popularity').val());
-    formData.append('image', $('#destination-image')[0].files[0]);
+    if ($('#destination-image')[0].files.length > 0) {
+        formData.append('image', $('#destination-image')[0].files[0]);
+    } else {
+        formData.append('existing_image', $('#existing-image').val());
+    }
     formData.append('_token', $('[name="_token"]').val());
     formData.append('id', $('#id').val());
 
@@ -390,6 +397,7 @@ updateDestination = () => {
                         $('#destination-location').val('');
                         $('#destination-link').val('');
                         $('#destination-popularity').val('');
+                        $('#image-preview').attr('src', '#').addClass('d-none');
                         $('#title-form-destination').text('Add Destination');
                         HELPER.unblock();
                         HELPER.showMessage({
