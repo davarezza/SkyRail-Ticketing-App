@@ -19,9 +19,10 @@ class MainController extends Controller
         // return view('home', [
         //     'image' => $image,
         // ]);
-        $destination = Destination::all();
+        $destination = Destination::take(4)->get();
 
         return view('home', [
+            'active' => 'home',
             'destination' => $destination,
         ]);
     }

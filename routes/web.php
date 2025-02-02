@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordResetController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\Management\RoleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\DestinationController;
@@ -27,6 +28,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::get('/', [MainController::class, 'home'])->name('home');
+
+Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');

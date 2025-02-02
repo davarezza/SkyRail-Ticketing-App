@@ -33,10 +33,12 @@
 
     <section class="px-6 max-w-screen-lg mx-auto pt-8">
         <h2 class="text-3xl md:text-4xl font-semibold text-center mb-8">Best Destination</h2>
-        @foreach ($destination as $dest)
-            @include('partials.destination-card', ['dest' => $dest])
-        @endforeach
-    </section>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            @foreach ($destination as $dest)
+                @include('partials.destination-card', ['dest' => $dest])
+            @endforeach
+        </div>
+    </section>    
 
     <section class="py-8 px-8 relative xl:mr-0 lg:mr-5 mr-0">
         @include('partials.home-about')
