@@ -35,6 +35,22 @@
             @error('name')
                 <p class="text-xs text-red-600">{{ $message }}</p>
             @enderror
+
+            <div class="relative pt-2">
+                <select 
+                    name="gender" 
+                    id="gender" 
+                    class="w-full h-12 px-3 text-white bg-white/20 rounded-lg outline-none backdrop-blur-md shadow-md appearance-none cursor-pointer"
+                    required>
+                    <option value="" disabled selected class="text-gray-400">Select Gender</option>
+                    <option value="L" class="text-black">Male</option>
+                    <option value="P" class="text-black">Female</option>
+                </select>
+                <i class="bx bx-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-white pointer-events-none"></i>
+            </div>
+            @error('gender')
+                <p class="text-xs text-red-600">{{ $message }}</p>
+            @enderror
         
             <div class="relative py-2">
                 <input 
@@ -59,14 +75,14 @@
                     class="w-full h-12 px-3 text-white bg-white/20 rounded-lg outline-none backdrop-blur-md shadow-md placeholder:text-white placeholder:text-sm"
                     required autocomplete="off">
                 <i class="bx bx-hide absolute right-3 top-1/2 -translate-y-1/2 text-white cursor-pointer" id="togglePassword"></i>
-            </div><br>
-            @error('email')
+            </div>
+            @error('password')
                 <p class="text-xs text-red-600">{{ $password }}</p>
             @enderror
         
             <button 
                 type="submit" 
-                class="flex items-center justify-center gap-2 w-full h-12 px-3 text-white bg-[#21264D] rounded-lg shadow-md hover:gap-3 transition-all duration-300">
+                class="flex items-center justify-center gap-2 w-full h-12 px-3 text-white bg-[#21264D] rounded-lg shadow-md hover:gap-3 transition-all duration-300 mt-4">
                 <span>Register</span>
                 <i class="bx bx-right-arrow-alt"></i>
             </button>

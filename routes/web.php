@@ -7,6 +7,7 @@ use App\Http\Controllers\Management\RoleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\DestinationController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\Management\ProfileController;
 use App\Http\Controllers\Master\OfficerController;
 use App\Http\Controllers\Master\PassengerController;
 use App\Http\Controllers\Master\TransportationController;
@@ -102,6 +103,10 @@ Route::middleware('auth')->group(function () {
             Route::post('/delete', [RoleController::class, 'delete'])->name('management.role.delete');
             Route::post('edit', [RoleController::class, 'edit'])->name('management.role.edit');
             Route::post('update', [RoleController::class, 'update'])->name('management.role.update');
+        });
+
+        Route::prefix('profile')->group(function () {
+            Route::get('/', [ProfileController::class, 'index'])->name('management.profile.index');
         });
     });
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');

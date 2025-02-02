@@ -8,7 +8,7 @@
 @endpush
 
 @section('container')
-    @include('partials.footer')
+
 @endsection
 
 @push('scripts')

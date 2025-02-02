@@ -46,16 +46,6 @@
               rel="noopener noreferrer"
               target="_blank"
             >
-              Terms of Service
-            </a>
-          </li>
-          <li class="pt-3">
-            <a
-              class="underline decoration-transparent underline-offset-4 transition hover:decoration-slate-700"
-              href="#"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
               Privacy Policy
             </a>
           </li>
@@ -74,16 +64,6 @@
               target="_blank"
             >
               Flight Booking
-            </a>
-          </li>
-          <li class="pt-3">
-            <a
-              class="underline decoration-transparent underline-offset-4 transition hover:decoration-slate-700"
-              href="#"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Baggage Information
             </a>
           </li>
           <li class="pt-3">
@@ -141,16 +121,6 @@
               target="_blank"
             >
               FAQs
-            </a>
-          </li>
-          <li class="pt-3">
-            <a
-              class="underline decoration-transparent underline-offset-4 transition hover:decoration-slate-700"
-              href="#"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Refund Policy
             </a>
           </li>
         </ul>

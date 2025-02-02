@@ -86,6 +86,7 @@ class AuthController extends Controller
     
         $penumpang = Penumpang::create([
             'nama_penumpang' => $request->name,
+            'jenis_kelamin' => $request->gender,
             'password' => $request->password,
             'user_id' => $user->id,
             'username' => $username,

@@ -45,8 +45,6 @@
     </section><br><br>
 
     @include('partials.card')
-
-    @include('partials.footer')
 @endsection
 
 @push('scripts')

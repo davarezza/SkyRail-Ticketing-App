@@ -45,7 +45,7 @@
                                 <img src="{{ asset('assets/img/user/dava.jpg') }}" class="avatar img-fluid rounded-circle" alt="User Avatar" style="width: 40px; height: 40px; border: 2px solid #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
                             </a>
                             <div class="dropdown-menu dropdown-menu-end shadow-lg" style="border: none; border-radius: 10px; padding: 10px; min-width: 200px;">
-                                <a href="#" class="dropdown-item d-flex align-items-center" style="padding: 10px; border-radius: 8px; transition: background-color 0.3s ease;">
+                                <a href="{{ route('management.profile.index') }}" class="dropdown-item d-flex align-items-center" style="padding: 10px; border-radius: 8px; transition: background-color 0.3s ease;">
                                     <i class='bx bxs-user mx-2'></i>
                                     <span>Profile</span>
                                 </a>
