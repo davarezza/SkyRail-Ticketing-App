@@ -16,6 +16,7 @@ class Transportasi extends BaseModel
         'jumlah_kursi',
         'keterangan',
         'id_type_transportasi',
+        'class_id',
     ];
 
     public function typeTransportasi()
@@ -26,6 +27,11 @@ class Transportasi extends BaseModel
     public function rutes()
     {
         return $this->hasMany(Rute::class, 'id_transportasi', 'id_transportasi');
+    }
+
+    public function transportClass()
+    {
+        return $this->belongsTo(TransportClass::class, 'class_id', 'id');
     }
 
     public function useView()

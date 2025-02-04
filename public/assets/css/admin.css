@@ -115,6 +115,19 @@ a.sidebar-link {
     font-size: 0.875rem;
 }
 
+.sidebar-link {
+    font-weight: normal;
+    transition: font-weight 0.2s ease-in-out;
+}
+
+.sidebar-link:hover {
+    font-weight: bold;
+}
+
+.sidebar-link.active {
+    font-weight: bold;
+}
+
 .sidebar-link[data-bs-toggle="collapse"]::after {
     border: solid;
     border-width: 0 .075rem .075rem 0;

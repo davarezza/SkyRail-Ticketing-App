@@ -11,6 +11,7 @@ use App\Http\Controllers\Management\ProfileController;
 use App\Http\Controllers\Master\OfficerController;
 use App\Http\Controllers\Master\PassengerController;
 use App\Http\Controllers\Master\TransportationController;
+use App\Http\Controllers\Master\TransportClassController;
 use App\Http\Controllers\Master\TransportTypeController;
 use App\Http\Controllers\Master\TravelRouteController;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +31,7 @@ Route::middleware('guest')->group(function () {
 
 Route::get('/', [MainController::class, 'home'])->name('home');
 
-Route::get('/booking', [BookingController::class, 'index'])->name('booking.index');
+Route::get('/booking', [BookingController::class, 'index'])->name('booking.page');
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
@@ -44,6 +45,15 @@ Route::middleware('auth')->group(function () {
             Route::post('update', [TransportationController::class, 'update'])->name('master.transportation.update');
             Route::get('detail/{id}', [TransportationController::class, 'detail'])->name('master.transportation.detail');
             Route::post('get-data-select', [TransportationController::class, 'getDataSelect'])->name('master.transportation.get-data-select');
+        });
+
+        Route::prefix('/transport-class')->group(function () {
+            Route::get('/', [TransportClassController::class, 'index'])->name('master.transport-class.index');
+            Route::post('table', [TransportClassController::class, 'table'])->name('master.transport-class.table');
+            Route::post('store', [TransportClassController::class, 'store'])->name('master.transport-class.store');
+            Route::post('delete', [TransportClassController::class, 'delete'])->name('master.transport-class.delete');
+            Route::post('edit', [TransportClassController::class, 'edit'])->name('master.transport-class.edit');
+            Route::post('update', [TransportClassController::class, 'update'])->name('master.transport-class.update');
         });
 
         Route::prefix('/transport-type')->group(function () {

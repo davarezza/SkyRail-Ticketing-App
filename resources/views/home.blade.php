@@ -29,7 +29,7 @@
         <img src="{{ asset('assets/img/header.jpg') }}" alt="header" class="w-full" />
     </header>
 
-    @include('partials.booking')
+    @include('partials.booking-card')
 
     <section class="px-6 max-w-screen-lg mx-auto pt-8">
         <h2 class="text-3xl md:text-4xl font-semibold text-center mb-8">Best Destination</h2>
