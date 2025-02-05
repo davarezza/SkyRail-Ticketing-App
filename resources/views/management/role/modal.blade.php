@@ -5,7 +5,7 @@
                 @csrf
                 <input type="hidden" id="id" name="id" />
 
-                <div class="modal-header bg-light py-3 px-4 border-bottom-0 rounded-top-3">
+                <div class="modal-header d-flex justify-content-between bg-light py-3 px-4 border-bottom-0 rounded-top-3">
                     <h5 class="modal-title fs-5 fw-medium" id="title-form-role">Tambah Role</h5>
                     <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" onclick="toggleAddRole(false)">
                         <i class="ki-outline ki-cross fs-3"></i>

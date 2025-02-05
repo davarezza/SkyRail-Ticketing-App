@@ -5,7 +5,7 @@
                 @csrf
                 <input type="hidden" name="id" id="id" value="">
                 
-                <div class="modal-header bg-light py-3 px-4 border-bottom-0 rounded-top-3">
+                <div class="modal-header d-flex justify-content-between bg-light py-3 px-4 border-bottom-0 rounded-top-3">
                     <h5 class="modal-title fs-5 fw-medium" id="title-form-transport-class">Add Transport Class</h5>
                     <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" onclick="toggleAddTransportClass(false)">
                         <i class="ki-outline ki-cross fs-3"></i>
@@ -24,24 +24,24 @@
                                style="--bs-bg-opacity: .6;" />
                     </div>
 
-                    <div class="fv-row mb-4">
-                        <label for="transport-class-facilities" class="form-label fs-9 fw-medium mb-2">Facilities (Font Awesome Icon)</label>
-                        <div class="d-flex align-items-center gap-2">
-                            <input type="text" 
-                                   class="form-control bg-light-subtle flex-grow-1" 
-                                   id="transport-class-facilities" 
-                                   name="transport-class-facilities" 
-                                   placeholder="Enter Facilities" 
-                                   autocomplete="off"
-                                   style="--bs-bg-opacity: .6;" />
-                            <a href="https://fontawesome.com/icons" 
-                               target="_blank" 
-                               class="btn btn-light btn-icon" 
-                               title="Open Font Awesome">
-                                <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </div>
+                <div class="fv-row mb-4">
+                    <label for="transport-class-facilities" class="form-label fs-9 fw-medium mb-2">Facilities (Font Awesome Icon)</label>
+                    <div class="d-flex align-items-center gap-2">
+                        <input type="text" 
+                                class="form-control bg-light-subtle flex-grow-1" 
+                                id="transport-class-facilities" 
+                                name="transport-class-facilities" 
+                                placeholder="Enter Facilities" 
+                                autocomplete="off"
+                                style="--bs-bg-opacity: .6;" />
+                        <a href="https://fontawesome.com/icons" 
+                            target="_blank" 
+                            class="btn btn-light btn-icon fs-4" 
+                            title="Open Font Awesome">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
                     </div>
+                </div>
                 <div class="modal-footer border-top-0 px-3 pb-3 pt-0">
                     <button type="button" 
                             class="btn btn-light px-3 py-2" 

@@ -5,17 +5,18 @@ namespace App\Http\Controllers\Master;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\Master\TransportationService;
+use App\Services\Master\TransportClassService;
 use App\Services\Master\TransportTypeService;
 
 class TransportationController extends Controller
 {
-    protected $service; 
-    protected $serviceTypeTransport;
+    protected $service, $serviceTypeTransport, $serviceTransportClass;
 
     public function __construct()
     {
         $this->service = new TransportationService();
         $this->serviceTypeTransport = new TransportTypeService();
+        $this->serviceTransportClass = new TransportClassService();
     }
 
     public function index()
@@ -69,6 +70,7 @@ class TransportationController extends Controller
     {
         $opr = [];
         $opr['transport_type'] = $this->serviceTypeTransport->getData($request);
+        $opr['transport_class'] = $this->serviceTransportClass->getData($request);
 
         return $opr;
     }

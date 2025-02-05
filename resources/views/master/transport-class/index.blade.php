@@ -4,6 +4,37 @@
     <title>Transport Class | {{ config('app.name') }}</title>
 @endsection
 
+@push('styles')
+    <style>
+        .tagify {
+            width: 100% !important;
+            max-width: 100%;
+            min-height: calc(1.5em + 0.75rem + 2px);
+            background-color: rgba(var(--bs-light-rgb), 0.6);
+            border-radius: 0.375rem;
+            border: 1px solid #ccc;
+            padding: 0.5rem;
+        }
+
+        .tagify__input {
+            font-size: 1rem;
+            padding: 0.375rem 0;
+        }
+
+        .tagify__tag {
+            background-color: rgba(13, 110, 253, 0.15);
+            border-radius: 0.5rem;
+            padding: 0.3rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.2s ease-in-out;
+        }
+    </style>
+@endpush
+
 @section('breadcrumb')
 <nav aria-label="breadcrumb" class="py-3 px-3">
     <ol class="breadcrumb mb-0">
@@ -54,4 +85,19 @@
 
 @push('scripts')
     <script src="{!! asset('js/master/transport-class.js') !!}?v={{ time() }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@yaireo/tagify"></script>
+    <script>
+        let input = document.querySelector('input[name=transport-class-facilities]');
+        let tagify = new Tagify(input, {
+            transformTag: (tagData) => {
+                if (tagData.value.includes('<i class="')) {
+                    const match = tagData.value.match(/class="([^"]+)"/);
+                    if (match) {
+                        tagData.value = match[1];
+                    }
+                }
+            },
+            originalInputValueFormat: values => values.map(item => item.value).join(',')
+        });
+    </script>
 @endpush

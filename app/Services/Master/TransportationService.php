@@ -34,6 +34,7 @@ class TransportationService
                 'nama' => $request->name,
                 'kode' => $request->kode,
                 'id_type_transportasi' => $request->id_type_transportasi,
+                'class_id' => $request->class_id,
                 'jumlah_kursi' => $request->jumlah_kursi,
                 'keterangan' => $request->keterangan,
             ];
@@ -70,6 +71,7 @@ class TransportationService
                 'nama' => $request->name,
                 'kode' => $request->kode,
                 'id_type_transportasi' => $request->id_type_transportasi,
+                'class_id' => $request->class_id,
                 'jumlah_kursi' => $request->jumlah_kursi,
                 'keterangan' => $request->keterangan,
             ];

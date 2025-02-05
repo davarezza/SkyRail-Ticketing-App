@@ -35,7 +35,7 @@ initTableTransportation = () => {
             data: {
                 _token: $('[name="_token"]').val(),
             },
-            clickAble: true,
+            clickAble: false,
             index: 0,
             sorting: "desc",
             destroyAble: true,
@@ -128,6 +128,9 @@ initTableTransportation = () => {
                                 <button class="btn btn-sm btn-icon btn-outline btn-outline-warning" onclick="editTransport('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
                                     <i class="bx bx-pencil"></i>
                                 </button>
+                                <button class="btn btn-sm btn-icon btn-outline btn-outline-info" onclick="detailTransport('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
                                 <button class="btn btn-sm btn-icon btn-outline btn-outline-danger" onclick="deleteTransport('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
                                     <i class="bx bx-trash"></i>
                                 </button>
@@ -139,9 +142,6 @@ initTableTransportation = () => {
             ],
             fnCreatedRow: function (nRow, aData, iDataIndex) {
                 $(nRow).attr("id", aData[0]);
-                $(nRow).on('click', function () {
-                    detailTransport(aData.id);
-                });
             },
             fnInitComplete: function (oSettings, data) {
                 var debounceTimer;
@@ -179,6 +179,13 @@ getDataSelect = () => {
                 displayField: 'nama_type_transportasi',
                 placeholder: 'Select Transport Type'
             },
+            {
+                data: response.transport_class,
+                el: 'transport-class',
+                valueField: 'id',
+                displayField: 'name',
+                placeholder: 'Select Transport Class'
+            },
         ]);
         },
         error: (err) => {
@@ -200,6 +207,7 @@ toggleAddTransport = (show) => {
         $('#transport-name').val('');
         $('#transport-code').val('');
         $('#transport-type').val('');
+        $('#transport-class').val('');
         $('#transport-description').val('');
         $('#total-seat').val('');
         $('#id').val('');
@@ -264,6 +272,13 @@ formValidationAddTransport = () => {
                         }
                     }
                 },
+                'transport-class': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Transport Class is required'
+                        }
+                    }
+                },
                 'total-seat': {
                     validators: {
                         notEmpty: {
@@ -320,6 +335,7 @@ saveTransport = () => {
     formData.append('name', $('#transport-name').val());
     formData.append('kode', $('#transport-code').val());
     formData.append('id_type_transportasi', $('#transport-type').val());
+    formData.append('class_id', $('#transport-class').val());
     formData.append('jumlah_kursi', $('#total-seat').val());
     formData.append('keterangan', $('#transport-description').val());
     formData.append('_token', $('[name="_token"]').val());
@@ -343,6 +359,7 @@ saveTransport = () => {
                         $('#transport-name').val('');
                         $('#transport-code').val('');
                         $('#transport-type').val('');
+                        $('#transport-class').val('');
                         $('#total-seat').val('');
                         $('#transport-description').val('');
                         HELPER.unblock();
@@ -382,6 +399,7 @@ detailTransport = (id) => {
             $('#detail-name').text(response.detail.name);
             $('#detail-code').text(response.detail.kode);
             $('#detail-type').text(response.detail.type_name);
+            $('#detail-class').text(response.detail.class_name);
             $('#detail-total-seat').text(response.detail.jumlah_kursi);
             $('#detail-description').text(response.detail.keterangan);
             toggleDetailTransport(true);
@@ -413,6 +431,7 @@ editTransport = (id) => {
             $('#transport-description').val(res.keterangan);
             $('#total-seat').val(res.jumlah_kursi);
             $('#transport-type').val(res.id_type_transportasi).trigger('change');
+            $('#transport-class').val(res.class_id).trigger('change');
             toggleAddTransport(true);
         },
         error: (err) => {
@@ -430,6 +449,7 @@ updateTransport = () => {
     formData.append('name', $('#transport-name').val());
     formData.append('kode', $('#transport-code').val());
     formData.append('id_type_transportasi', $('#transport-type').val());
+    formData.append('class_id', $('#transport-class').val());
     formData.append('jumlah_kursi', $('#total-seat').val());
     formData.append('keterangan', $('#transport-description').val());
     formData.append('id_transportasi', $('#id').val());
@@ -454,6 +474,7 @@ updateTransport = () => {
                         $('#transport-name').val('');
                         $('#transport-code').val('');
                         $('#transport-type').val('');
+                        $('#transport-class').val('');
                         $('#total-seat').val('');
                         $('#transport-description').val('');
                         $('#title-form-transport').text('Add Transportation');
@@ -727,6 +748,9 @@ initTableTransportType = () => {
                             <button type="button" class="btn btn-sm btn-icon btn-outline btn-outline-warning" onclick="EditTransportType('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Transportation Type">
                                 <i class="ki-outline ki-pencil"></i>
                             </button>
+                            <button class="btn btn-sm btn-icon btn-outline btn-outline-info" onclick="detailTransportType('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
                             <button type="button" class="btn btn-sm btn-icon btn-outline btn-outline-danger" onclick="deleteTransportType('${full.id}')">
                                 <i class="ki-outline ki-trash"></i>
                             </button>
@@ -738,9 +762,6 @@ initTableTransportType = () => {
             ],
             fnCreatedRow: function (nRow, aData, iDataIndex) {
                 $(nRow).attr("id", aData[0]);
-                $(nRow).on('click', function () {
-                    detailTransportType(aData.id);
-                });
             },
             fnInitComplete: function (oSettings, data) {
                 var debounceTimer;

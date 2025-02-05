@@ -22,7 +22,7 @@ initTablePassenger = () => {
             data: {
                 _token: $('[name="_token"]').val(),
             },
-            clickAble: true,
+            clickAble: false,
             index: 0,
             sorting: "desc",
             destroyAble: true,

@@ -5,7 +5,7 @@
                 @csrf
                 <input type="hidden" name="id" id="id" value="">
                 
-                <div class="modal-header bg-light py-3 px-4 border-bottom-0 rounded-top-3">
+                <div class="modal-header d-flex justify-content-between bg-light py-3 px-4 border-bottom-0 rounded-top-3">
                     <h5 class="modal-title fs-5 fw-medium" id="title-form-destination">Add Destination</h5>
                     <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" onclick="toggleAddDestination(false)">
                         <i class="ki-outline ki-cross fs-3"></i>

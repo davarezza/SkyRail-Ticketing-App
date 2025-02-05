@@ -81,4 +81,11 @@ class TransportClassService
             return BaseResponse::errorTransaction($e);
         }
     }
+
+    public function getData($request)
+    {
+        $opr = $this->repository->getData($request);
+
+        return $opr;
+    }
 }

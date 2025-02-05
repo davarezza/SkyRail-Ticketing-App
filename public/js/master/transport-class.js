@@ -25,7 +25,7 @@ initTableTransportClass = () => {
             data: {
                 _token: $('[name="_token"]').val(),
             },
-            clickAble: true,
+            clickAble: false,
             index: 0,
             sorting: "desc",
             destroyAble: true,
@@ -83,9 +83,11 @@ initTableTransportClass = () => {
                 {
                     targets: 2,
                     render: function (data, type, full, meta) {
-                        return full.facilities;
+                        if (!data) return '-';
+                        
+                        return data.split(',').map(iconClass => `<i class="${iconClass.trim()} mx-1"></i>`).join('');
                     },
-                },                  
+                },                                  
                 {
                     targets: 3,
                     render: function (data, type, full, meta) {

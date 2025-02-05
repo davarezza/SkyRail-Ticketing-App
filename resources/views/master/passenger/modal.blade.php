@@ -1,7 +1,7 @@
 <div class="modal fade" tabindex="-1" id="modal-detail-passenger" data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content shadow-sm rounded-3 border-0">
-            <div class="modal-header bg-light py-3 px-4 border-bottom-0 rounded-top-3">
+            <div class="modal-header d-flex justify-content-between bg-light py-3 px-4 border-bottom-0 rounded-top-3">
                 <h5 class="modal-title fs-5 fw-medium" id="modal-title-detail-passenger">Detail Passenger</h5>
                 <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" onclick="toggleDetailPassenger(false)">
                     <i class="ki-outline ki-cross fs-3"></i>

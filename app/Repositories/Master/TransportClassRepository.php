@@ -53,4 +53,10 @@ class TransportClassRepository extends BaseRepository
 
         return $opr;
     }
+
+    public function getData($request){
+        $opr = $this->model->get();
+
+        return $opr;
+    }
 }
