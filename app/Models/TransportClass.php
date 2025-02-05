@@ -19,4 +19,10 @@ class TransportClass extends BaseModel
     {
         return $this->hasMany(Transportasi::class, 'class_id', 'id');
     }
+
+    public function useView()
+    {
+        $this->setView('v_transport_class');
+        return $this;
+    }
 }
