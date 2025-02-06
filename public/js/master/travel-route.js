@@ -121,6 +121,9 @@ initTableTravelRoute = () => {
                                 <button class="btn btn-sm btn-icon btn-outline btn-outline-warning" onclick="editTravelRoute('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
                                     <i class="bx bx-pencil"></i>
                                 </button>
+                                <button class="btn btn-sm btn-icon btn-outline btn-outline-info" onclick="detailTravelRoute('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
                                 <button class="btn btn-sm btn-icon btn-outline btn-outline-danger" onclick="deleteTravelRoute('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
                                     <i class="bx bx-trash"></i>
                                 </button>
@@ -191,11 +194,23 @@ toggleAddTravelRoute = (show) => {
         $('#travel-route-first-route').val('');
         $('#transport-id').val('');
         $('#travel-route-price').val('');
+        $('#travel-route-departure-date').val('');
+        $('#travel-route-departure-time').val('');
+        $('#travel-route-arrival-time').val('');
         $('#id').val('');
         $('#title-form-travel-route').text('Add Travel Route');
         if(validatorAddTravelRoute){
             validatorAddTravelRoute.resetForm();
         }
+    }
+}
+
+toggleDetailTravelRoute = (show) => {
+    if (show) {
+        $("#modal-detail-travel-route").modal("show");
+    } else {
+        $("#modal-detail-travel-route").modal("hide");
+        $('#title-form-travel-route').text('Add Travel Route');
     }
 }
 
@@ -251,6 +266,27 @@ formValidationAddTravelRoute = () => {
                         }
                     }
                 },
+                'travel-route-departure-date': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Departure Date is required'
+                        }
+                    }
+                },
+                'travel-route-departure-time': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Departure Time is required'
+                        }
+                    }
+                },
+                'travel-route-arrival-time': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Arrival Time is required'
+                        }
+                    }
+                },
             },
 
             plugins: {
@@ -291,6 +327,9 @@ saveTravelRoute = () => {
     formData.append('first_route', $('#travel-route-first-route').val());
     formData.append('id_transportasi', $('#transport-id').val());
     formData.append('price', $('#travel-route-price').val());
+    formData.append('departure_date', $('#travel-route-departure-date').val());
+    formData.append('departure_time', $('#travel-route-departure-time').val());
+    formData.append('arrival_time', $('#travel-route-arrival-time').val());
     formData.append('_token', $('[name="_token"]').val());
 
     $("#modal-add-travel-route").modal("hide");
@@ -313,6 +352,9 @@ saveTravelRoute = () => {
                         $('#travel-route-first-route').val('');
                         $('#transport-id').val('');
                         $('#travel-route-price').val('');
+                        $('#travel-route-departure-date').val('');
+                        $('#travel-route-departure-time').val('');
+                        $('#travel-route-arrival-time').val('');
                         HELPER.unblock();
                         HELPER.showMessage({
                             success: true,
@@ -323,10 +365,14 @@ saveTravelRoute = () => {
                     error: (err) => {
                         toggleAddTravelRoute(false);
                         HELPER.unblock();
+                        let errorMessage = err.responseJSON && err.responseJSON.message 
+                            ? err.responseJSON.message 
+                            : 'System error, please contact the Administrator';
+
                         HELPER.showMessage({
                             success: false,
                             title: 'Failed',
-                            message: 'System error, please contact the Administrator'
+                            message: errorMessage
                         });
                     }
                 });
@@ -334,6 +380,33 @@ saveTravelRoute = () => {
                 $("#modal-add-travel-route").modal("show");
                 formValidationAddTravelRoute();
             }
+        }
+    });
+}
+
+detailTravelRoute = (id) => {
+    HELPER.ajax({
+        url: HELPER.api.detail + '/' + id,
+        type: 'get',
+        data: {
+            id: id,
+            _token: $('[name="_token"]').val()
+        },
+        success: (response) => {
+            $('#detail-objective').text(response.detail.objective);
+            $('#detail-first-route').text(response.detail.first_route);
+            $('#detail-departure-date').text(moment(response.detail.departure_date).format('DD MMMM YYYY'));
+            $('#detail-departure-time').text(moment(response.detail.departure_time, 'HH:mm').format('hh:mm a'));
+            $('#detail-arrival-time').text(moment(response.detail.arrival_time, 'HH:mm').format('hh:mm a'));
+            $('#detail-price').text(`Rp. ${parseInt(response.detail.price).toLocaleString('id-ID')}`);
+            toggleDetailTravelRoute(true);
+        },
+        error: (err) => {
+            HELPER.showMessage({
+                success: false,
+                title: 'Failed',
+                message: 'System error, please contact the Administrator'
+            });
         }
     });
 }
@@ -353,6 +426,9 @@ editTravelRoute = (id) => {
             $('#travel-route-objective').val(res.tujuan);
             $('#travel-route-first-route').val(res.rute_awal);
             $('#travel-route-price').val(res.harga);
+            $('#travel-route-departure-date').val(res.tanggal_berangkat);
+            $('#travel-route-departure-time').val(res.jam_berangkat);
+            $('#travel-route-arrival-time').val(res.jam_tiba);
             $('#transport-id').val(res.id_transportasi).trigger('change');
             toggleAddTravelRoute(true);
         },
@@ -372,6 +448,9 @@ updateTravelRoute = () => {
     formData.append('first_route', $('#travel-route-first-route').val());
     formData.append('id_transportasi', $('#transport-id').val());
     formData.append('price', $('#travel-route-price').val());
+    formData.append('departure_date', $('#travel-route-departure-date').val());
+    formData.append('departure_time', $('#travel-route-departure-time').val());
+    formData.append('arrival_time', $('#travel-route-arrival-time').val());
     formData.append('_token', $('[name="_token"]').val());
     formData.append('id_rute', $('#id').val());
 
@@ -396,6 +475,9 @@ updateTravelRoute = () => {
                         $('#travel-route-first-route').val('');
                         $('#transport-id').val('');
                         $('#travel-route-price').val('');
+                        $('#travel-route-departure-date').val('');
+                        $('#travel-route-departure-time').val('');
+                        $('#travel-route-arrival-time').val('');
                         $('#title-form-travel-route').text('Add Travel Route');
                         HELPER.unblock();
                         HELPER.showMessage({

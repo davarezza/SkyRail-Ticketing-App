@@ -14,6 +14,9 @@ class Rute extends BaseModel
         'tujuan',
         'rute_awal',
         'rute_akhir',
+        'tanggal_berangkat',
+        'jam_berangkat',
+        'jam_tiba',
         'harga',
         'id_transportasi',
     ];

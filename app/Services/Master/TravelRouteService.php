@@ -29,11 +29,19 @@ class TravelRouteService
     {
         DB::beginTransaction();
         try {
+            if (strtotime($request->arrival_time) < strtotime($request->departure_time)) {
+                throw new \Exception("Arrival time cannot be earlier than departure time.");
+            }
+            $cleaned_price = str_replace(['Rp ', '.'], '', $request->price);
+
             $dataTravel = [
                 'tujuan' => $request->objective,
                 'rute_awal' => $request->first_route,
                 'rute_akhir' => $request->first_route,
-                'harga' => $request->price,
+                'tanggal_berangkat' => $request->departure_date,
+                'jam_berangkat' => $request->departure_time,
+                'jam_tiba' => $request->arrival_time,
+                'harga' => $cleaned_price,
                 'id_transportasi' => $request->id_transportasi,
             ];
 
@@ -43,7 +51,10 @@ class TravelRouteService
             return BaseResponse::created($opr);
         } catch (\Exception $e) {
             DB::rollBack();
-            return BaseResponse::errorTransaction($e);
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 422);
         }
     }
 
@@ -65,11 +76,20 @@ class TravelRouteService
     {
         DB::beginTransaction();
         try {
+            if (strtotime($request->arrival_time) < strtotime($request->departure_time)) {
+                throw new \Exception("Arrival time cannot be earlier than departure time.");
+            }
+
+            $cleaned_price = str_replace(['Rp ', '.'], '', $request->price);
+
             $dataTravel = [
                 'tujuan' => $request->objective,
                 'rute_awal' => $request->first_route,
                 'rute_akhir' => $request->first_route,
-                'harga' => $request->price,
+                'tanggal_berangkat' => $request->departure_date,
+                'jam_berangkat' => $request->departure_time,
+                'jam_tiba' => $request->arrival_time,
+                'harga' => $cleaned_price,
                 'id_transportasi' => $request->id_transportasi,
             ];
 
@@ -79,7 +99,10 @@ class TravelRouteService
             return BaseResponse::updated($opr);
         } catch (\Exception $e) {
             DB::rollBack();
-            return BaseResponse::errorTransaction($e);
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage(),
+            ], 422);
         }
     }
 

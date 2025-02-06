@@ -20,7 +20,6 @@ class Pemesanan extends Model
         'tujuan',
         'tanggal_berangkat',
         'jam_check_in',
-        'jam_berangkat',
         'total_bayar',
         'id_petugas',
     ];
