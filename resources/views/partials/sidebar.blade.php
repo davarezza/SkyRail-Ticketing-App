@@ -1,7 +1,12 @@
 <aside id="sidebar">
     <div class="h-100">
         <div class="sidebar-logo">
-            <a href="#">{{ config('app.name') }}</a>
+            <div class="d-flex items-center justify-content-between">
+                <a href="#">{{ config('app.name') }}</a>
+                <button class="sidebar-mobile-toggle" id="sidebar-close">
+                    <i class="fa-solid fa-x"></i>
+                </button>
+            </div>
         </div>
         <ul class="sidebar-nav">
             <li class="sidebar-header">Management Data</li>
