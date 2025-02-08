@@ -5,6 +5,7 @@ namespace App\Repositories\Master;
 use Prettus\Repository\Eloquent\BaseRepository;
 use App\Models\Penumpang;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PassengerRepository extends BaseRepository
@@ -48,5 +49,12 @@ class PassengerRepository extends BaseRepository
     public function removeRole($id)
     {
         return DB::table('model_has_roles')->where('model_id', $id)->delete();
+    }
+
+    public function getDataLogin($request){
+        $dataUser = Auth::user();
+        $opr = $this->model->setView('v_penumpang')->where('user_id', $dataUser->id)->first();
+
+        return $opr;
     }
 }

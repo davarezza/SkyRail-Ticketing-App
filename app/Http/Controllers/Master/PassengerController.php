@@ -40,4 +40,18 @@ class PassengerController extends Controller
 
         return $opr;
     }
+
+    public function getDataLogin(Request $request)
+    {
+        $opr = $this->service->getDataLogin($request);
+
+        return $opr;
+    }
+
+    public function saveDataProfile(Request $request)
+    {
+        $opr = $this->service->saveDataProfile($request);
+
+        return $opr;
+    }
 }

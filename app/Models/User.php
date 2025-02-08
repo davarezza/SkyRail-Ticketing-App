@@ -72,4 +72,17 @@ class User extends Authenticatable
     {
         return $this->hasOne(Penumpang::class, 'user_id');
     }
+
+    public function hasPermission($permission)
+    {
+        $roles = $this->role()->with('permissions')->get();
+
+        foreach ($roles as $role) {
+            if ($role->permissions->contains('name', $permission)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

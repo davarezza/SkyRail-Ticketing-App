@@ -102,6 +102,8 @@ Route::middleware('auth')->group(function () {
             Route::post('table', [PassengerController::class, 'table'])->name('master.passenger.table');
             Route::post('delete', [PassengerController::class, 'delete'])->name('master.passenger.delete');
             Route::get('detail/{id}', [PassengerController::class, 'detail'])->name('master.passenger.detail');
+            Route::post('get-data-login', [PassengerController::class, 'getDataLogin'])->name('passenger.get-data-login');
+            Route::post('save-data-profile', [PassengerController::class, 'saveDataProfile'])->name('passenger.save-data-profile');
         });
     });
 
@@ -115,8 +117,10 @@ Route::middleware('auth')->group(function () {
             Route::post('update', [RoleController::class, 'update'])->name('management.role.update');
         });
 
-        Route::prefix('profile')->group(function () {
+        Route::prefix('profile')->middleware('permission:Access Profile')->group(function () {
             Route::get('/', [ProfileController::class, 'index'])->name('management.profile.index');
+            Route::patch('/update', [ProfileController::class, 'update'])->name('management.profile.update');
+            Route::patch('/change-image', [ProfileController::class, 'changeImage'])->name('management.profile.changeImage');
         });
     });
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');

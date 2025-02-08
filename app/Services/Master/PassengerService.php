@@ -59,5 +59,65 @@ class PassengerService
                 'message' => $e->getMessage(),
             ], 422);
         }
-    }   
+    }
+    
+    public function getDataLogin($request)
+    {
+        $opr = $this->repository->getDataLogin($request);
+
+        return $opr;
+    }
+
+    public function saveDataProfile($request)
+    {
+        DB::beginTransaction();
+        try {
+            if ($request->hasFile('image')) {
+
+                $file = $request->file('image');
+                $newFileName = 'avatar_' . $file->getClientOriginalExtension();
+                $uploadPath = public_path('assets/img/user');
+
+                $oldFileName = $uploadPath . '/' . $newFileName;
+                if (file_exists($oldFileName)) {
+                    unlink($oldFileName);
+                }
+        
+                $moved = $file->move($uploadPath, $newFileName);
+        
+                if ($moved) {
+                    $this->user->where('id', $request->id)->update(['image' => $newFileName]);
+
+                } else {
+                    return BaseResponse::errorMessage('Failed to upload new image.');
+                }
+            }
+            $dataUser = [
+                'username' => $request->username,
+            ];
+
+            if ($request->password !== null && $request->cpassword !== null) {
+                $dataUser['password'] = bcrypt($request->password);
+                $dataUser['plain_password'] = null;
+            }
+
+            $opr = $this->user->where('id', $request->id)->update($dataUser);
+
+            $dataPassenger = [
+                'full_name' => $request->full_name,
+            ];
+
+            $employeeId = $this->passenger->where('user_id', $request->id)->first()->id;
+            
+            $opr = $this->passenger->where('id', $employeeId)->update($dataPassenger);
+
+    
+            DB::commit();
+            return BaseResponse::updated($opr);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            dd($e->getMessage());
+            return BaseResponse::errorTransaction($e);
+        }
+    }
 }

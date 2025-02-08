@@ -14,11 +14,17 @@
                 @auth
                 <div class="relative" id="profile-menu">
                     <button class="flex items-center gap-2 p-2 rounded-full transition-transform duration-300 hover:scale-105" id="profile-button">
-                        <img src="{{ asset('assets/img/user/dava.jpg') }}" class="w-10 h-10 rounded-full" alt="Profile">
+                        @if ($image)
+                            <img src="{{ asset('assets/img/user/' . $image) }}" class="w-10 h-10 rounded-full" alt="Profile">
+                        @else
+                            <img src="{{ asset('assets/img/user/dava.jpg') }}" class="w-10 h-10 rounded-full" alt="Profile">
+                        @endif
                     </button>                        
                     <div class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300" id="profile-dropdown">
                         <a href="{{ route('dashboard.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
+                        @can('Access Profile')
                         <a href="{{ route('management.profile.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
+                        @endcan
                         <form action="{{ route('logout') }}" method="POST" class="w-full">
                             @csrf
                             <button type="submit" class="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">Logout</button>
@@ -46,7 +52,9 @@
                 @auth
                     <div class="border-t pt-4 pb-2">
                         <a href="{{ route('dashboard.index') }}" class="block font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Dashboard</a>
-                        <a href="{{ route('management.profile.index') }}" class="block font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300 py-4">Profile</a>
+                        @can('Access Profile')
+                            <a href="{{ route('management.profile.index') }}" class="block font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300 py-4">Profile</a>
+                        @endcan
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="w-full mt-2 px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition duration-300">Logout</button>
