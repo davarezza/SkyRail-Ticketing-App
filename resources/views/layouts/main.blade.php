@@ -34,6 +34,7 @@
 <script src="{!! asset('assets/js/custom/helper/js.cookie.js') !!}"></script>
 <script defer src="{!! asset('assets/js/custom/helper/helper.js') !!}?v={{ time() }}"></script>
 <script src="{!! asset('assets/js/custom/jquery.blockUI.js') !!}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.3.0/alpine-ie11.min.js"></script>
 <script>
     var hostUrl = "assets/";
     const BASEURL = '{{ url('/') }}';

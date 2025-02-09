@@ -24,9 +24,11 @@ getData = () => {
             $('#id').val(res.user_id);
             $('#name').val(res.name);
             $('#username').val(res.username);
+            $('#email').val(res.email);
             $('#gender').val(res.gender);
             $('#telephone').val(res.telephone);
             $('#birth_date').val(res.birth_date);
+            $('#address').val(res.address);
         },
         error: (err) => {
             HELPER.unblock();

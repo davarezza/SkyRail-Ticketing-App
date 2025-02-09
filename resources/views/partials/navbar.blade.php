@@ -15,9 +15,9 @@
                 <div class="relative" id="profile-menu">
                     <button class="flex items-center gap-2 p-2 rounded-full transition-transform duration-300 hover:scale-105" id="profile-button">
                         @if ($image)
-                            <img src="{{ asset('assets/img/user/' . $image) }}" class="w-10 h-10 rounded-full" alt="Profile">
+                            <img src="{{ asset('assets/img/user/' . $image) }}" class="w-12 h-12 rounded-full" alt="Profile">
                         @else
-                            <img src="{{ asset('assets/img/user/dava.jpg') }}" class="w-10 h-10 rounded-full" alt="Profile">
+                            <img src="{{ asset('assets/img/user/dava.jpg') }}" class="w-12 h-12 rounded-full" alt="Profile">
                         @endif
                     </button>                        
                     <div class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300" id="profile-dropdown">

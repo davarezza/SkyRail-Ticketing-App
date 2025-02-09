@@ -121,6 +121,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/', [ProfileController::class, 'index'])->name('management.profile.index');
             Route::patch('/update', [ProfileController::class, 'update'])->name('management.profile.update');
             Route::patch('/change-image', [ProfileController::class, 'changeImage'])->name('management.profile.changeImage');
+            Route::put('/change-password', [ProfileController::class, 'changePassword'])->name('management.profile.changePassword');
         });
     });
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
