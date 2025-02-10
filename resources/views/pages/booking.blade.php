@@ -88,45 +88,55 @@
     </div>
 
     <!-- Flight Route Section -->
-    <div class="bg-white shadow-lg rounded-lg p-4 md:p-6 mb-6">
-        <div class="flex flex-col md:flex-row items-center justify-between">
-            <div class="flex items-center space-x-4">
-                <img src="/path-to-batik-logo.png" alt="Batik Air" class="w-12 h-12 rounded-full">
-                <div>
-                    <p class="font-semibold text-gray-800 text-lg">Batik Air Indonesia</p>
+    @foreach ($booking as $book)
+        <div class="bg-white shadow-lg rounded-lg p-4 md:p-6 mb-6 cursor-pointer" onclick="window.location.href='{{ route('booking.detail', $book->id) }}';">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <img src="{{ asset('assets/img/transport_logo/' . $book->transport_logo) }}" alt="Batik Air" class="w-12 h-12 rounded-full">
+                    <div>
+                        <p class="font-semibold text-gray-800 text-lg pb-2">{{ $book->transport_name }}</p>
+                        <div class="flex items-center space-x-2">
+                            @foreach(explode(',', $book->class_facilities) as $class_facility)
+                                <i class="{{ trim($class_facility) }} h-5 w-5 text-gray-500"></i>
+                            @endforeach
+                        </div>
+                    </div>                    
+                </div>
+                <div class="flex flex-col items-end mt-4 md:mt-0">
                     <div class="flex items-center space-x-2">
-                        <i class="fas fa-file-alt h-5 w-5 text-gray-500"></i>
-                        <i class="fas fa-user-circle h-5 w-5 text-gray-500"></i>
+                        <span class="text-gray-800 font-bold text-2xl">Rp {{ number_format($book->price, 0, ',', '.') }}</span>                        
+                        <span class="text-gray-500 text-sm">/pax</span>
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col items-end mt-4 md:mt-0">
-                <div class="flex items-center space-x-2">
-                    <span class="text-gray-800 font-bold text-2xl">IDR 952.574</span>
-                    <span class="text-gray-500 text-sm">/pax</span>
+        
+            <div class="flex flex-col md:flex-row justify-between items-center mt-6">
+                <div class="text-center">
+                    <p class="text-2xl font-bold">{{ \Carbon\Carbon::createFromFormat('H:i:s', $book->departure_time)->format('H:i') }}</p>                    
+                    <p class="text-sm text-gray-500">{{ strtoupper($book->departure_city) }}</p>
+                </div>
+                <div class="relative flex-1 mx-4 my-4 md:my-0">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center">
+                        @php
+                            $departure = \Carbon\Carbon::createFromFormat('H:i:s', $book->departure_time);
+                            $arrival = \Carbon\Carbon::createFromFormat('H:i:s', $book->arrival_time);
+                            $duration = $departure->diff($arrival);
+                        @endphp
+                        <span class="bg-white px-2 text-sm text-gray-500">
+                            {{ $duration->h }}h {{ $duration->i }}m
+                        </span>
+                    </div>
+                </div>                
+                <div class="text-center">
+                    <p class="text-2xl font-bold">{{ \Carbon\Carbon::createFromFormat('H:i:s', $book->arrival_time)->format('H:i') }}</p>
+                    <p class="text-sm text-gray-500">{{ strtoupper($book->objective_city) }}</p>
                 </div>
             </div>
         </div>
-    
-        <div class="flex flex-col md:flex-row justify-between items-center mt-6">
-            <div class="text-center">
-                <p class="text-2xl font-bold">15:10</p>
-                <p class="text-sm text-gray-500">CGK</p>
-            </div>
-            <div class="relative flex-1 mx-4 my-4 md:my-0">
-                <div class="absolute inset-0 flex items-center">
-                    <div class="w-full border-t border-gray-300"></div>
-                </div>
-                <div class="relative flex justify-center">
-                    <span class="bg-white px-2 text-sm text-gray-500">1h 30m</span>
-                </div>
-            </div>
-            <div class="text-center">
-                <p class="text-2xl font-bold">16:40</p>
-                <p class="text-sm text-gray-500">SUB</p>
-            </div>
-        </div>
-    </div>
+    @endforeach
 </div>
 @endsection
 

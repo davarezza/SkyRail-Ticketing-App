@@ -24,6 +24,11 @@ class TransportationRepository extends BaseRepository
         return $this->model;
     }
 
+    public function findId($id)
+    {
+        return $this->model->find($id);
+    }
+
     public function table($request){
         $opr = $this->model->setView('v_transportasis');
 

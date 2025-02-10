@@ -15,6 +15,7 @@ class Transportasi extends BaseModel
         'nama',
         'jumlah_kursi',
         'keterangan',
+        'logo',
         'id_type_transportasi',
         'class_id',
     ];

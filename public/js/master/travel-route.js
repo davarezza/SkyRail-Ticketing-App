@@ -48,13 +48,13 @@ initTableTravelRoute = () => {
                     className: "align-middle",
                 },
                 {
-                    data: "objective",
+                    data: "objective_city",
                     searchable: true,
                     orderable: true,
                     className: "align-middle",
                 },
                 {
-                    data: "first_route",
+                    data: "departure_city",
                     searchable: true,
                     orderable: true,
                     className: "align-middle",
@@ -66,7 +66,7 @@ initTableTravelRoute = () => {
                     className: "align-middle",
                 },
                 {
-                    data: "name_transport",
+                    data: "transport_name",
                     searchable: true,
                     orderable: false,
                     className: "align-middle",
@@ -92,13 +92,13 @@ initTableTravelRoute = () => {
                 {
                     targets: 1,
                     render: function (data, type, full, meta) {
-                        return full.objective;
+                        return full.objective_city;
                     },
                 },             
                 {
                     targets: 2,
                     render: function (data, type, full, meta) {
-                        return full.first_route;
+                        return full.departure_city;
                     },
                 },             
                 {
@@ -110,7 +110,7 @@ initTableTravelRoute = () => {
                 {
                     targets: 4,
                     render: function (data, type, full, meta) {
-                        return full.name_transport;
+                        return full.transport_name;
                     },
                 },             
                 {
@@ -241,14 +241,14 @@ formValidationAddTravelRoute = () => {
                 'travel-route-objective': {
                     validators: {
                         notEmpty: {
-                            message: 'Objective is required'
+                            message: 'Objective City is required'
                         }
                     }
                 },
                 'travel-route-first-route': {
                     validators: {
                         notEmpty: {
-                            message: 'First Route is required'
+                            message: 'Departure City is required'
                         }
                     }
                 },
@@ -324,7 +324,7 @@ function handleSubmitFormTravelRoute(e) {
 saveTravelRoute = () => {
     var formData = new FormData();
     formData.append('objective', $('#travel-route-objective').val());
-    formData.append('first_route', $('#travel-route-first-route').val());
+    formData.append('departure_city', $('#travel-route-first-route').val());
     formData.append('id_transportasi', $('#transport-id').val());
     formData.append('price', $('#travel-route-price').val());
     formData.append('departure_date', $('#travel-route-departure-date').val());
@@ -393,8 +393,8 @@ detailTravelRoute = (id) => {
             _token: $('[name="_token"]').val()
         },
         success: (response) => {
-            $('#detail-objective').text(response.detail.objective);
-            $('#detail-first-route').text(response.detail.first_route);
+            $('#detail-objective').text(response.detail.objective_city);
+            $('#detail-first-route').text(response.detail.departure_city);
             $('#detail-departure-date').text(moment(response.detail.departure_date).format('DD MMMM YYYY'));
             $('#detail-departure-time').text(moment(response.detail.departure_time, 'HH:mm').format('hh:mm a'));
             $('#detail-arrival-time').text(moment(response.detail.arrival_time, 'HH:mm').format('hh:mm a'));
@@ -445,7 +445,7 @@ editTravelRoute = (id) => {
 updateTravelRoute = () => {
     var formData = new FormData();
     formData.append('objective', $('#travel-route-objective').val());
-    formData.append('first_route', $('#travel-route-first-route').val());
+    formData.append('departure_city', $('#travel-route-first-route').val());
     formData.append('id_transportasi', $('#transport-id').val());
     formData.append('price', $('#travel-route-price').val());
     formData.append('departure_date', $('#travel-route-departure-date').val());

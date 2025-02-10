@@ -31,7 +31,10 @@ Route::middleware('guest')->group(function () {
 
 Route::get('/', [MainController::class, 'home'])->name('home');
 
-Route::get('/booking', [BookingController::class, 'index'])->name('booking.page');
+Route::prefix('booking')->group(function () {
+    Route::get('/', [BookingController::class, 'index'])->name('booking.page');
+    Route::get('{id}/detail', [BookingController::class, 'index'])->name('booking.detail');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');

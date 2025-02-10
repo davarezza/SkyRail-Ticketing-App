@@ -18,8 +18,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="fv-row mb-4">
-                                <label for="travel-route-objective" class="form-label fs-9 fw-medium mb-2">Objective
-                                    Route</label>
+                                <label for="travel-route-objective" class="form-label fs-9 fw-medium mb-2">Objective City</label>
                                 <input type="text" class="form-control bg-light-subtle" id="travel-route-objective"
                                     name="travel-route-objective" placeholder="Enter objective" autocomplete="off"
                                     style="--bs-bg-opacity: .6;" />
@@ -30,7 +29,7 @@
                                 <label for="travel-route-first-route" class="form-label fs-9 fw-medium mb-2">First
                                     Route</label>
                                 <input type="text" class="form-control bg-light-subtle" id="travel-route-first-route"
-                                    name="travel-route-first-route" placeholder="Enter First Route" autocomplete="off"
+                                    name="travel-route-first-route" placeholder="Enter Departure City" autocomplete="off"
                                     style="--bs-bg-opacity: .6;" />
                             </div>
                         </div>
@@ -98,11 +97,11 @@
             <div class="modal-body p-4">
                 <div class="row mb-4">
                     <div class="col-4">
-                        <p class="fw-bold mb-1">Objective</p>
+                        <p class="fw-bold mb-1">Objective City</p>
                         <p class="text-gray-700" id="detail-objective"></p>
                     </div>
                     <div class="col-4">
-                        <p class="fw-bold mb-1">First Route</p>
+                        <p class="fw-bold mb-1">Departure City</p>
                         <p class="text-gray-700" id="detail-first-route"></p>
                     </div>
                     <div class="col-4">

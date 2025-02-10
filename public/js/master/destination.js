@@ -175,6 +175,7 @@ toggleAddDestination = (show) => {
         $('#destination-link').val('');
         $('#destination-popularity').val('');
         $('#destination-image').val('');
+        $('#image-preview').attr('src', '#').addClass('d-none');
         $('#id').val('');
         $('#title-form-destination').text('Add Destination');
         if(validatorAddDestination){

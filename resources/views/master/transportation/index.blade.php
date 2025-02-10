@@ -36,6 +36,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Logo</th>
                                     <th>Kode</th>
                                     <th>Name</th>
                                     <th>Transportation Type</th>

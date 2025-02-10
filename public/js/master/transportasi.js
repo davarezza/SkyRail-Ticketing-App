@@ -55,6 +55,12 @@ initTableTransportation = () => {
                     className: "align-middle",
                 },
                 {
+                    data: "logo",
+                    searchable: false,
+                    orderable: false,
+                    className: "align-middle",
+                },
+                {
                     data: "kode",
                     searchable: true,
                     orderable: true,
@@ -99,29 +105,35 @@ initTableTransportation = () => {
                 {
                     targets: 1,
                     render: function (data, type, full, meta) {
-                        return full.kode;
+                        return `<img src="/assets/img/transport_logo/${full.logo}" alt="Transport Image" width="60" height="auto" class="rounded">`;
                     },
                 },             
                 {
                     targets: 2,
                     render: function (data, type, full, meta) {
-                        return full.name;
+                        return full.kode;
                     },
                 },             
                 {
                     targets: 3,
                     render: function (data, type, full, meta) {
-                        return full.type_name;
+                        return full.name;
                     },
                 },             
                 {
                     targets: 4,
                     render: function (data, type, full, meta) {
-                        return full.keterangan.length > 40 ? full.keterangan.substring(0, 40) + '...' : full.keterangan;
+                        return full.type_name;
                     },
                 },             
                 {
                     targets: 5,
+                    render: function (data, type, full, meta) {
+                        return full.keterangan.length > 40 ? full.keterangan.substring(0, 40) + '...' : full.keterangan;
+                    },
+                },             
+                {
+                    targets: 6,
                     render: function (data, type, full, meta) {
                         var html = `
                             <div class="d-flex justify-content-center gap-2">
@@ -209,6 +221,8 @@ toggleAddTransport = (show) => {
         $('#transport-type').val('');
         $('#transport-class').val('');
         $('#transport-description').val('');
+        $('#transport-logo').val('');
+        $('#image-preview').attr('src', '#').addClass('d-none');
         $('#total-seat').val('');
         $('#id').val('');
         $('#title-form-transport').text('Add Transportation');
@@ -338,6 +352,7 @@ saveTransport = () => {
     formData.append('class_id', $('#transport-class').val());
     formData.append('jumlah_kursi', $('#total-seat').val());
     formData.append('keterangan', $('#transport-description').val());
+    formData.append('logo', $('#transport-logo')[0].files[0]);
     formData.append('_token', $('[name="_token"]').val());
 
     $("#modal-add-transport").modal("hide");
@@ -362,6 +377,8 @@ saveTransport = () => {
                         $('#transport-class').val('');
                         $('#total-seat').val('');
                         $('#transport-description').val('');
+                        $('#transport-logo').val('');
+                        $('#image-preview').attr('src', '#').addClass('d-none');
                         HELPER.unblock();
                         HELPER.showMessage({
                             success: true,
@@ -432,6 +449,14 @@ editTransport = (id) => {
             $('#total-seat').val(res.jumlah_kursi);
             $('#transport-type').val(res.id_type_transportasi).trigger('change');
             $('#transport-class').val(res.class_id).trigger('change');
+            if (res.logo) {
+                const imageUrl = `/assets/img/transport_logo/${res.logo}`;
+                $('#image-preview').attr('src', imageUrl).removeClass('d-none');
+                $('#existing-image').val(res.logo);
+            } else {
+                $('#image-preview').attr('src', '#').addClass('d-none');
+                $('#existing-image').val('');
+            }
             toggleAddTransport(true);
         },
         error: (err) => {
@@ -452,6 +477,11 @@ updateTransport = () => {
     formData.append('class_id', $('#transport-class').val());
     formData.append('jumlah_kursi', $('#total-seat').val());
     formData.append('keterangan', $('#transport-description').val());
+    if ($('#transport-logo')[0].files.length > 0) {
+        formData.append('logo', $('#transport-logo')[0].files[0]);
+    } else {
+        formData.append('existing_image', $('#existing-image').val());
+    }
     formData.append('id_transportasi', $('#id').val());
     formData.append('_token', $('[name="_token"]').val());
 
@@ -477,6 +507,7 @@ updateTransport = () => {
                         $('#transport-class').val('');
                         $('#total-seat').val('');
                         $('#transport-description').val('');
+                        $('#image-preview').attr('src', '#').addClass('d-none');
                         $('#title-form-transport').text('Add Transportation');
                         HELPER.unblock();
                         HELPER.showMessage({

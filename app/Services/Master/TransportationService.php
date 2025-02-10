@@ -30,6 +30,14 @@ class TransportationService
     {
         DB::beginTransaction();
         try {
+            if ($request->hasFile('logo')) {
+                $file = $request->file('logo');
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/img/transport_logo'), $fileName);
+            } else {
+                $fileName = null;
+            }
+
             $dataTransport = [
                 'nama' => $request->name,
                 'kode' => $request->kode,
@@ -37,6 +45,7 @@ class TransportationService
                 'class_id' => $request->class_id,
                 'jumlah_kursi' => $request->jumlah_kursi,
                 'keterangan' => $request->keterangan,
+                'logo' => $fileName,
             ];
 
             $opr = $this->repository->create($dataTransport);
@@ -67,6 +76,23 @@ class TransportationService
     {
         DB::beginTransaction();
         try {
+            $transport = $this->repository->findId($request->id_transportasi);
+            if (!$transport) {
+                dd('Not Found');
+            }
+    
+            if ($request->hasFile('logo')) {
+                if ($transport->logo && file_exists(public_path('assets/img/transport_logo/' . $transport->logo))) {
+                    unlink(public_path('assets/img/transport_logo/' . $transport->logo));
+                }
+    
+                $file = $request->file('logo');
+                $fileName = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('assets/img/transport_logo'), $fileName);
+            } else {
+                $fileName = $transport->logo;
+            }
+
             $dataTransport = [
                 'nama' => $request->name,
                 'kode' => $request->kode,
@@ -74,6 +100,7 @@ class TransportationService
                 'class_id' => $request->class_id,
                 'jumlah_kursi' => $request->jumlah_kursi,
                 'keterangan' => $request->keterangan,
+                'logo' => $fileName,
             ];
 
             $opr = $this->repository->update($request->id_transportasi, $dataTransport);

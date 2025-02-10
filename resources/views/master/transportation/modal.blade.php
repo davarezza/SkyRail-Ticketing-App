@@ -72,13 +72,29 @@
                                    style="--bs-bg-opacity: .6;" />
                         </div>
                         <div class="col-md-6 fv-row">
+                            <label for="transport-logo" class="form-label fs-9 fw-medium mb-2">Transportation Logo</label>
+                            <input type="file" 
+                                    class="form-control bg-light-subtle" 
+                                    id="transport-logo" 
+                                    name="transport-logo" 
+                                    accept="image/*"
+                                    onchange="previewImage(event)"
+                                   style="--bs-bg-opacity: .6;" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 fv-row">
                             <label for="transport-description" class="form-label fs-9 fw-medium mb-2">Description</label>
                             <textarea class="form-control bg-light-subtle" 
-                                      id="transport-description" 
-                                      name="transport-description" 
-                                      rows="4" 
-                                      placeholder="Enter description"
-                                      style="--bs-bg-opacity: .6;"></textarea>
+                                    id="transport-description" 
+                                    name="transport-description" 
+                                    rows="4" 
+                                    placeholder="Enter description"
+                                    style="--bs-bg-opacity: .6;"></textarea>
+                        </div>
+                        <div class="col-md-6 fv-row">
+                            <img id="image-preview" src="#" alt="Image Preview" class="img-fluid d-none" style="max-height: 200px; border-radius: 8px;" />
+                            <input type="hidden" id="existing-image" name="existing_image">
                         </div>
                     </div>
                 </div>                
@@ -252,3 +268,22 @@
         </div>
     </div>
 </div>
+
+<script>
+    function previewImage(event) {
+        const input = event.target;
+        const preview = document.getElementById('image-preview');
+        
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.classList.remove('d-none');
+            }
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            preview.src = "#";
+            preview.classList.add('d-none');
+        }
+    }
+</script>

@@ -36,8 +36,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Objective</th>
-                                    <th>First Route</th>
+                                    <th>Objective City</th>
+                                    <th>Departure City</th>
                                     <th>Price</th>
                                     <th>Transport Name</th>
                                     <th class="text-center">Action</th>
