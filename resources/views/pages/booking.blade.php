@@ -104,7 +104,7 @@
                 </div>
                 <div class="flex flex-col items-end mt-4 md:mt-0">
                     <div class="flex items-center space-x-2">
-                        <span class="text-gray-800 font-bold text-2xl">Rp {{ number_format($book->price, 0, ',', '.') }}</span>                        
+                        <span class="text-gray-800 font-bold text-2xl">IDR {{ number_format($book->price, 0, ',', '.') }}</span>                        
                         <span class="text-gray-500 text-sm">/pax</span>
                     </div>
                 </div>
