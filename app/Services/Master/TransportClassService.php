@@ -29,6 +29,7 @@ class TransportClassService
             $dataTransClass = [
                 'name' => $request->name,
                 'facilities' => $request->facilities,
+                'facilities_detail' => $request->facilities_detail,
             ];
 
             $opr = $this->repository->create($dataTransClass);
@@ -55,6 +56,7 @@ class TransportClassService
             $dataTransClass = [
                 'name' => $request->name,
                 'facilities' => $request->facilities,
+                'facilities_detail' => $request->facilities_detail,
             ];
 
             $opr = $this->repository->update($request->id, $dataTransClass);

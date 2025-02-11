@@ -42,6 +42,17 @@
                         </a>
                     </div>
                 </div>
+
+                <div class="fv-row mb-4">
+                    <label for="transport-class-facilities-detail" class="form-label fs-9 fw-medium mb-2">Facilities Detail</label>
+                        <input type="text" 
+                                class="form-control bg-light-subtle flex-grow-1" 
+                                id="transport-class-facilities-detail" 
+                                name="transport-class-facilities-detail" 
+                                placeholder="Free Wifi, Baggage: 20kg, etc" 
+                                autocomplete="off"
+                                style="--bs-bg-opacity: .6;" />
+                </div>
                 <div class="modal-footer border-top-0 px-3 pb-3 pt-0">
                     <button type="button" 
                             class="btn btn-light px-3 py-2" 

@@ -191,7 +191,9 @@ toggleAddTravelRoute = (show) => {
     } else {
         $("#modal-add-travel-route").modal("hide");
         $('#travel-route-objective').val('');
+        $('#travel-route-objective-airport').val('');
         $('#travel-route-first-route').val('');
+        $('#travel-route-first-route-airport').val('');
         $('#transport-id').val('');
         $('#travel-route-price').val('');
         $('#travel-route-departure-date').val('');
@@ -245,10 +247,24 @@ formValidationAddTravelRoute = () => {
                         }
                     }
                 },
+                'travel-route-objective-airport': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Objective Airport is required'
+                        }
+                    }
+                },
                 'travel-route-first-route': {
                     validators: {
                         notEmpty: {
                             message: 'Departure City is required'
+                        }
+                    }
+                },
+                'travel-route-first-route-airport': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Departure Airport is required'
                         }
                     }
                 },
@@ -324,7 +340,9 @@ function handleSubmitFormTravelRoute(e) {
 saveTravelRoute = () => {
     var formData = new FormData();
     formData.append('objective', $('#travel-route-objective').val());
+    formData.append('objective_airport', $('#travel-route-objective-airport').val());
     formData.append('departure_city', $('#travel-route-first-route').val());
+    formData.append('departure_airport', $('#travel-route-first-route-airport').val());
     formData.append('id_transportasi', $('#transport-id').val());
     formData.append('price', $('#travel-route-price').val());
     formData.append('departure_date', $('#travel-route-departure-date').val());
@@ -349,7 +367,9 @@ saveTravelRoute = () => {
                         initTableTravelRoute();
                         toggleAddTravelRoute(false);
                         $('#travel-route-objective').val('');
+                        $('#travel-route-objective-airport').val('');
                         $('#travel-route-first-route').val('');
+                        $('#travel-route-first-route-airport').val('');
                         $('#transport-id').val('');
                         $('#travel-route-price').val('');
                         $('#travel-route-departure-date').val('');
@@ -394,7 +414,9 @@ detailTravelRoute = (id) => {
         },
         success: (response) => {
             $('#detail-objective').text(response.detail.objective_city);
+            $('#detail-objective-airport').text(response.detail.objective_airport);
             $('#detail-first-route').text(response.detail.departure_city);
+            $('#detail-first-route-airport').text(response.detail.departure_airport);
             $('#detail-departure-date').text(moment(response.detail.departure_date).format('DD MMMM YYYY'));
             $('#detail-departure-time').text(moment(response.detail.departure_time, 'HH:mm').format('hh:mm a'));
             $('#detail-arrival-time').text(moment(response.detail.arrival_time, 'HH:mm').format('hh:mm a'));
@@ -424,7 +446,9 @@ editTravelRoute = (id) => {
             $('#title-form-travel-route').text('Edit Travel Route');
             $('#id').val(res.id_rute);
             $('#travel-route-objective').val(res.tujuan);
+            $('#travel-route-objective-airport').val(res.tujuan_bandara);
             $('#travel-route-first-route').val(res.rute_awal);
+            $('#travel-route-first-route-airport').val(res.rute_awal_bandara);
             $('#travel-route-price').val(res.harga);
             $('#travel-route-departure-date').val(res.tanggal_berangkat);
             $('#travel-route-departure-time').val(res.jam_berangkat);
@@ -445,7 +469,9 @@ editTravelRoute = (id) => {
 updateTravelRoute = () => {
     var formData = new FormData();
     formData.append('objective', $('#travel-route-objective').val());
+    formData.append('objective_airport', $('#travel-route-objective-airport').val());
     formData.append('departure_city', $('#travel-route-first-route').val());
+    formData.append('departure_airport', $('#travel-route-first-route-airport').val());
     formData.append('id_transportasi', $('#transport-id').val());
     formData.append('price', $('#travel-route-price').val());
     formData.append('departure_date', $('#travel-route-departure-date').val());
@@ -472,7 +498,9 @@ updateTravelRoute = () => {
                         toggleAddTravelRoute(false);
                         $('#id').val('');
                         $('#travel-route-objective').val('');
+                        $('#travel-route-objective-airport').val('');
                         $('#travel-route-first-route').val('');
+                        $('#travel-route-first-route-airport').val('');
                         $('#transport-id').val('');
                         $('#travel-route-price').val('');
                         $('#travel-route-departure-date').val('');

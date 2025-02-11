@@ -15,4 +15,13 @@ class BookingController extends Controller
             'booking' => $booking,
         ]);
     }
+
+    public function detail($id)
+    {
+        $booking = TravelRouteView::find($id);
+    
+        return view('pages.booking-detail', [
+            'booking' => $booking,
+        ]);
+    } 
 }

@@ -89,7 +89,7 @@
 
     <!-- Flight Route Section -->
     @foreach ($booking as $book)
-        <div class="bg-white shadow-lg rounded-lg p-4 md:p-6 mb-6 cursor-pointer" onclick="window.location.href='{{ route('booking.detail', $book->id) }}';">
+    <div class="bg-white shadow-lg rounded-lg p-4 md:p-6 mb-6 cursor-pointer transition-all duration-300 hover:shadow-xl hover:bg-gray-50" onclick="window.location.href='{{ route('booking.detail', $book->id) }}';">
             <div class="flex flex-col md:flex-row items-center justify-between">
                 <div class="flex items-center space-x-4">
                     <img src="{{ asset('assets/img/transport_logo/' . $book->transport_logo) }}" alt="Batik Air" class="w-12 h-12 rounded-full">

@@ -26,10 +26,27 @@
                         </div>
                         <div class="col-md-6">
                             <div class="fv-row mb-4">
-                                <label for="travel-route-first-route" class="form-label fs-9 fw-medium mb-2">First
-                                    Route</label>
+                                <label for="travel-route-first-route" class="form-label fs-9 fw-medium mb-2">Departure City</label>
                                 <input type="text" class="form-control bg-light-subtle" id="travel-route-first-route"
                                     name="travel-route-first-route" placeholder="Enter Departure City" autocomplete="off"
+                                    style="--bs-bg-opacity: .6;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="fv-row mb-4">
+                                <label for="travel-route-objective-airport" class="form-label fs-9 fw-medium mb-2">Objective Airport</label>
+                                <input type="text" class="form-control bg-light-subtle" id="travel-route-objective-airport"
+                                    name="travel-route-objective-airport" placeholder="Enter Objective Airport" autocomplete="off"
+                                    style="--bs-bg-opacity: .6;" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="fv-row mb-4">
+                                <label for="travel-route-first-route-airport" class="form-label fs-9 fw-medium mb-2">Departure Airport</label>
+                                <input type="text" class="form-control bg-light-subtle" id="travel-route-first-route-airport"
+                                    name="travel-route-first-route-airport" placeholder="Enter Departure Airport" autocomplete="off"
                                     style="--bs-bg-opacity: .6;" />
                             </div>
                         </div>

@@ -69,6 +69,7 @@
                                     <th>No</th>
                                     <th>Name</th>
                                     <th>Facilities</th>
+                                    <th>Detail</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
@@ -99,5 +100,10 @@
             },
             originalInputValueFormat: values => values.map(item => item.value).join(',')
         });
+
+        let inputDetail = document.querySelector('input[name=transport-class-facilities-detail]');
+        let tagifyDetail = new Tagify(inputDetail, {
+            originalInputValueFormat: values => values.map(item => item.value).join(',')
+        })
     </script>
 @endpush

@@ -13,6 +13,7 @@ class TransportClass extends BaseModel
     protected $fillable = [
         'name',
         'facilities',
+        'facilities_detail',
     ];
 
     public function transportasis()

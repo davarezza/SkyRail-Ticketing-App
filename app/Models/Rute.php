@@ -12,7 +12,9 @@ class Rute extends BaseModel
     protected $primaryKey = 'id_rute';
     protected $fillable = [
         'tujuan',
+        'tujuan_bandara',
         'rute_awal',
+        'rute_awal_bandara',
         'rute_akhir',
         'tanggal_berangkat',
         'jam_berangkat',

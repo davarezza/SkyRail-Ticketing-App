@@ -57,6 +57,12 @@ initTableTransportClass = () => {
                     className: "align-middle",
                 },
                 {
+                    data: "facilities_detail",
+                    searchable: true,
+                    orderable: true,
+                    className: "align-middle",
+                },
+                {
                     data: "id",
                     searchable: false,
                     orderable: false,
@@ -90,6 +96,12 @@ initTableTransportClass = () => {
                 },                                  
                 {
                     targets: 3,
+                    render: function (data, type, full, meta) {
+                        return full.facilities_detail;
+                    },
+                },                                  
+                {
+                    targets: 4,
                     render: function (data, type, full, meta) {
                         var html = `
                             <div class="d-flex justify-content-center gap-2">
@@ -137,6 +149,7 @@ toggleAddTransportClass = (show) => {
         $("#modal-add-transport-class").modal("hide");
         $('#transport-class-name').val('');
         $('#transport-class-facilities').val('');
+        $('#transport-class-facilities-detail').val('');
         $('#id').val('');
         $('#title-form-transport-class').text('Add Transport Class');
         if(validatorAddTransportClass){
@@ -183,6 +196,13 @@ formValidationAddTransportClass = () => {
                         }
                     }
                 },
+                'transport-class-facilities-detail': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Facilities detail is required'
+                        }
+                    }
+                },
             },
 
             plugins: {
@@ -221,6 +241,7 @@ saveTransportClass = () => {
     var formData = new FormData();
     formData.append('name', $('#transport-class-name').val());
     formData.append('facilities', $('#transport-class-facilities').val());
+    formData.append('facilities_detail', $('#transport-class-facilities-detail').val());
     formData.append('_token', $('[name="_token"]').val());
 
     $("#modal-add-transport-class").modal("hide");
@@ -241,6 +262,7 @@ saveTransportClass = () => {
                         toggleAddTransportClass(false);
                         $('#transport-class-name').val('');
                         $('#transport-class-facilities').val('');
+                        $('#transport-class-facilities-detail').val('');
                         HELPER.unblock();
                         HELPER.showMessage({
                             success: true,
@@ -280,6 +302,7 @@ editTransportClass = (id) => {
             $('#id').val(res.id);
             $('#transport-class-name').val(res.name);
             $('#transport-class-facilities').val(res.facilities);
+            $('#transport-class-facilities-detail').val(res.facilities_detail);
             toggleAddTransportClass(true);
         },
         error: (err) => {
@@ -296,6 +319,7 @@ updateTransportClass = () => {
     var formData = new FormData();
     formData.append('name', $('#transport-class-name').val());
     formData.append('facilities', $('#transport-class-facilities').val());
+    formData.append('facilities_detail', $('#transport-class-facilities-detail').val());
     formData.append('_token', $('[name="_token"]').val());
     formData.append('id', $('#id').val());
 
@@ -318,6 +342,7 @@ updateTransportClass = () => {
                         $('#id').val('');
                         $('#transport-class-name').val('');
                         $('#transport-class-facilities').val('');
+                        $('#transport-class-facilities-detail').val('');
                         $('#title-form-transport-class').text('Add Transport Class');
                         HELPER.unblock();
                         HELPER.showMessage({

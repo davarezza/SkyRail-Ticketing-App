@@ -36,7 +36,9 @@ class TravelRouteService
 
             $dataTravel = [
                 'tujuan' => $request->objective,
+                'tujuan_bandara' => $request->objective_airport,
                 'rute_awal' => $request->departure_city,
+                'rute_awal_bandara' => $request->departure_airport,
                 'rute_akhir' => $request->objective,
                 'tanggal_berangkat' => $request->departure_date,
                 'jam_berangkat' => $request->departure_time,
@@ -84,7 +86,9 @@ class TravelRouteService
 
             $dataTravel = [
                 'tujuan' => $request->objective,
+                'tujuan_bandara' => $request->objective_airport,
                 'rute_awal' => $request->departure_city,
+                'rute_awal_bandara' => $request->departure_airport,
                 'rute_akhir' => $request->departure_city,
                 'tanggal_berangkat' => $request->departure_date,
                 'jam_berangkat' => $request->departure_time,
