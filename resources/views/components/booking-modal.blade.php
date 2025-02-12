@@ -50,15 +50,9 @@
             </div>
             <div class="mb-6 space-y-4">
                 <h2 class="text-lg font-semibold text-gray-800">Price</h2>
-                <div class="space-y-3">
-                    <div class="flex justify-between items-center">
-                        <div class="flex items-center space-x-3">
-                            <span class="w-2 h-2 bg-gray-300 rounded-full"></span>
-                            <span class="text-gray-700 text-base">Adult (x1)</span>
-                        </div>
-                        <span id="price" class="text-gray-900 font-medium"></span>
-                    </div>
-                </div>
+                <div class="space-y-3" id="passenger-prices">
+
+                </div>                
             </div>
             <hr class="border-gray-300 my-2">
     
@@ -78,9 +72,9 @@
             <div class="flex justify-between items-center pt-4 border-t border-gray-200">
                 <div class="space-y-1">
                     <h2 class="text-base font-medium text-gray-600">Total</h2>
-                    <div id="total-price" class="text-xl font-bold text-gray-900"></div>
+                    <div id="total-price-modal" class="text-xl font-bold text-gray-900"></div>
                 </div>
-                <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold mt-2.5 py-2.5 px-6 rounded-lg transition duration-300 text-base">
+                <button type="button" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold mt-2.5 py-2.5 px-6 rounded-lg transition duration-300 text-base" onclick="toggleDetailPrices(false)">
                     Choose Ticket
                 </button>
             </div>

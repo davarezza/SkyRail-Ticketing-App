@@ -57,10 +57,10 @@
             </div>
             <div class="relative w-full md:flex-1">
                 <select class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white">
-                    <option>1 Penumpang, Ekonomi</option>
+                    <option>Economy</option>
                 </select>
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                    <i class="fas fa-user text-gray-400 h-3 w-5"></i>
+                    <i class="fas fa-couch text-gray-400 h-3 w-5"></i>
                 </span>
             </div>
             <button class="w-full md:w-auto p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition flex items-center justify-center transform hover:scale-105">

@@ -55,8 +55,62 @@
             <div class="flex items-center gap-2">
                 <h1 class="text-xl font-semibold">{{ $booking->departure_city }} → {{ $booking->objective_city }}</h1>
             </div>
-            <p class="text-gray-600">1 Dewasa</p>
+            <p class="text-gray-600" id="passenger-summary">1 Adult</p>
         </div>
+
+        <div class="rounded-lg shadow-lg p-4 mb-4 border-2 border-gray-200/50 backdrop-blur-sm">
+            <h1 class="text-2xl font-bold text-gray-900 mb-6">Set Passengers</h1>
+            <div class="space-y-6">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-base text-gray-700">Adult (12 years and above)</h3>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button onclick="updateCount('adult', 'decrease')" 
+                                class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-blue-500 text-blue-500 hover:bg-blue-50 transition-colors">
+                                <i class="fa-solid fa-minus"></i>
+                        </button>
+                        <span id="adult-count" class="text-lg font-medium min-w-[20px] text-center">1</span>
+                        <button onclick="updateCount('adult', 'increase')" 
+                                class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-blue-500 text-blue-500 hover:bg-blue-50 transition-colors">
+                                <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-base text-gray-700">Child (2 - 11 years)</h3>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button onclick="updateCount('child', 'decrease')" 
+                                class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-blue-500 text-blue-500 hover:bg-blue-50 transition-colors">
+                                <i class="fa-solid fa-minus"></i>
+                        </button>
+                        <span id="child-count" class="text-lg font-medium min-w-[20px] text-center">0</span>
+                        <button onclick="updateCount('child', 'increase')" 
+                                class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-blue-500 text-blue-500 hover:bg-blue-50 transition-colors">
+                                <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-base text-gray-700">Infant (under 2 years)</h3>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button onclick="updateCount('infant', 'decrease')" 
+                                class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-blue-500 text-blue-500 hover:bg-blue-50 transition-colors">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                        <span id="infant-count" class="text-lg font-medium min-w-[20px] text-center">0</span>
+                        <button onclick="updateCount('infant', 'increase')" 
+                                class="w-8 h-8 flex items-center justify-center rounded-full border-2 border-blue-500 text-blue-500 hover:bg-blue-50 transition-colors">
+                                <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div> 
 
         <div class="rounded-lg shadow-lg p-4 mb-4 border-2 border-gray-200/50 backdrop-blur-sm">
             <div class="flex items-center mb-2">
@@ -151,20 +205,23 @@
                 <button type="button" class="text-blue-600 mt-4 text-sm font-bold hover:text-blue-700 transition-colors" onclick="detailPrices({{ $booking->id }})">View Details</button>
             </div>
             
-            <!-- Pricing Section -->
             <div class="space-y-2">
                 <div class="text-gray-600">IDR {{ number_format($booking->price, 0, ',', '.') }}/pax</div>
                 <div class="flex items-center justify-between">
                     <div>
-                        @php
-                            $tax = (int) ($booking->price * 0.11);
-                            $total = $booking->price + $tax;
-                        @endphp
                         <div class="flex items-center gap-1">
                             <span class="text-gray-600">Total</span>
-                            <span class="text-xl font-bold text-red-500">IDR {{ number_format($total, 0, ',', '.') }}</span>
+                            <span class="text-xl font-bold text-red-500" id="total-price">
+                                IDR {{ number_format($booking->price + ($booking->price * 0.11), 0, ',', '.') }}
+                            </span>
                         </div>
                         <div class="text-sm text-gray-500">Including Tax</div>
+                    </div>
+                    <div id="price-data"
+                        data-price="{{ $booking->price }}"
+                        data-tax-rate="0.11"
+                        data-child-discount="0.75"
+                        data-infant-discount="0.1">
                     </div>
                     <div class="flex items-center gap-2">
                         <button class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
@@ -172,7 +229,7 @@
                         </button>
                     </div>
                 </div>
-            </div>
+            </div>            
         </div>
     </div>
     @include('components.booking-modal')
