@@ -33,7 +33,7 @@
     }
 
     .timeline-dot:last-child {
-        margin-top: 26.8rem;
+        margin-top: 24.7rem;
     }
 
     .timeline-line::after {
@@ -97,7 +97,7 @@
                             @php
                                 $facilities = $booking->class_facilities_detail;
                                 $facilitiesArray = explode(',', $facilities);
-                                $facilitiesLimited = array_slice($facilitiesArray, 0, 3);
+                                $facilitiesLimited = array_slice($facilitiesArray, 0, 2);
                             @endphp
 
                             @foreach($facilitiesLimited as $facility)
@@ -118,7 +118,7 @@
                 </div>
             </div>
 
-            <hr class="border-gray-300"/>
+            <hr class="border-gray-300 mt-2"/>
             <div class="mt-4">
                 <h3 class="font-medium text-gray-800 mb-2">Free Benefits for You</h3>
                 <p class="text-gray-600 mb-2">Direct Flight</p>
@@ -143,14 +143,12 @@
                     <span class="text-gray-700">Can check-in earlier</span>
                 </div>
                 
-                <div class="flex items-center gap-2 mb-3">
+                <div class="flex items-center gap-2 mb-2">
                     <i class="fas fa-tag text-green-600 mr-2"></i>
                     <span class="text-gray-700">Free seat selection</span>
                 </div>
                 
-                <button class="text-blue-600 text-sm font-bold hover:text-blue-700 transition-colors">
-                    View Details
-                </button>
+                <button type="button" class="text-blue-600 mt-4 text-sm font-bold hover:text-blue-700 transition-colors" onclick="detailPrices({{ $booking->id }})">View Details</button>
             </div>
             
             <!-- Pricing Section -->
@@ -158,9 +156,13 @@
                 <div class="text-gray-600">IDR {{ number_format($booking->price, 0, ',', '.') }}/pax</div>
                 <div class="flex items-center justify-between">
                     <div>
+                        @php
+                            $tax = (int) ($booking->price * 0.11);
+                            $total = $booking->price + $tax;
+                        @endphp
                         <div class="flex items-center gap-1">
                             <span class="text-gray-600">Total</span>
-                            <span class="text-xl font-bold text-red-500">IDR 3.461.594</span>
+                            <span class="text-xl font-bold text-red-500">IDR {{ number_format($total, 0, ',', '.') }}</span>
                         </div>
                         <div class="text-sm text-gray-500">Including Tax</div>
                     </div>
