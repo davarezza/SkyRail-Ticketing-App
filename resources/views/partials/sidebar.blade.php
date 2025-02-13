@@ -64,7 +64,7 @@
                 </ul>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link"><i class='bx bxs-book'></i> Booking Management</a>
+                <a href="{{ route('management.manage-booking.index') }}" class="sidebar-link {{ request()->routeIs('management.manage-booking.index') ? 'active' : '' }}"><i class='bx bxs-book'></i> Booking Management</a>
             </li>
 
             <li class="sidebar-header">Operation</li>

@@ -223,11 +223,11 @@
                         data-child-discount="0.75"
                         data-infant-discount="0.1">
                     </div>
-                    <div class="flex items-center gap-2">
-                        <a href="{{ route('booking-passenger.detail', $booking->id) }}" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                    <form action="{{ route('booking-passenger.detail', $booking->id) }}" method="POST" class="flex items-center gap-2">
+                        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
                             Next
-                        </a>
-                    </div>
+                        </button>
+                    </form>
                 </div>
             </div>            
         </div>

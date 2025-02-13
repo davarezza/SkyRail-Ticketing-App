@@ -8,6 +8,7 @@ use App\Http\Controllers\Management\RoleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\DestinationController;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\Management\ManageBookingController;
 use App\Http\Controllers\Management\ProfileController;
 use App\Http\Controllers\Master\OfficerController;
 use App\Http\Controllers\Master\PassengerController;
@@ -131,6 +132,15 @@ Route::middleware('auth')->group(function () {
             Route::patch('/update', [ProfileController::class, 'update'])->name('management.profile.update');
             Route::patch('/change-image', [ProfileController::class, 'changeImage'])->name('management.profile.changeImage');
             Route::put('/change-password', [ProfileController::class, 'changePassword'])->name('management.profile.changePassword');
+        });
+
+        Route::prefix('manage-booking')->group(function () {
+            Route::get('/', [ManageBookingController::class, 'index'])->name('management.manage-booking.index');
+            Route::post('/table', [ManageBookingController::class, 'table'])->name('management.manage-booking.table');
+            Route::post('/store', [ManageBookingController::class, 'store'])->name('management.manage-booking.store');
+            Route::post('/delete', [ManageBookingController::class, 'delete'])->name('management.manage-booking.delete');
+            Route::post('edit', [ManageBookingController::class, 'edit'])->name('management.manage-booking.edit');
+            Route::post('update', [ManageBookingController::class, 'update'])->name('management.manage-booking.update');
         });
     });
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
