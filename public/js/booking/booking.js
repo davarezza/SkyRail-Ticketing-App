@@ -197,9 +197,9 @@ const counts = {
 };
 
 const limits = {
-    adult: { min: 1, max: 4 },
-    child: { min: 0, max: 2 },
-    infant: { min: 0, max: 2 }
+    adult: { min: 1, max: 3 },
+    child: { min: 0, max: 1 },
+    infant: { min: 0, max: 1 }
 };
 
 function updatePassengerSummary() {

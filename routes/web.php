@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\BookingPassengerController;
 use App\Http\Controllers\Management\RoleController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Master\DestinationController;
@@ -35,6 +36,10 @@ Route::prefix('booking')->group(function () {
     Route::get('/', [BookingController::class, 'index'])->name('booking.page');
     Route::get('{id}/detail', [BookingController::class, 'detail'])->name('booking.detail');
     Route::get('detail-facilities/{id}', [BookingController::class, 'detailFacilities'])->name('master.transportation.detail-facilities');
+});
+
+Route::prefix('booking-passenger')->group(function () {
+    Route::get('/{id}', [BookingPassengerController::class, 'detail'])->name('booking-passenger.detail');
 });
 
 Route::middleware('auth')->group(function () {

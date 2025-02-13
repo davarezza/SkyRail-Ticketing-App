@@ -63,6 +63,9 @@
                     </li>
                 </ul>
             </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link"><i class='bx bxs-book'></i> Booking Management</a>
+            </li>
 
             <li class="sidebar-header">Operation</li>
             <li class="sidebar-item">

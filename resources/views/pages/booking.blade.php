@@ -10,7 +10,7 @@
         display: none;
     }
     .gradient-bg {
-        background: linear-gradient(135deg, #4ade80, #22c55e);
+        background: linear-gradient(135deg, #84abe9, #b0c7f5);
     }
 </style>
 @endpush
@@ -18,7 +18,7 @@
 @section('container') <br><br><br>
 <div class="container mx-auto p-4 md:p-6">
     <!-- Search Section -->
-    <div class="shadow-lg rounded-lg p-4 md:p-6 mb-6 bg-white">
+    <div class="rounded-lg shadow-lg p-4 mb-4 border-2 border-gray-200/50 backdrop-blur-sm">
         <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
             <div class="relative w-full md:flex-1">
                 <input
@@ -70,7 +70,7 @@
     </div>
     
     <!-- Date List Section -->
-    <div class="bg-white shadow-lg rounded-lg p-4 md:p-6 mb-6">
+    <div class="rounded-lg shadow-lg p-4 mb-4 border-2 border-gray-200/50 backdrop-blur-sm">
         <div class="relative">
             <div class="flex space-x-2 overflow-x-auto snap-x snap-mandatory scroll-smooth py-2 no-scrollbar">
                 @foreach (range(0, 30) as $i)
@@ -89,7 +89,7 @@
 
     <!-- Flight Route Section -->
     @foreach ($booking as $book)
-    <div class="bg-white shadow-lg rounded-lg p-4 md:p-6 mb-6 cursor-pointer transition-all duration-300 hover:shadow-xl hover:bg-gray-50" onclick="window.location.href='{{ route('booking.detail', $book->id) }}';">
+    <div class="rounded-lg shadow-lg p-4 mb-4 border-2 border-gray-200/50 backdrop-blur-sm cursor-pointer" onclick="window.location.href='{{ route('booking.detail', $book->id) }}';">
             <div class="flex flex-col md:flex-row items-center justify-between">
                 <div class="flex items-center space-x-4">
                     <img src="{{ asset('assets/img/transport_logo/' . $book->transport_logo) }}" alt="Batik Air" class="w-12 h-12 rounded-full">

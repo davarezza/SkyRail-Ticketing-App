@@ -49,7 +49,7 @@
                 <h1 id="all-city" class="text-xl font-bold text-gray-900">Jakarta → Surabaya</h1>
             </div>
             <div class="mb-6 space-y-4">
-                <h2 class="text-lg font-semibold text-gray-800">Price</h2>
+                <h2 class="text-base font-semibold text-gray-800">Price</h2>
                 <div class="space-y-3" id="passenger-prices">
 
                 </div>                
@@ -57,7 +57,7 @@
             <hr class="border-gray-300 my-2">
     
             <div class="mb-6 space-y-4">
-                <h2 class="text-lg font-semibold text-gray-800">Other Charges</h2>
+                <h2 class="text-base font-semibold text-gray-800">Other Charges</h2>
                 <div class="space-y-3">
                     <div class="flex justify-between items-center">
                         <div class="flex items-center space-x-3">

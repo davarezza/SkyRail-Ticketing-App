@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en" data-bs-theme="light">
 
 <head>
     <meta charset="utf-8">
@@ -82,10 +82,6 @@
                     @yield('container')
                 </div>
             </main>
-            <a href="#" class="theme-toggle">
-                <i class='bx bxs-moon' ></i>
-                <i class='bx bxs-sun' ></i>
-            </a>
             <footer class="footer">
                 <div class="container-fluid">
                     <div class="row text-muted">

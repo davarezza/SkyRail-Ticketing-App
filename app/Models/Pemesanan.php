@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Core\BaseModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Pemesanan extends Model
+class Pemesanan extends BaseModel
 {
     use HasFactory;
 
@@ -22,6 +22,7 @@ class Pemesanan extends Model
         'jam_check_in',
         'total_bayar',
         'id_petugas',
+        'status',
     ];
 
     public function penumpang()
@@ -37,5 +38,10 @@ class Pemesanan extends Model
     public function petugas()
     {
         return $this->belongsTo(Petugas::class, 'id_petugas', 'id_petugas');
+    }
+
+    public function pemesananPenumpangs()
+    {
+        return $this->hasMany(PemesananPenumpang::class, 'id_pemesanan', 'id_pemesanan');
     }
 }
