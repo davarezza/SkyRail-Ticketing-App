@@ -37,6 +37,7 @@ Route::prefix('booking')->group(function () {
     Route::get('/', [BookingController::class, 'index'])->name('booking.page');
     Route::get('{id}/detail', [BookingController::class, 'detail'])->name('booking.detail');
     Route::get('detail-facilities/{id}', [BookingController::class, 'detailFacilities'])->name('master.transportation.detail-facilities');
+    Route::post('/first-booking', [BookingController::class, 'firstBooking'])->name('booking.first-booking');
 });
 
 Route::prefix('booking-passenger')->group(function () {

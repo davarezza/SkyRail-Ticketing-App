@@ -55,6 +55,44 @@
             </div>
         </div>        
     </div>
-    {{-- Chart Element --}}
-    
+    <div class="row my-3">
+        <div class="col-12 col-md-6 d-flex">
+            <div class="card flex-fill border-0 w-100">
+                <div class="card-body py-4">
+                    <h5 class="mb-3">Total Revenue (Last 12 Months)</h5>
+                    <div id="revenueChart" class="chart-container"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 d-flex">
+            <div class="card flex-fill border-0 w-100">
+                <div class="card-body py-4">
+                    <h5 class="mb-3">Ticket Sales per Route</h5>
+                    <div id="ticketSalesChart" class="chart-container"></div>
+                </div>
+            </div>
+        </div>      
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6 d-flex">
+            <div class="card flex-fill border-0 w-100">
+                <div class="card-body py-4">
+                    <h5 class="mb-3">Ticket Class Distribution</h5>
+                    <div id="ticketClassChart" class="chart-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 d-flex">
+            <div class="card flex-fill border-0 w-100">
+                <div class="card-body py-4">
+                    <h5 class="mb-3">Passenger Age Distribution</h5>
+                    <div id="passengerAgeChart" class="chart-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+@push('scripts')
+    <script src="{!! asset('js/management/dashboard.js') !!}?v={{ time() }}"></script>
+@endpush

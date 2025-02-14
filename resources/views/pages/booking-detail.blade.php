@@ -223,7 +223,22 @@
                         data-child-discount="0.75"
                         data-infant-discount="0.1">
                     </div>
-                    <form action="{{ route('booking-passenger.detail', $booking->id) }}" method="POST" class="flex items-center gap-2">
+                    <form action="{{ route('booking.first-booking') }}" method="POST" class="flex items-center gap-2">
+                        @csrf
+                        <div class="block">
+                         <input type="text" name="objective_city" id="objective_city" value="{{ $booking->objective_city }}" class="rounded-lg border border-gray-300">
+                         <input type="text" name="departure_city" id="departure_city" value="{{ $booking->departure_city }}" class="rounded-lg border border-gray-300">
+                         <input type="text" name="objective_airport" id="objective_airport" value="{{ $booking->objective_airport }}" class="rounded-lg border border-gray-300">
+                         <input type="text" name="departure_airport" id="departure_airport" value="{{ $booking->departure_airport }}" class="rounded-lg border border-gray-300">
+                         <input type="text" name="booking_place" id="booking_place" value="Online" class="rounded-lg border border-gray-300">
+                         {{-- <input type="text" name="booking_date" id="booking_date" value="{{ $booking->booking_date }}" class="rounded-lg border border-gray-300"> isi lewat database --}} 
+                         {{-- <input type="text" name="booking_code" id="booking_code" value="{{ $booking->booking_code }}" class="rounded-lg border border-gray-300"> isi lewat database --}}
+                         {{-- <input type="text" name="passenger_id" id="passenger_id" value="{{ $booking->passenger_id }}" class="rounded-lg border border-gray-300"> get id from login user --}}
+                         <input type="text" name="id_rute" id="id_rute" value="{{ $booking->id }}" class="rounded-lg border border-gray-300">
+                         <input type="text" name="total_price_input" id="total_price_input" class="rounded-lg border border-gray-300">
+                         <input type="text" name="departure_date" id="departure_date" value="{{ $booking->departure_date }}" class="rounded-lg border border-gray-300">
+                         {{-- <input type="text" name="status" id="status" value="{{ $booking->status }}" class="rounded-lg border border-gray-300"> set to draft --}}
+                        </div>                    
                         <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
                             Next
                         </button>

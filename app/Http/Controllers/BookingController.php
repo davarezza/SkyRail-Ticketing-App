@@ -23,6 +23,13 @@ class BookingController extends Controller
         ]);
     }
 
+    public function firstBooking(Request $request)
+    {
+        $opr = $this->service->firstBooking($request);
+        
+        return $opr;
+    }
+
     public function detail($id)
     {
         $booking = TravelRouteView::find($id);

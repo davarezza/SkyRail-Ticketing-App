@@ -238,6 +238,7 @@ function updateTotalPrice() {
     const total = subtotal + tax;
 
     document.getElementById('total-price').textContent = `IDR ${total.toLocaleString()}`;
+    document.getElementById('total_price_input').value = total;
 }
 
 function updateCount(type, action) {

@@ -27,6 +27,12 @@ class BookingRepository extends BaseRepository
         return $this->model;
     }
 
+    public function firstBooking($request){
+        $opr = $this->model->create($request);
+
+        return $opr;
+    }
+
     public function detailFacilities($request){
         $opr = $this->modelTravelRoute->find($request->id);
 

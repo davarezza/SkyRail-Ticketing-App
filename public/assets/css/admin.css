@@ -5,6 +5,24 @@
     box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+}
+::-webkit-scrollbar-button {
+    display: none;
+}
+
 body {
     overflow-x: hidden;
     font-family: 'Poppins', sans-serif;
@@ -30,10 +48,9 @@ h4 {
 }
 
 .wrapper {
-    min-height: 100vh;
     display: flex;
-    width: 100%;
-    align-items: stretch;
+    height: 100vh;
+    overflow: hidden;
 }
 
 #sidebar {
@@ -41,18 +58,25 @@ h4 {
     min-width: 264px;
     background: var(--bs-dark);
     transition: all 0.35s ease-in-out;
+    height: 100vh;
+    overflow-y: auto;
+    position: sticky;
+    top: 0;
 }
 
 .main {
     flex: 1;
-    min-width: 0;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
     overflow: hidden;
-    width: 100%;
     background: #ede5e5;
-    transition: all 0.35s ease-in-out;
+}
+
+.content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    height: calc(100vh - 60px);
 }
 
 /* Mobile styles */
