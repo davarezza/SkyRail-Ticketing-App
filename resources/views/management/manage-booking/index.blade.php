@@ -40,7 +40,6 @@
                                     <th>Route</th>
                                     <th>Transport Name</th>
                                     <th>Total Price</th>
-                                    <th>Booking Date</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>

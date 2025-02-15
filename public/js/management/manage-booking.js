@@ -69,12 +69,6 @@ initTableManageBooking = () => {
                     className: "align-middle",
                 },
                 {
-                    data: "booking_date",
-                    searchable: true,
-                    orderable: false,
-                    className: "align-middle",
-                },
-                {
                     data: "id",
                     searchable: false,
                     orderable: false,
@@ -107,13 +101,13 @@ initTableManageBooking = () => {
                 {
                     targets: 3,
                     render: function (data, type, full, meta) {
-                        return transport_name;
+                        return full.transport_name;
                     },
                 },                                       
                 {
                     targets: 4,
                     render: function (data, type, full, meta) {
-                        return full.total_payment;
+                        return 'Rp ' + new Intl.NumberFormat('id-ID', { minimumFractionDigits: 0 }).format(full.total_payment);
                     },
                 },             
                 {

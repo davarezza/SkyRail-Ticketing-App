@@ -6,7 +6,7 @@
             <ul class="hidden md:flex items-center gap-8">
                 <li><a href="{{ route('home') }}" class="font-medium {{ request()->routeIs('home') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600' }} transition-colors duration-300">Home</a></li>
                 <li><a href="#" class="font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">About</a></li>
-                <li><a href="{{ route('booking.page') }}" class="font-medium {{ request()->routeIs('booking.page') || request()->is('booking/*') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600' }} transition-colors duration-300">Booking</a></li>
+                <li><a href="{{ route('booking.page') }}" class="font-medium {{ request()->routeIs('booking.page') || request()->is('booking/*') || request()->is('booking-passenger/*') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600' }} transition-colors duration-300">Booking</a></li>
                 <li><a href="#" class="font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Destination</a></li>
             </ul>
 
@@ -47,7 +47,7 @@
             <div class="py-4 space-y-4">
                 <a href="{{ route('home') }}" class="block font-medium {{ request()->routeIs('home') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600' }} transition-colors duration-300">Home</a>
                 <a href="#" class="block font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">About</a>
-                <a href="{{ route('booking.page') }}" class="block font-medium {{ request()->routeIs('booking.page') || request()->is('booking/*') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600' }} transition-colors duration-300">Booking</a>
+                <a href="{{ route('booking.page') }}" class="block font-medium {{ request()->routeIs('booking.page') || request()->is('booking/*') || request()->is('booking-passenger/*') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600' }} transition-colors duration-300">Booking</a>
                 <a href="#" class="block font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Destination</a>
                 @auth
                     <div class="border-t pt-4 pb-2">

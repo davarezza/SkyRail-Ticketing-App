@@ -34,7 +34,7 @@ class BookingService
             $bookingCode = "$departureAirport$objectiveAirport-$departureCity$objectiveCity-$bookingDateDay-$randomCode";
     
             $dataBooking = [
-                'id_penumpang' => Auth::id(),
+                'id_penumpang' => Auth::user()->penumpang->id_penumpang ?? null,
                 'tujuan' => $request->objective_city,
                 'kode_pemesanan' => $bookingCode,
                 'tanggal_pemesanan' => $bookingDate,
@@ -44,12 +44,41 @@ class BookingService
                 'total_bayar' => $request->total_price_input,
                 'status' => 'draft',
             ];
-            dd($dataBooking);
     
             $opr = $this->repository->firstBooking($dataBooking);
+            $booking_id = $opr->id_pemesanan;
+
+            $basePrice = $request->real_price;
+            $taxRate = 0.11;
+
+            $passengerPricing = [
+                'adult' => $basePrice,
+                'child' => $basePrice * 0.75,
+                'infant' => $basePrice * 0.10,
+            ];
+            $passengerTypes = [
+                'adult' => $request->adult_count,
+                'child' => $request->child_count,
+                'infant' => $request->infant_count,
+            ];
+    
+            $passengerData = [];
+            foreach ($passengerTypes as $type => $count) {
+                for ($i = 0; $i < $count; $i++) {
+                    $priceWithTax = (int) round($passengerPricing[$type] + ($passengerPricing[$type] * $taxRate));
+                    $passengerData[] = [
+                        'id_pemesanan' => $booking_id,
+                        'tipe' => $type,
+                        'harga' => $priceWithTax,
+                    ];
+                }
+            }
+
+            $opr = $this->repository->firstBookingPassenger($passengerData);
     
             DB::commit();
-            return BaseResponse::created($opr);
+            session()->flash('success', 'Booking has been submitted, please fill in passenger data');
+            return redirect(route('booking-passenger.detail', ['id' => $booking_id]));
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([

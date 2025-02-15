@@ -239,6 +239,9 @@ function updateTotalPrice() {
 
     document.getElementById('total-price').textContent = `IDR ${total.toLocaleString()}`;
     document.getElementById('total_price_input').value = total;
+    document.getElementById('adult_count').value = counts.adult;
+    document.getElementById('child_count').value = counts.child;
+    document.getElementById('infant_count').value = counts.infant;
 }
 
 function updateCount(type, action) {
