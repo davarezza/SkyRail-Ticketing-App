@@ -16,4 +16,11 @@ class MainController extends Controller
             'destination' => $destination,
         ]);
     }
+
+    public function about()
+    {
+        return view('about', [
+            'active' => 'about',
+        ]);
+    }
 }

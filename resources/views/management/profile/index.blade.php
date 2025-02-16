@@ -41,7 +41,7 @@
     @endif
     <div class="grid gap-6 md:grid-cols-2">
         <!-- Avatar Section -->
-        <div class="bg-white rounded-lg shadow-md">
+        <div class="bg-white rounded-lg shadow-lg border-2 border-gray-200/50 backdrop-blur-sm">
             <div class="p-4 flex flex-col justify-center items-center">
                 <h2 class="text-xl font-semibold mb-4">Profile Picture</h2>
                 <div class="flex flex-col items-center my-12">
@@ -71,7 +71,7 @@
         </div>
 
         <!-- Personal Info Section -->
-        <div class="bg-white rounded-lg shadow-md">
+        <div class="bg-white rounded-lg shadow-lg border-2 border-gray-200/50 backdrop-blur-sm">
             <div class="p-4">
                 <h2 class="text-xl font-semibold mb-4">Personal Information</h2>
                 <form action="{{ route('management.profile.update') }}" method="POST" class="space-y-4">
@@ -157,7 +157,7 @@
         </div>        
 
         <!-- Password Change Section -->
-        <div class="bg-white rounded-lg shadow-md md:col-span-2">
+        <div class="bg-white rounded-lg shadow-lg border-2 border-gray-200/50 backdrop-blur-sm md:col-span-2">
             <div class="p-4">
                 <h2 class="text-xl font-semibold mb-4">Change Password</h2>
                 <form action="{{ route('management.profile.changePassword') }}" method="POST" class="space-y-4">

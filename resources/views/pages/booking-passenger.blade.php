@@ -73,7 +73,7 @@
                     <div class="bg-gray-50 rounded-lg p-4 mb-4">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center space-x-4">
-                                <img src="/api/placeholder/32/32" class="rounded-full">
+                                <img src="{{ asset('assets/img/transport_logo/' . $route->transport_logo) }}" class="w-12 h-12 shadow-sm rounded-full">
                                 <div>
                                     <div class="text-xl font-bold">{{ \Carbon\Carbon::createFromFormat('H:i:s', $route->departure_time)->format('H:i') }}</div>
                                     <div class="text-gray-600 text-center">{{ strtoupper(substr($route->departure_city, 0, 3)) }}</div>
