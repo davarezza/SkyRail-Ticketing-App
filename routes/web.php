@@ -6,6 +6,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BookingPassengerController;
 use App\Http\Controllers\Management\RoleController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardUserController;
 use App\Http\Controllers\Master\DestinationController;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\Management\ManageBookingController;
@@ -38,11 +39,12 @@ Route::prefix('booking')->group(function () {
     Route::get('/', [BookingController::class, 'index'])->name('booking.page');
     Route::get('{id}/detail', [BookingController::class, 'detail'])->name('booking.detail');
     Route::get('detail-facilities/{id}', [BookingController::class, 'detailFacilities'])->name('master.transportation.detail-facilities');
-    Route::post('/first-booking', [BookingController::class, 'firstBooking'])->name('booking.first-booking');
+    Route::post('/first-booking', [BookingController::class, 'firstBooking'])->name('booking.first-booking')->middleware('auth');
 });
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/user/dashboard', [DashboardUserController::class, 'index'])->name('dashboard-user.index');
     Route::prefix('master')->group(function () {
         Route::prefix('/transportation')->group(function () {
             Route::get('/', [TransportationController::class, 'index'])->name('master.transportation.index');

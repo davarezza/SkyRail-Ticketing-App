@@ -29,8 +29,8 @@
                 <img src="{{ asset('assets/img/about-1.jpg') }}" alt="Airplane taking off"
                      class="w-full rounded-lg shadow-lg">
                 
-                <div class="absolute -bottom-8 -left-8 bg-white rounded-full p-2 shadow-md">
-                    <div class="w-24 h-24 flex items-center justify-center border border-gray-300 rounded-full">
+                <div class="absolute -bottom-6 -left-8 bg-white rounded-full p-2">
+                    <div class="w-28 h-28 flex items-center justify-center border rounded-full">
                         <img src="{{ asset('assets/img/logo.png') }}" class="rounded-full">
                     </div>
                 </div>
@@ -159,7 +159,7 @@
                     class="w-full h-full object-cover"
                 >
                 <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="w-16 h-16 md:w-20 md:h-20 bg-blue-400 rounded-full flex items-center justify-center cursor-pointer hover:bg-yellow-500 transition-colors duration-300">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-blue-400 rounded-full flex items-center justify-center cursor-pointer hover:bg-blue-500 transition-colors duration-300">
                         <svg class="w-8 h-8 md:w-10 md:h-10 text-white" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M8 5v14l11-7z"/>
                         </svg>
@@ -183,19 +183,19 @@
 
 @push('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const videoThumbnail = document.querySelector('.video-thumbnail');
-        const youtubeIframe = document.querySelector('.youtube-iframe');
-        const iframe = youtubeIframe.querySelector('iframe');
+    $(function() {
+        const $videoThumbnail = $('.video-thumbnail');
+        const $youtubeIframe = $('.youtube-iframe');
+        const $iframe = $youtubeIframe.find('iframe');
         
         const videoId = 'OkORKVBajLA';
         
-        videoThumbnail.addEventListener('click', function() {
-            iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        $videoThumbnail.on('click', function() {
+            $iframe.attr('src', `https://www.youtube.com/embed/${videoId}?autoplay=1`);
             
-            videoThumbnail.classList.add('hidden');
-            youtubeIframe.classList.remove('hidden');
+            $videoThumbnail.addClass('hidden');
+            $youtubeIframe.removeClass('hidden');
         });
     });
-    </script>
+</script>
 @endpush

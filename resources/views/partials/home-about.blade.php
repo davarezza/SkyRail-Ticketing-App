@@ -46,20 +46,16 @@
                 </div>
             </div>
             <button class="sm:w-fit w-full group px-3.5 py-2 bg-indigo-50 hover:bg-indigo-100 rounded-lg shadow-[0px_1px_2px_0px_rgba(16,_24,_40,_0.05)] transition-all duration-700 ease-in-out justify-center items-center flex">
-                <span class="px-1.5 text-indigo-600 text-sm font-medium leading-6 group-hover:-translate-x-0.5 transition-all duration-700 ease-in-out">
+                <a href="{{ route('about') }}" class="px-1.5 text-indigo-600 text-sm font-medium leading-6 group-hover:-translate-x-0.5 transition-all duration-700 ease-in-out">
                     Learn More
-                </span>
-                <svg class="group-hover:translate-x-0.5 transition-all duration-700 ease-in-out"
-                    xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <path d="M6.75265 4.49658L11.2528 8.99677L6.75 13.4996" stroke="#4F46E5" stroke-width="1.6"
-                        stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+                </a>
+                <i class="fa-solid fa-arrow-right text-indigo-400 group-hover:translate-x-0.5 transition-all duration-700 ease-in-out"></i>
             </button>
         </div>
         <div class="w-full lg:justify-start justify-center items-start flex">
             <div class="sm:w-[564px] w-full sm:h-[646px] h-full sm:bg-gray-100 rounded-3xl sm:border border-gray-200 relative">
                 <img class="sm:mt-5 sm:ml-5 w-full h-full rounded-3xl object-cover"
-                    src="https://pagedone.io/asset/uploads/1717742431.png" alt="About Us" />
+                    src="{{ asset('assets/img/about-3.jpg') }}" alt="About Us" />
             </div>
         </div>
     </div>

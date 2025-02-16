@@ -21,7 +21,11 @@
                         @endif
                     </button>                        
                     <div class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300" id="profile-dropdown">
-                        <a href="{{ route('dashboard.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
+                        @can('View User Dashboard')
+                            <a href="{{ route('dashboard-user.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
+                        @else
+                            <a href="{{ route('dashboard.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
+                        @endcan
                         @can('Access Profile')
                         <a href="{{ route('management.profile.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Profile</a>
                         @endcan
