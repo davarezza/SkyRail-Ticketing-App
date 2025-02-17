@@ -107,27 +107,26 @@
             </div>
         </div>
         <div class="grid grid-cols-1 gap-6 mt-12">
-            <!-- Left Column - Booking Form -->
             <div class="lg:col-span-2">
                 <h1 class="text-2xl font-bold text-gray-900 mb-4">Passenger Detail</h1>
-                <form action="#" method="POST">
+                <form id="bookingForm" action="{{ route('booking.second-booking') }}" method="POST">
                     @csrf
+                    <input type="hidden" name="booking_id" id="booking_id" value="{{ $booking->id }}">
                     <div id="passenger-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+
+                    <div x-data="{ show: false, message: '' }" x-show="show" x-cloak
+                        class="bg-red-100 border-l-4 border-red-500 text-red-700 px-4 py-3 my-4 rounded-md shadow-md flex justify-between items-center">
+                        <span x-text="message"></span>
+                        <button type="button" @click="show = false" class="text-red-700 hover:text-red-900">
+                            <i class="fas fa-times h-5 w-5"></i>
+                        </button>
+                    </div>
+                
                     <div class="rounded-lg shadow-lg p-4 mb-4 border-2 border-gray-200/50 backdrop-blur-sm mt-8">
                         <div class="flex justify-between items-center mb-6">
                             <span class="text-gray-600 text-lg">Total Payment</span>
                             <div class="flex items-center text-red-500 font-bold text-xl">
                                 IDR {{ number_format($booking->total_payment, 0, ',', '.') }}
-                                <svg xmlns="http://www.w3.org/2000/svg" 
-                                     class="h-5 w-5 ml-1" 
-                                     fill="none" 
-                                     viewBox="0 0 24 24" 
-                                     stroke="currentColor">
-                                    <path stroke-linecap="round" 
-                                          stroke-linejoin="round" 
-                                          stroke-width="2" 
-                                          d="M19 9l-7 7-7-7"/>
-                                </svg>
                             </div>
                         </div>
                         <div class="border-b border-gray-200 mb-6"></div>
@@ -135,15 +134,13 @@
                             Continue Payment
                         </button>
                     </div>
-                </form>                
+                </form>                           
             </div>
         </div>
     </div>
 @endsection
 
 @push('scripts')
-<script>
-    let passengers = @json($booking_passenger);
-</script>
+<script>let passengers = @json($booking_passenger);</script>
 <script src="{!! asset('js/booking/booking-passenger.js') !!}?v={{ time() }}"></script>
 @endpush

@@ -70,6 +70,8 @@ class BookingService
                         'id_pemesanan' => $booking_id,
                         'tipe' => $type,
                         'harga' => $priceWithTax,
+                        'created_at' => now()->setTimezone('Asia/Jakarta'),
+                        'updated_at' => now()->setTimezone('Asia/Jakarta'),
                     ];
                 }
             }
@@ -85,6 +87,25 @@ class BookingService
                 'success' => false,
                 'message' => $e->getMessage(),
             ], 422);
+        }
+    }
+    
+    public function secondBooking($request) {
+        DB::beginTransaction();
+        try {
+            $passengerData = $request->input('passengers', []);
+            $bookingId = $request->input('booking_id');
+    
+            $this->repository->secondBooking($passengerData);
+            $this->repository->updateBookingStatus($bookingId, 'select_seat');
+    
+            DB::commit();
+            session()->flash('success', 'Passenger data has been updated successfully.');
+    
+            return redirect(route('booking-passenger.booking-seat', ['id' => $bookingId]));
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }    
 

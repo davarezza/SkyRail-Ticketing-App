@@ -22,4 +22,14 @@ class BookingPassengerController extends Controller
             'booking_passenger' => $booking_passenger
         ]);
     }
+
+    public function bookingSeat($id)
+    {
+        $booking = BookingView::find($id);
+        $booking_passenger = BookingPassengerView::where('booking_id', $booking->id)->get();
+
+        return view('pages.booking-seat', [
+            'booking_passenger' => $booking_passenger
+        ]);
+    }
 }

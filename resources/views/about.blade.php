@@ -27,7 +27,7 @@
             
             <div class="relative">
                 <img src="{{ asset('assets/img/about-1.jpg') }}" alt="Airplane taking off"
-                     class="w-full rounded-lg shadow-lg">
+                     class="w-full rounded-lg">
                 
                 <div class="absolute -bottom-6 -left-8 bg-white rounded-full p-2">
                     <div class="w-28 h-28 flex items-center justify-center border rounded-full">

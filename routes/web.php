@@ -40,6 +40,7 @@ Route::prefix('booking')->group(function () {
     Route::get('{id}/detail', [BookingController::class, 'detail'])->name('booking.detail');
     Route::get('detail-facilities/{id}', [BookingController::class, 'detailFacilities'])->name('master.transportation.detail-facilities');
     Route::post('/first-booking', [BookingController::class, 'firstBooking'])->name('booking.first-booking')->middleware('auth');
+    Route::post('/second-booking', [BookingController::class, 'secondBooking'])->name('booking.second-booking')->middleware('auth');
 });
 
 Route::middleware('auth')->group(function () {
@@ -146,6 +147,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('booking-passenger')->group(function () {
         Route::get('/{id}', [BookingPassengerController::class, 'detail'])->name('booking-passenger.detail');
+        Route::get('/select-seat/{id}', [BookingPassengerController::class, 'bookingSeat'])->name('booking-passenger.booking-seat');
     });
 
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');

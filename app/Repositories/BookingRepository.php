@@ -35,11 +35,28 @@ class BookingRepository extends BaseRepository
         return $opr;
     }
 
+    public function secondBooking($passengerData){
+        foreach ($passengerData as $passenger) {
+            $this->modelBookingPassenger
+                ->where('id', $passenger['booking_passenger_id'])
+                ->update([
+                    'nama' => $passenger['name'],
+                    'tanggal_lahir' => $passenger['birth_date'] ?? null,
+                    'updated_at' => now()->setTimezone('Asia/Jakarta')
+                ]);
+        }
+    
+        return true;
+    }
+    
+    public function updateBookingStatus($bookingId, $status) {
+        $this->model->where('id_pemesanan', $bookingId)->update([
+            'status' => $status,
+            'updated_at' => now()
+        ]);
+    }
+
     public function firstBookingPassenger($passengerData){
-        // foreach ($passengerData as $data) {
-        //     $this->modelBookingPassenger->create($data);
-        // }
-        // return true;
         return $this->modelBookingPassenger->insert($passengerData);
     }
 

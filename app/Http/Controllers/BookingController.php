@@ -30,6 +30,11 @@ class BookingController extends Controller
         return $opr;
     }
 
+    public function secondBooking(Request $request)
+    {
+        return $this->service->secondBooking($request);
+    }    
+
     public function detail($id)
     {
         $booking = TravelRouteView::find($id);

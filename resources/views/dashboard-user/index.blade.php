@@ -45,7 +45,7 @@
                                 <p class="text-gray-600">{{ $user->email }}</p>
                             </div>
                         </div>
-                        <a href="#" class="text-blue-600 font-medium hover:text-blue-700">To Account Center</a>
+                        <a href="{{ route('management.profile.index') }}" class="text-blue-600 font-medium hover:text-blue-700">To Account Center</a>
                     </div>
                 </div>
             </div>
