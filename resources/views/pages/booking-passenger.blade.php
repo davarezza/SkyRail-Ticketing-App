@@ -141,6 +141,8 @@
 @endsection
 
 @push('scripts')
-<script>let passengers = @json($booking_passenger);</script>
+<script>
+    let passengers = @json($booking_passenger);
+</script>
 <script src="{!! asset('js/booking/booking-passenger.js') !!}?v={{ time() }}"></script>
 @endpush

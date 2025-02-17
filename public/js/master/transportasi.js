@@ -417,7 +417,7 @@ detailTransport = (id) => {
             $('#detail-code').text(response.detail.kode);
             $('#detail-type').text(response.detail.type_name);
             $('#detail-class').text(response.detail.class_name);
-            $('#detail-total-seat').text(response.detail.jumlah_kursi);
+            $('#detail-total-seat').text(response.detail.total_seat);
             $('#detail-description').text(response.detail.keterangan);
             toggleDetailTransport(true);
         },

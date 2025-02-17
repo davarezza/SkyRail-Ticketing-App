@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ViewModels\BookingPassengerView;
 use App\Models\ViewModels\BookingView;
+use App\Models\ViewModels\TransportationView;
 use App\Models\ViewModels\TravelRouteView;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class BookingPassengerController extends Controller
     {
         $booking = BookingView::find($id);
         $route = TravelRouteView::find($booking->route_id);
-
+        
         $booking_passenger = BookingPassengerView::where('booking_id', $booking->id)->get();
     
         return view('pages.booking-passenger', [
@@ -26,10 +27,16 @@ class BookingPassengerController extends Controller
     public function bookingSeat($id)
     {
         $booking = BookingView::find($id);
+        $route = TravelRouteView::find($booking->route_id);
+        $transport = TransportationView::find($route->id_transportasi);
+
         $booking_passenger = BookingPassengerView::where('booking_id', $booking->id)->get();
 
         return view('pages.booking-seat', [
-            'booking_passenger' => $booking_passenger
+            'route' => $route,
+            'booking' => $booking,
+            'transport' => $transport,
+            'booking_passenger' => $booking_passenger,
         ]);
     }
 }
