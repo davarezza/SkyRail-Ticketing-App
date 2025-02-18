@@ -9,11 +9,15 @@ class PemesananPenumpang extends BaseModel
 {
     use HasFactory;
 
+    protected $primaryKey = 'id';
     protected $fillable = [
         'id_pemesanan',
         'nama',
         'tipe',
         'tanggal_lahir',
+        'kode_kursi',
+        'id_rute',
+        'id_transportasi',
         'harga',
     ];
 

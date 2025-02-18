@@ -15,7 +15,6 @@ class Pemesanan extends BaseModel
         'tanggal_pemesanan',
         'tempat_pemesanan',
         'id_penumpang',
-        'kode_kursi',
         'id_rute',
         'tujuan',
         'tanggal_berangkat',

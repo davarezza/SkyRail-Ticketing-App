@@ -38,9 +38,11 @@ Route::get('/about', [MainController::class, 'about'])->name('about');
 Route::prefix('booking')->group(function () {
     Route::get('/', [BookingController::class, 'index'])->name('booking.page');
     Route::get('{id}/detail', [BookingController::class, 'detail'])->name('booking.detail');
+    Route::get('payment/{id}', [BookingController::class, 'payment'])->name('booking.payment');
     Route::get('detail-facilities/{id}', [BookingController::class, 'detailFacilities'])->name('master.transportation.detail-facilities');
     Route::post('/first-booking', [BookingController::class, 'firstBooking'])->name('booking.first-booking')->middleware('auth');
     Route::post('/second-booking', [BookingController::class, 'secondBooking'])->name('booking.second-booking')->middleware('auth');
+    Route::post('/third-booking', [BookingController::class, 'thirdBooking'])->name('booking.third-booking')->middleware('auth');
 });
 
 Route::middleware('auth')->group(function () {

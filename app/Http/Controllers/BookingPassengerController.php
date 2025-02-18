@@ -29,14 +29,20 @@ class BookingPassengerController extends Controller
         $booking = BookingView::find($id);
         $route = TravelRouteView::find($booking->route_id);
         $transport = TransportationView::find($route->id_transportasi);
-
+    
+        $unavailableSeats = BookingPassengerView::where('id_rute', $route->id)
+                            ->where('id_transportasi', $transport->id)
+                            ->pluck('seat_code')
+                            ->toArray();
+    
         $booking_passenger = BookingPassengerView::where('booking_id', $booking->id)->get();
-
+    
         return view('pages.booking-seat', [
             'route' => $route,
             'booking' => $booking,
             'transport' => $transport,
             'booking_passenger' => $booking_passenger,
+            'unavailableSeats' => $unavailableSeats,
         ]);
-    }
+    }    
 }

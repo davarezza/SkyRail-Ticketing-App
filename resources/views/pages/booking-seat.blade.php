@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    <title>Booking | {{ config('app.name') }}</title>
+    <title>Booking Seat | {{ config('app.name') }}</title>
 @endsection
 
 @push('styles')
@@ -117,7 +117,7 @@
                 </div>
             </div>
         </div>
-
+            
         <div class="bg-white rounded-lg border-2 border-gray-200/50 backdrop-blur-sm shadow-lg p-6">
             <h2 class="text-xl font-semibold mb-6 text-center">Select Your Seat</h2>
         
@@ -141,7 +141,7 @@
                     $totalSeats = $transport->total_seat;
                     $rows = range('A', chr(ord('A') + ceil($totalSeats / 6) - 1));
                     $columns = range(1, 6);
-                    $unavailableSeats = $booking_passenger->pluck('seat_number')->toArray();
+                    $unavailableSeats = $unavailableSeats ?? [];
                 @endphp
         
                 @foreach($rows as $row)
@@ -152,28 +152,40 @@
                                 $isUnavailable = in_array($seatId, $unavailableSeats);
                                 $seatNumber = (ord($row) - 65) * 6 + $col;
                             @endphp
-        
+                
                             @if($seatNumber <= $totalSeats)
-                                <button 
-                                    type="button"
-                                    data-seat="{{ $seatId }}"
-                                    class="seat-btn w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center text-xs sm:text-sm font-medium
-                                        @if($isUnavailable)
-                                            bg-gray-200 cursor-not-allowed
-                                        @else border-2 border-gray-200 hover:border-blue-500 transition-colors duration-200
-                                        @endif"
-                                    @if($isUnavailable) disabled @endif
-                                >
-                                    {{ $seatId }}
-                                </button>
-        
+                            <button 
+                                type="button"
+                                data-seat="{{ $seatId }}"
+                                class="seat-btn w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center text-xs sm:text-sm font-medium
+                                    @if($isUnavailable)
+                                        bg-gray-300 cursor-not-allowed booked-seat
+                                    @else border-2 border-gray-200 hover:border-blue-500 transition-colors duration-200
+                                    @endif"
+                                @if($isUnavailable) disabled @endif
+                            >
+                                {{ $seatId }}
+                            </button>                        
+                
                                 @if($col == 3)
                                     <div class="w-4 sm:w-8"></div>
                                 @endif
                             @endif
                         @endforeach
                     </div>
-                @endforeach
+                @endforeach    
+                <form action="{{ route('booking.third-booking') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="booking_id" value="{{ $booking->id }}">
+                    <input type="hidden" name="route_id" value="{{ $route->id }}">
+                    <input type="hidden" name="transport_id" value="{{ $transport->id }}">
+                    <div id="passenger-container" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+                    <div class="flex justify-center mt-2">
+                        <button type="submit" class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300">
+                            Continue Payment
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>       
     </div>

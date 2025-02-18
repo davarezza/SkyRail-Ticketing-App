@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('title')
-    <title>Booking | {{ config('app.name') }}</title>
+    <title>Booking Passenger | {{ config('app.name') }}</title>
 @endsection
 
 @push('styles')
@@ -131,7 +131,7 @@
                         </div>
                         <div class="border-b border-gray-200 mb-6"></div>
                         <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-4 px-4 rounded-lg transition-colors duration-200">
-                            Continue Payment
+                            Select Seat
                         </button>
                     </div>
                 </form>                           

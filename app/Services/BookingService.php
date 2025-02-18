@@ -109,6 +109,27 @@ class BookingService
         }
     }    
 
+    public function thirdBooking($request) {
+        DB::beginTransaction();
+        try {
+            $passengerData = $request->input('passengers', []);
+            $bookingId = $request->input('booking_id');
+            $routeId = $request->input('route_id');
+            $transportId = $request->input('transport_id');
+    
+            $this->repository->thirdBooking($passengerData, $routeId, $transportId);
+            $this->repository->updateBookingStatus($bookingId, 'waiting_payment');
+     
+            DB::commit();
+            session()->flash('success', 'Passenger seat has been selected successfully.');
+
+            return redirect(route('booking.payment', ['id' => $bookingId]));
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return dd($e->getMessage());
+        }
+    }       
+
     public function detailFacilities($id) {
         $data = [];
         $data['detail'] = $this->modelView->find($id);
