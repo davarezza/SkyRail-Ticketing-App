@@ -43,6 +43,7 @@ Route::prefix('booking')->group(function () {
     Route::post('/first-booking', [BookingController::class, 'firstBooking'])->name('booking.first-booking')->middleware('auth');
     Route::post('/second-booking', [BookingController::class, 'secondBooking'])->name('booking.second-booking')->middleware('auth');
     Route::post('/third-booking', [BookingController::class, 'thirdBooking'])->name('booking.third-booking')->middleware('auth');
+    Route::post('/fourth-booking', [BookingController::class, 'fourthBooking'])->name('booking.fourth-booking')->middleware('auth');
 });
 
 Route::middleware('auth')->group(function () {

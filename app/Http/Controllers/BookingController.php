@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class BookingController extends Controller
 {
     protected $service;
-    
+
     public function __construct()
     {
         $this->service = new BookingService();
@@ -29,24 +29,29 @@ class BookingController extends Controller
     public function firstBooking(Request $request)
     {
         $opr = $this->service->firstBooking($request);
-        
+
         return $opr;
     }
 
     public function secondBooking(Request $request)
     {
         return $this->service->secondBooking($request);
-    }    
+    }
 
     public function thirdBooking(Request $request)
     {
         return $this->service->thirdBooking($request);
-    }    
+    }
+
+    public function fourthBooking(Request $request)
+    {
+        return $this->service->fourthBooking($request);
+    }
 
     public function detail($id)
     {
         $booking = TravelRouteView::find($id);
-    
+
         return view('pages.booking-detail', [
             'booking' => $booking,
         ]);
@@ -67,7 +72,7 @@ class BookingController extends Controller
             'booking_passenger' => $booking_passenger,
         ]);
     }
-    
+
     public function detailFacilities($id)
     {
         $opr = $this->service->detailFacilities($id);

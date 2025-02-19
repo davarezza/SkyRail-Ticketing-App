@@ -45,7 +45,7 @@ class BookingRepository extends BaseRepository
                     'updated_at' => now()->setTimezone('Asia/Jakarta')
                 ]);
         }
-    
+
         return true;
     }
 
@@ -60,10 +60,10 @@ class BookingRepository extends BaseRepository
                     'updated_at' => now()->setTimezone('Asia/Jakarta')
                 ]);
         }
-    
+
         return true;
-    }    
-    
+    }
+
     public function updateBookingStatus($bookingId, $status) {
         $this->model->where('id_pemesanan', $bookingId)->update([
             'status' => $status,
