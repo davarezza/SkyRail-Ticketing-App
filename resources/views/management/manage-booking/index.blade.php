@@ -62,5 +62,6 @@
     <script src="{!! asset('js/management/manage-booking.js') !!}?v={{ time() }}"></script>
     <script>
         const hasVerify        = @can('Verify Manage Booking') true @else false @endcan;
+        const hasDelete        = @can('Delete Manage Booking') true @else false @endcan;
     </script>
 @endpush

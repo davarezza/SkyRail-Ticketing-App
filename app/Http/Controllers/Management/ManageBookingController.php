@@ -75,7 +75,6 @@ class ManageBookingController extends Controller
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
 
-        // Set Headers
         $headers = [
             'No',
             'Code',
@@ -83,31 +82,42 @@ class ManageBookingController extends Controller
             'Departure City',
             'Objective City',
             'Departure Date',
-            'Total Payment',
+            'Transport Name',
+            'Booker Name',
             'Booker Telephone',
             'Booker Email',
-            'Booker Name',
-            'Transport Name',
+            'Total Payment',
             'Status',
         ];
 
-        // Lebar kolom seragam (misal 25 untuk semua kolom)
-        foreach (range('B', 'M') as $columnID) {
-            $sheet->getColumnDimension($columnID)->setWidth(25);
+        $columnWidths = [
+            'C' => 30,
+            'D' => 24,
+            'E' => 26,
+            'F' => 26,
+            'G' => 24,
+            'H' => 30,
+            'I' => 28,
+            'J' => 20,
+            'K' => 35,
+            'L' => 20,
+            'M' => 20,
+        ];
+
+        foreach ($columnWidths as $column => $width) {
+            $sheet->getColumnDimension($column)->setWidth($width);
         }
 
-        // Menulis Header di B1
         $columnLetter = 'B';
         foreach ($headers as $header) {
-            $sheet->setCellValue($columnLetter . '1', $header);
+            $sheet->setCellValue($columnLetter . '2', $header);
             $columnLetter++;
         }
 
-        // Styling Header
         $headerStyle = [
             'fill' => [
                 'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                'startColor' => ['argb' => 'c5e0b3'], // Warna hijau
+                'startColor' => ['argb' => 'c5e0b3'],
             ],
             'font' => [
                 'bold' => true,
@@ -116,31 +126,43 @@ class ManageBookingController extends Controller
                 'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
             ],
         ];
-        $sheet->getStyle('B1:L1')->applyFromArray($headerStyle);
+        $sheet->getStyle('B2:M2')->applyFromArray($headerStyle);
 
-        // Menulis Data Mulai dari B2
-        $rowNumber = 2;
+        $rowNumber = 3;
         foreach ($data as $index => $item) {
+            $statusMapping = [
+                'draft' => 'Draft',
+                'select_seat' => 'Select Seat',
+                'waiting_payment' => 'Waiting Payment',
+                'paid' => 'Paid',
+                'expired' => 'Expired',
+            ];
+            $formattedStatus = $statusMapping[$item->status] ?? ucfirst($item->status);
+
+            $bookingDate = \Carbon\Carbon::parse($item->booking_date)->format('d F Y');
+            $departureDate = \Carbon\Carbon::parse($item->departure_date)->format('d F Y');
+
+            $formattedTotalPayment = 'IDR ' . number_format($item->total_payment, 0, ',', '.');
+
             $sheet->setCellValue('B' . $rowNumber, $index + 1);
             $sheet->setCellValue('C' . $rowNumber, $item->code);
-            $sheet->setCellValue('D' . $rowNumber, $item->booking_date);
+            $sheet->setCellValue('D' . $rowNumber, $bookingDate);
             $sheet->setCellValue('E' . $rowNumber, $item->departure_city);
             $sheet->setCellValue('F' . $rowNumber, $item->objective_city);
-            $sheet->setCellValue('G' . $rowNumber, $item->departure_date);
-            $sheet->setCellValue('H' . $rowNumber, $item->total_payment);
-            $sheet->setCellValue('I' . $rowNumber, $item->booker_telephone);
-            $sheet->setCellValue('J' . $rowNumber, $item->booker_email);
-            $sheet->setCellValue('K' . $rowNumber, $item->booker_name);
-            $sheet->setCellValue('L' . $rowNumber, $item->transport_name);
-            $sheet->setCellValue('M' . $rowNumber, $item->status);
+            $sheet->setCellValue('G' . $rowNumber, $departureDate);
+            $sheet->setCellValue('H' . $rowNumber, $item->transport_name);
+            $sheet->setCellValue('I' . $rowNumber, $item->booker_name);
+            $sheet->setCellValue('J' . $rowNumber, $item->booker_telephone);
+            $sheet->setCellValue('K' . $rowNumber, $item->booker_email);
+            $sheet->setCellValue('L' . $rowNumber, $formattedTotalPayment);
+            $sheet->setCellValue('M' . $rowNumber, $formattedStatus);
+
             $rowNumber++;
         }
 
-        // Pusatkan semua data
-        $sheet->getStyle('B1:M' . ($rowNumber - 1))->getAlignment()
+        $sheet->getStyle('B2:M' . ($rowNumber - 1))->getAlignment()
             ->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
-        // Tambahkan border
         $borderStyle = [
             'borders' => [
                 'allBorders' => [
@@ -149,9 +171,8 @@ class ManageBookingController extends Controller
                 ],
             ],
         ];
-        $sheet->getStyle('B1:M' . ($rowNumber - 1))->applyFromArray($borderStyle);
+        $sheet->getStyle('B2:M' . ($rowNumber - 1))->applyFromArray($borderStyle);
 
-        // Generate File Excel
         $writer = new Xlsx($spreadsheet);
         $response = new StreamedResponse(function () use ($writer) {
             $writer->save('php://output');

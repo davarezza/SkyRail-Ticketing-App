@@ -78,22 +78,35 @@ initTableRole = () => {
                 {
                     targets: 2,
                     render: function (data, type, full, meta) {
-                        var html = `
-                            <div class="d-flex justify-content-center gap-2">
-                                <button class="btn btn-sm btn-icon btn-outline btn-outline-warning" onclick="editRole('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
-                                    <i class="bx bx-pencil"></i>
-                                </button>
-                                <button class="btn btn-sm btn-icon btn-outline btn-outline-danger" onclick="deleteRole('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                        let deleteButton = (![1, 2, 5].includes(full.id))
+                            ? `
+                                <button class="btn btn-sm btn-icon btn-outline btn-outline-danger"
+                                        onclick="deleteRole('${full.id}')"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
                                     <i class="bx bx-trash"></i>
                                 </button>
-                                <button class="btn btn-sm btn-icon btn-outline btn-outline-primary showPermission" data-role-id="${full.id}" data-bs-toggle="tooltip" data-bs-placement="top" title="Access">
+                            `
+                            : '';
+
+                        let html = `
+                            <div class="d-flex justify-content-center gap-2">
+                                <button class="btn btn-sm btn-icon btn-outline btn-outline-warning"
+                                        onclick="editRole('${full.id}')"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
+                                    <i class="bx bx-pencil"></i>
+                                </button>
+                                ${deleteButton}
+                                <button class="btn btn-sm btn-icon btn-outline btn-outline-primary showPermission"
+                                        data-role-id="${full.id}"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Access">
                                     <i class='bx bx-right-arrow-alt'></i>
                                 </button>
                             </div>
                         `;
+
                         return html;
                     },
-                },
+                }
             ],
             fnCreatedRow: function (nRow, aData, iDataIndex) {
                 $(nRow).attr("id", aData[0]);
@@ -258,8 +271,8 @@ saveRole = () => {
                     error: (err) => {
                         toggleAddRole(false);
                         HELPER.unblock();
-                        let errorMessage = err.responseJSON && err.responseJSON.message 
-                            ? err.responseJSON.message 
+                        let errorMessage = err.responseJSON && err.responseJSON.message
+                            ? err.responseJSON.message
                             : 'System error, please contact the Administrator';
 
                         HELPER.showMessage({
@@ -336,8 +349,8 @@ updateRole = () => {
                     error: (err) => {
                         toggleAddRole(false);
                         HELPER.unblock();
-                        let errorMessage = err.responseJSON && err.responseJSON.message 
-                            ? err.responseJSON.message 
+                        let errorMessage = err.responseJSON && err.responseJSON.message
+                            ? err.responseJSON.message
                             : 'System error, please contact the Administrator';
 
                         HELPER.showMessage({

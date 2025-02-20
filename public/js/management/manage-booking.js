@@ -123,8 +123,8 @@ initTableManageBooking = () => {
                                 statusText = "Draft";
                                 badgeClass = "text-secondary border border-secondary bg-secondary bg-opacity-10 px-3 py-1 rounded-pill";
                                 break;
-                            case "passenger_details":
-                                statusText = "Passenger Detail";
+                            case "select_seat":
+                                statusText = "Select Seat";
                                 badgeClass = "text-info border border-info bg-info bg-opacity-10 px-3 py-1 rounded-pill";
                                 break;
                             case "waiting_payment":
@@ -138,6 +138,10 @@ initTableManageBooking = () => {
                             case "verified":
                                 statusText = "Verified";
                                 badgeClass = "text-primary border border-primary bg-primary bg-opacity-10 px-2 py-1 rounded-pill";
+                                break;
+                            case "expired":
+                                statusText = "Expired";
+                                badgeClass = "text-danger border border-danger bg-danger bg-opacity-10 px-3 py-1 rounded-pill";
                                 break;
                             default:
                                 statusText = "Unknown";
@@ -160,6 +164,16 @@ initTableManageBooking = () => {
                             `
                             : '';
 
+                        let deleteButton = (hasDelete && full.status === "expired")
+                            ? `
+                                <button class="btn btn-sm btn-icon btn-outline btn-outline-danger"
+                                        onclick="deleteManageBooking('${full.id}')"
+                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            `
+                            : '';
+
                         let html = `
                             <div class="d-flex justify-content-center gap-2">
                                 ${verifyButton}
@@ -168,12 +182,13 @@ initTableManageBooking = () => {
                                         data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
                                     <i class="fa-solid fa-eye"></i>
                                 </button>
+                                ${deleteButton}
                             </div>
                         `;
 
                         return html;
                     },
-                },
+                }
             ],
             fnCreatedRow: function (nRow, aData, iDataIndex) {
                 $(nRow).attr("id", aData[0]);

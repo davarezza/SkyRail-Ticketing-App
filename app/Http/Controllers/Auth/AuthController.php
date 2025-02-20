@@ -70,12 +70,12 @@ class AuthController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:8',
         ]);
-    
+
         $username = $this->generateUsername(explode(' ', $request->name));
-    
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -83,7 +83,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'plain_password' => $request->password,
         ]);
-    
+
         $penumpang = Penumpang::create([
             'nama_penumpang' => $request->name,
             'jenis_kelamin' => $request->gender,
@@ -91,18 +91,18 @@ class AuthController extends Controller
             'user_id' => $user->id,
             'username' => $username,
         ]);
-    
+
         $syncRole = [
             'id' => $user->id,
             'role' => 2,
         ];
-    
+
         $this->repository->syncRole($syncRole);
-    
+
         session()->flash('success', 'Registration successful, please login!');
-    
+
         return redirect('/login');
-    }    
+    }
 
     public function logout()
     {

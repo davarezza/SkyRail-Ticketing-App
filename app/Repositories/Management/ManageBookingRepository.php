@@ -49,7 +49,7 @@ class ManageBookingRepository extends BaseRepository
     }
 
     public function verify($request){
-        $opr = $this->model->where('id_pemesanan', $request)->update([
+        $opr = $this->model->where('id_pemesanan', $request->id)->update([
             'status' => 'verified',
             'updated_at' => now()->setTimezone('Asia/Jakarta')
         ]);

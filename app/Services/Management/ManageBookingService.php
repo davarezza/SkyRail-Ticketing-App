@@ -86,7 +86,7 @@ class ManageBookingService
             $opr = $this->repository->verify($request->id);
 
             DB::commit();
-            return BaseResponse::deleted($opr);
+            return BaseResponse::updated($opr);
         } catch (\Exception $e) {
             DB::rollBack();
             dd($e->getMessage());
