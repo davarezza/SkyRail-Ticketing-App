@@ -11,11 +11,18 @@
                 <div class="card-body py-4">
                     <div class="d-flex align-items-start">
                         <div class="flex-grow-1">
-                            <h4 class="mb-2">1,250</h4>
+                            <h4 class="mb-2">{{ number_format($completed_payments) }}</h4>
                             <p class="mb-2">Completed Payments</p>
                             <div class="mb-0">
-                                <span class="badge text-success me-2">+150</span>
-                                <span class="text-muted">Higher than last month</span>
+                                @if ($payment_difference > 0)
+                                    <span class="badge text-success me-2">+{{ number_format($payment_difference) }}</span>
+                                    <span class="text-muted">Higher than last month</span>
+                                @elseif ($payment_difference < 0)
+                                    <span class="badge text-danger me-2">{{ number_format($payment_difference) }}</span>
+                                    <span class="text-muted">Lower than last month</span>
+                                @else
+                                    <span class="text-muted">Same as last month</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -27,11 +34,18 @@
                 <div class="card-body py-4">
                     <div class="d-flex align-items-start">
                         <div class="flex-grow-1">
-                            <h4 class="mb-2">$125,000</h4>
-                            <p class="mb-2">Revenue This Month</p>
+                            <h4 class="mb-2">IDR {{ number_format($monthly_revenue, 0, ',', '.') }}</h4>
+                            <p class="mb-2">Monthly Revenue</p>
                             <div class="mb-0">
-                                <span class="badge text-success me-2">+$15,000</span>
-                                <span class="text-muted">Since last month</span>
+                                @if ($revenue_difference > 0)
+                                    <span class="badge text-success me-2">+IDR {{ number_format($revenue_difference, 0, ',', '.') }}</span>
+                                    <span class="text-muted">Higher than last month</span>
+                                @elseif ($revenue_difference < 0)
+                                    <span class="badge text-danger me-2">IDR {{ number_format($revenue_difference, 0, ',', '.') }}</span>
+                                    <span class="text-muted">Lower than last month</span>
+                                @else
+                                    <span class="text-muted">Same as last month</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -43,23 +57,30 @@
                 <div class="card-body py-4">
                     <div class="d-flex align-items-start">
                         <div class="flex-grow-1">
-                            <h4 class="mb-2">85</h4>
-                            <p class="mb-2">Pending Payments</p>
+                            <h4 class="mb-2">IDR {{ number_format($average_transaction_value, 0, ',', '.') }}</h4>
+                            <p class="mb-2">Average Transaction Value</p>
                             <div class="mb-0">
-                                <span class="badge text-danger me-2">-10</span>
-                                <span class="text-muted">Reduced from last week's peak</span>
+                                @if ($average_transaction_difference > 0)
+                                    <span class="badge text-success me-2">+IDR {{ number_format($average_transaction_difference, 0, ',', '.') }}</span>
+                                    <span class="text-muted">Higher than last month</span>
+                                @elseif ($average_transaction_difference < 0)
+                                    <span class="badge text-danger me-2">IDR {{ number_format(abs($average_transaction_difference), 0, ',', '.') }}</span>
+                                    <span class="text-muted">Lower than last month</span>
+                                @else
+                                    <span class="text-muted">Same as last month</span>
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
     <div class="row my-3">
         <div class="col-12 col-md-6 d-flex">
             <div class="card flex-fill border-0 w-100">
                 <div class="card-body py-4">
-                    <h5 class="mb-3">Total Revenue (Last 12 Months)</h5>
+                    <h5 class="mb-3">Revenue (Last 12 Months)</h5>
                     <div id="revenueChart" class="chart-container"></div>
                 </div>
             </div>
@@ -71,7 +92,7 @@
                     <div id="ticketSalesChart" class="chart-container"></div>
                 </div>
             </div>
-        </div>      
+        </div>
     </div>
     <div class="row">
         <div class="col-12 col-md-6 d-flex">

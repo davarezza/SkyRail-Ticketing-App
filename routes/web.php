@@ -35,6 +35,13 @@ Route::middleware('guest')->group(function () {
 Route::get('/', [MainController::class, 'home'])->name('home');
 Route::get('/about', [MainController::class, 'about'])->name('about');
 
+Route::prefix('dashboard')->group(function () {
+    Route::get('/revenue-data', [DashboardController::class, 'getRevenueLast12Months']);
+    Route::get('/ticket-sales', [DashboardController::class, 'getTicketSalesPerRoute']);
+    Route::get('/ticket-class', [DashboardController::class, 'getTicketClassDistribution']);
+    Route::get('/passenger-age', [DashboardController::class, 'getPassengerAgeDistribution']);
+});
+
 Route::prefix('booking')->group(function () {
     Route::get('/', [BookingController::class, 'index'])->name('booking.page');
     Route::get('{id}/detail', [BookingController::class, 'detail'])->name('booking.detail');
