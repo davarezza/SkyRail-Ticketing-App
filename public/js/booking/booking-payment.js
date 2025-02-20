@@ -31,7 +31,7 @@ $(document).ready(function () {
 
     $displayAmountInput.on("keyup", function () {
         let rawValue = $(this).val().replace(/\D/g, "");
-        let formattedValue = formatRupiah(rawValue, "Rp ");
+        let formattedValue = formatRupiah(rawValue, "IDR ");
         $(this).val(formattedValue);
         $actualAmountInput.val(rawValue);
     });
@@ -72,7 +72,7 @@ $(document).ready(function () {
         }
 
         if (parseInt(amount) !== parseInt(paymentPrice)) {
-            $errorBox.attr("x-data", `{ show: true, message: 'The amount must match the required payment of Rp ${paymentPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}' }`);
+            $errorBox.attr("x-data", `{ show: true, message: 'The amount must match the required payment of IDR ${paymentPrice.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}' }`);
             return;
         }
 

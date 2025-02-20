@@ -32,7 +32,7 @@ class TravelRouteService
             if (strtotime($request->arrival_time) < strtotime($request->departure_time)) {
                 throw new \Exception("Arrival time cannot be earlier than departure time.");
             }
-            $cleaned_price = str_replace(['Rp ', '.'], '', $request->price);
+            $cleaned_price = str_replace(['IDR ', '.'], '', $request->price);
 
             $dataTravel = [
                 'tujuan' => $request->objective,
@@ -82,7 +82,7 @@ class TravelRouteService
                 throw new \Exception("Arrival time cannot be earlier than departure time.");
             }
 
-            $cleaned_price = str_replace(['Rp ', '.'], '', $request->price);
+            $cleaned_price = str_replace(['IDR ', '.'], '', $request->price);
 
             $dataTravel = [
                 'tujuan' => $request->objective,

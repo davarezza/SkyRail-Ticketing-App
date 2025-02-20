@@ -139,9 +139,8 @@ class BookingService
 
             DB::commit();
             session()->flash('success', 'Successfully paid. Check your email for the ticket.');
-            dd('success paid');
 
-            return redirect(route('booking.payment', ['id' => $bookingId]));
+            return redirect(route('booking.success-payment', ['id' => $bookingId]));
         } catch (\Exception $e) {
             DB::rollBack();
             return dd($e->getMessage());

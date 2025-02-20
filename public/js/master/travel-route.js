@@ -94,25 +94,25 @@ initTableTravelRoute = () => {
                     render: function (data, type, full, meta) {
                         return full.objective_city;
                     },
-                },             
+                },
                 {
                     targets: 2,
                     render: function (data, type, full, meta) {
                         return full.departure_city;
                     },
-                },             
+                },
                 {
                     targets: 3,
                     render: function (data, type, full, meta) {
-                        return 'Rp ' + new Intl.NumberFormat('id-ID', { minimumFractionDigits: 0 }).format(full.price);
+                        return 'IDR ' + new Intl.NumberFormat('id-ID', { minimumFractionDigits: 0 }).format(full.price);
                     },
-                },                                       
+                },
                 {
                     targets: 4,
                     render: function (data, type, full, meta) {
                         return full.transport_name;
                     },
-                },             
+                },
                 {
                     targets: 5,
                     render: function (data, type, full, meta) {
@@ -226,7 +226,7 @@ formValidationAddTravelRoute = () => {
         console.error('Form #form-add-travel-route not found');
         return;
     }
-    
+
     if (!submitButton) {
         console.error('Button #btn-save-travel-route not found');
         return;
@@ -385,8 +385,8 @@ saveTravelRoute = () => {
                     error: (err) => {
                         toggleAddTravelRoute(false);
                         HELPER.unblock();
-                        let errorMessage = err.responseJSON && err.responseJSON.message 
-                            ? err.responseJSON.message 
+                        let errorMessage = err.responseJSON && err.responseJSON.message
+                            ? err.responseJSON.message
                             : 'System error, please contact the Administrator';
 
                         HELPER.showMessage({
@@ -420,7 +420,7 @@ detailTravelRoute = (id) => {
             $('#detail-departure-date').text(moment(response.detail.departure_date).format('DD MMMM YYYY'));
             $('#detail-departure-time').text(moment(response.detail.departure_time, 'HH:mm').format('hh:mm a'));
             $('#detail-arrival-time').text(moment(response.detail.arrival_time, 'HH:mm').format('hh:mm a'));
-            $('#detail-price').text(`Rp. ${parseInt(response.detail.price).toLocaleString('id-ID')}`);
+            $('#detail-price').text(`IDR. ${parseInt(response.detail.price).toLocaleString('id-ID')}`);
             toggleDetailTravelRoute(true);
         },
         error: (err) => {

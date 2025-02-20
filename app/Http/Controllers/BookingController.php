@@ -73,6 +73,22 @@ class BookingController extends Controller
         ]);
     }
 
+    public function successPayment($id)
+    {
+        $booking = BookingView::find($id);
+        $route = TravelRouteView::find($booking->route_id);
+        $transport = TransportationView::find($route->id_transportasi);
+
+        $booking_passenger = BookingPassengerView::where('booking_id', $booking->id)->get();
+
+        return view('pages.booking-success-payment', [
+            'route' => $route,
+            'booking' => $booking,
+            'transport' => $transport,
+            'booking_passenger' => $booking_passenger,
+        ]);
+    }
+
     public function detailFacilities($id)
     {
         $opr = $this->service->detailFacilities($id);

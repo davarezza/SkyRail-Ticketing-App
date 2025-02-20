@@ -39,6 +39,7 @@ Route::prefix('booking')->group(function () {
     Route::get('/', [BookingController::class, 'index'])->name('booking.page');
     Route::get('{id}/detail', [BookingController::class, 'detail'])->name('booking.detail');
     Route::get('payment/{id}', [BookingController::class, 'payment'])->name('booking.payment');
+    Route::get('success-payment/{id}', [BookingController::class, 'successPayment'])->name('booking.success-payment');
     Route::get('detail-facilities/{id}', [BookingController::class, 'detailFacilities'])->name('master.transportation.detail-facilities');
     Route::post('/first-booking', [BookingController::class, 'firstBooking'])->name('booking.first-booking')->middleware('auth');
     Route::post('/second-booking', [BookingController::class, 'secondBooking'])->name('booking.second-booking')->middleware('auth');
@@ -145,6 +146,8 @@ Route::middleware('auth')->group(function () {
             Route::post('/delete', [ManageBookingController::class, 'delete'])->name('management.manage-booking.delete');
             Route::post('edit', [ManageBookingController::class, 'edit'])->name('management.manage-booking.edit');
             Route::post('update', [ManageBookingController::class, 'update'])->name('management.manage-booking.update');
+            Route::post('verify', [ManageBookingController::class, 'verify'])->name('management.manage-booking.verify');
+            Route::post('/export-excel', [ManageBookingController::class, 'exportToExcel'])->name('management.manage-booking.export-excel');
         });
     });
 

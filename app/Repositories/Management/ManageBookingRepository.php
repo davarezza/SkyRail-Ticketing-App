@@ -30,26 +30,29 @@ class ManageBookingRepository extends BaseRepository
         return $opr->draw();
     }
 
+    public function fetchAllData($request){
+        $opr = $this->model->setView('v_booking');
+
+        return $opr->get();
+    }
+
     public function create($request){
         $opr = $this->model->create($request);
 
         return $opr;
     }
 
-    public function edit($request){
-        $opr = $this->model->find($request->id);
-
-        return $opr;
-    }
-
-    public function update($id, $data){
-        $opr = $this->model->find($id)->update($data);
-
-        return $opr;
-    }
-
     public function delete($request){
-        $opr = $this->model->where('id_rute', $request)->delete();
+        $opr = $this->model->where('id_pemesanan', $request)->delete();
+
+        return $opr;
+    }
+
+    public function verify($request){
+        $opr = $this->model->where('id_pemesanan', $request)->update([
+            'status' => 'verified',
+            'updated_at' => now()->setTimezone('Asia/Jakarta')
+        ]);
 
         return $opr;
     }

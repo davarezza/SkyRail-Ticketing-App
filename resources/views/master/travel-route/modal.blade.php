@@ -70,7 +70,7 @@
                                     name="travel-route-arrival-time" autocomplete="off" style="--bs-bg-opacity: .6;" />
                             </div>
                         </div>
-                    </div>                    
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="fv-row mb-4">
@@ -81,7 +81,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="fv-row mb-4">
-                                <label for="travel-route-price" class="form-label fs-9 fw-medium mb-2">Price (Rp)</label>
+                                <label for="travel-route-price" class="form-label fs-9 fw-medium mb-2">Price (IDR)</label>
                                 <input type="text" class="form-control bg-light-subtle" id="travel-route-price"
                                     name="travel-route-price" placeholder="Enter Price" autocomplete="off" style="--bs-bg-opacity: .6;" />
                             </div>

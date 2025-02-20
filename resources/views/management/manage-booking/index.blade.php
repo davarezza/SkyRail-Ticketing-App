@@ -28,6 +28,10 @@
                             <i class='bx bx-plus fs-5'></i>
                             <span>Add New</span>
                         </button>
+                        <a href="{{ route('management.manage-booking.export-excel') }}" id="exportExcel" class="btn btn-success d-flex align-items-center">
+                            <i class='bx bxs-file fs-5 mx-1'></i>
+                            <span> Generate Excel</span>
+                        </a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -40,6 +44,7 @@
                                     <th>Route</th>
                                     <th>Transport Name</th>
                                     <th>Total Price</th>
+                                    <th>Status</th>
                                     <th class="text-center">Action</th>
                                 </tr>
                             </thead>
@@ -54,5 +59,8 @@
 @endsection
 
 @push('scripts')
-    <script src="{!! asset('js/management/manage-booking.js') !!}?v={{ time() }}"></script>    
+    <script src="{!! asset('js/management/manage-booking.js') !!}?v={{ time() }}"></script>
+    <script>
+        const hasVerify        = @can('Verify Manage Booking') true @else false @endcan;
+    </script>
 @endpush
