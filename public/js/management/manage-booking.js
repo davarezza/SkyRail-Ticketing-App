@@ -3,8 +3,6 @@ $(() => {
         table: APP_URL + "management/manage-booking/table",
         save: APP_URL + "management/manage-booking/store",
         detail: APP_URL + "management/manage-booking/detail",
-        edit: APP_URL + "management/manage-booking/edit",
-        update: APP_URL + "management/manage-booking/update",
         delete: APP_URL + "management/manage-booking/delete",
         verify: APP_URL + "management/manage-booking/verify",
         exportExcel: APP_URL + "management/manage-booking/export-excel",
@@ -164,7 +162,7 @@ initTableManageBooking = () => {
                             `
                             : '';
 
-                        let deleteButton = (hasDelete && full.status === "expired")
+                        let deleteButton = (full.status === "expired")
                             ? `
                                 <button class="btn btn-sm btn-icon btn-outline btn-outline-danger"
                                         onclick="deleteManageBooking('${full.id}')"
@@ -177,11 +175,11 @@ initTableManageBooking = () => {
                         let html = `
                             <div class="d-flex justify-content-center gap-2">
                                 ${verifyButton}
-                                <button class="btn btn-sm btn-icon btn-outline btn-outline-info"
-                                        onclick="detailManageBooking('${full.id}')"
-                                        data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
+                                <a class="btn btn-sm btn-icon btn-outline btn-outline-info"
+                                    href="${APP_URL}management/manage-booking/detail/${full.id}"
+                                    data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
                                     <i class="fa-solid fa-eye"></i>
-                                </button>
+                                </a>
                                 ${deleteButton}
                             </div>
                         `;
@@ -214,10 +212,50 @@ initTableManageBooking = () => {
     });
 }
 
+deleteManageBooking = (id) => {
+    HELPER.confirm({
+        title: 'Delete Booking',
+        message: 'Are you sure you want to delete this booking?',
+        callback: function (result) {
+            if (result) {
+                HELPER.block();
+                HELPER.ajax({
+                    url: HELPER.api.delete,
+                    type: 'post',
+                    data: {
+                        id: id,
+                        _token: $('[name="_token"]').val()
+                    },
+                    success: (res) => {
+                        initTableManageBooking();
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: true,
+                            title: 'Success',
+                            message: 'Booking has been deleted'
+                        })
+                    },
+                    error: (err) => {
+                        HELPER.unblock();
+                        HELPER.showMessage({
+                            success: true,
+                            title: 'Success',
+                            message: 'Booking has been deleted',
+                            callback: function () {
+                                location.reload();
+                            }
+                        });
+                    }
+                });
+            }
+        }
+    });
+}
+
 verifyManageBooking = (id) => {
     HELPER.confirm({
         title: 'Verify Manage Booking',
-        message: 'Are you sure you want to verify this booking?',
+        message: 'Are you sure you want to verify this booking? Please check the booking detail first.',
         callback: function (result) {
             if (result) {
                 HELPER.block();

@@ -153,6 +153,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/delete', [ManageBookingController::class, 'delete'])->name('management.manage-booking.delete');
             Route::post('edit', [ManageBookingController::class, 'edit'])->name('management.manage-booking.edit');
             Route::post('update', [ManageBookingController::class, 'update'])->name('management.manage-booking.update');
+            Route::get('/detail/{id}', [ManageBookingController::class, 'detail'])->name('management.manage-booking.detail');
             Route::post('verify', [ManageBookingController::class, 'verify'])->name('management.manage-booking.verify');
             Route::post('/export-excel', [ManageBookingController::class, 'exportToExcel'])->name('management.manage-booking.export-excel');
         });

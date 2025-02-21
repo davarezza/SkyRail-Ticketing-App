@@ -67,9 +67,9 @@ class OfficerService
         try {
             $fullNameParts = explode(' ', $request->nama_petugas);
             $username = $this->generateUsername($fullNameParts);
-    
+
             $password = Str::random(8);
-    
+
             $dataUser = [
                 'name' => $request->nama_petugas,
                 'username' => $username,
@@ -79,7 +79,7 @@ class OfficerService
             ];
             $user = $this->user->create($dataUser);
             $userId = $user->id;
-    
+
             $dataOfficer = [
                 'nama_petugas' => $request->nama_petugas,
                 'email' => $request->email,
@@ -96,9 +96,9 @@ class OfficerService
 
             $this->repository->syncRole($syncRole);
             $opr = $this->repository->create($dataOfficer);
-    
+
             $user->notify(new NewOfficerNotification($request->nama_petugas, $username, $password));
-    
+
             DB::commit();
             return BaseResponse::created($opr);
         } catch (\Exception $e) {
@@ -106,7 +106,7 @@ class OfficerService
             dd($e->getMessage(), $e->getCode());
             return BaseResponse::errorTransaction($e);
         }
-    }           
+    }
 
     public function detail($id) {
         $data = [];
@@ -131,9 +131,9 @@ class OfficerService
                 'email' => $request->email,
                 'role_id' => $request->role_id,
             ];
-    
+
             $opr = $this->repository->update($request->id_petugas, $dataOfficer);
-    
+
             DB::commit();
             return BaseResponse::updated($opr);
         } catch (\Exception $e) {
@@ -153,10 +153,10 @@ class OfficerService
 
             $this->repository->removeRole($dataOfficer->user_id);
             $opr = $this->repository->delete($request->id);
-    
+
             DB::commit();
             return BaseResponse::deleted($opr);
-    
+
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json([
@@ -164,5 +164,5 @@ class OfficerService
                 'message' => $e->getMessage(),
             ], 422);
         }
-    }    
+    }
 }

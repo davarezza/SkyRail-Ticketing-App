@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Management;
 
 use App\Http\Controllers\Controller;
+use App\Models\ViewModels\BookingPassengerView;
 use App\Models\ViewModels\BookingView;
+use App\Models\ViewModels\TransportationView;
+use App\Models\ViewModels\TravelRouteView;
 use App\Repositories\Management\ManageBookingRepository;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
@@ -40,18 +43,26 @@ class ManageBookingController extends Controller
         return $opr;
     }
 
-    public function detail($id)
-    {
-        $opr = $this->service->detail($id);
-
-        return $opr;
-    }
-
     public function edit(Request $request)
     {
         $opr = $this->service->edit($request);
 
         return $opr;
+    }
+
+    public function detail($id)
+    {
+        $booking = BookingView::find($id);
+        $route = TravelRouteView::find($booking->route_id);
+        $transport = TransportationView::find($route->id_transportasi);
+        $booking_passenger = BookingPassengerView::where('booking_id', $booking->id)->get();
+
+        return view('management.manage-booking.detail', [
+            'route' => $route,
+            'booking' => $booking,
+            'transport' => $transport,
+            'booking_passenger' => $booking_passenger,
+        ]);
     }
 
     public function delete(Request $request)

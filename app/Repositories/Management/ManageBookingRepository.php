@@ -3,15 +3,17 @@
 namespace App\Repositories\Management;
 
 use App\Models\Pemesanan;
+use App\Models\PemesananPenumpang;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 class ManageBookingRepository extends BaseRepository
 {
-    protected $model;
+    protected $model, $modelBookingPassenger;
 
     public function __construct()
     {
         $this->model = new Pemesanan();
+        $this->modelBookingPassenger = new PemesananPenumpang();
     }
 
     /**
@@ -43,7 +45,9 @@ class ManageBookingRepository extends BaseRepository
     }
 
     public function delete($request){
-        $opr = $this->model->where('id_pemesanan', $request)->delete();
+        $this->modelBookingPassenger->where('id_pemesanan', $request->id)->delete();
+
+        $opr = $this->model->where('id_pemesanan', $request->id)->delete();
 
         return $opr;
     }
