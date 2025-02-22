@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\BookingHistoryController;
 use App\Http\Controllers\BookingPassengerController;
 use App\Http\Controllers\Management\RoleController;
 use App\Http\Controllers\DashboardController;
@@ -56,7 +57,10 @@ Route::prefix('booking')->group(function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/user/dashboard', [DashboardUserController::class, 'index'])->name('dashboard-user.index');
+    Route::prefix('user')->group(function () {
+        Route::get('/dashboard', [DashboardUserController::class, 'index'])->name('dashboard-user.index');
+        Route::get('/booking-history', [BookingHistoryController::class, 'index'])->name('booking-history.index');
+    });
     Route::prefix('master')->group(function () {
         Route::prefix('/transportation')->group(function () {
             Route::get('/', [TransportationController::class, 'index'])->name('master.transportation.index');
