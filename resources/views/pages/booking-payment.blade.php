@@ -83,8 +83,8 @@
                         <div class="bg-gray-50 rounded-lg border border-gray-200">
                             <div class="flex justify-between items-center p-4">
                                 <div>
-                                    <span class="font-medium text-gray-800">Email Notification</span>
-                                    <p class="text-sm text-gray-600 mt-1">Ticket will be sent to email after payment success</p>
+                                    <span class="font-medium text-gray-800">E-Ticket Download</span>
+                                    <p class="text-sm text-gray-600 mt-1">You can download PDF E-Ticket after payment success</p>
                                 </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />

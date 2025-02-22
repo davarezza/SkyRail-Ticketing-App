@@ -63,9 +63,11 @@
                                     </span>
                                     {{ $booking->objective_city }}
                                 </h2>
-                                <a href="#" class="text-blue-500 text-sm font-medium hover:text-blue-600 flex items-center gap-1 group">
+                                @if (in_array($booking->status, ['paid', 'verified']))
+                                <a href="{{ route('booking.check-ticket', $booking->id) }}" class="text-blue-500 text-sm font-medium hover:text-blue-600 flex items-center gap-1 group">
                                     See details
                                 </a>
+                                @endif
                             </div>
 
                             <div class="bg-gray-50 rounded-lg p-4 space-y-3">

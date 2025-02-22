@@ -7,6 +7,7 @@ use App\Models\ViewModels\BookingView;
 use App\Models\ViewModels\TransportationView;
 use App\Models\ViewModels\TravelRouteView;
 use App\Services\BookingService;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -87,6 +88,39 @@ class BookingController extends Controller
             'transport' => $transport,
             'booking_passenger' => $booking_passenger,
         ]);
+    }
+
+    public function checkTicket($id)
+    {
+        $booking = BookingView::find($id);
+        $route = TravelRouteView::find($booking->route_id);
+        $transport = TransportationView::find($route->id_transportasi);
+
+        $booking_passenger = BookingPassengerView::where('booking_id', $booking->id)->get();
+
+        return view('pages.booking-ticket', [
+            'route' => $route,
+            'booking' => $booking,
+            'transport' => $transport,
+            'booking_passenger' => $booking_passenger,
+        ]);
+    }
+
+    public function downloadTicket($id)
+    {
+        $booking = BookingView::findOrFail($id);
+        $route = TravelRouteView::findOrFail($booking->route_id);
+        $transport = TransportationView::findOrFail($route->id_transportasi);
+        $booking_passenger = BookingPassengerView::where('booking_id', $booking->id)->get();
+
+        $pdf = PDF::loadView('pages.pdf-ticket', [
+            'booking' => $booking,
+            'route' => $route,
+            'transport' => $transport,
+            'booking_passenger' => $booking_passenger
+        ]);
+
+        return $pdf->download('E-Ticket_' . $booking->code . '.pdf');
     }
 
     public function detailFacilities($id)

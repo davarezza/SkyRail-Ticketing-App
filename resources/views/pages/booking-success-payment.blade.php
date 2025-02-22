@@ -76,36 +76,14 @@
                 </div>
             </div>
 
-            <!-- Passenger Details -->
-            <div class="border-t border-gray-100 pt-8">
-                <h3 class="text-xl font-semibold text-gray-700 mb-4">Passenger Details</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    @foreach($booking_passenger as $passenger)
-                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100 hover:border-gray-200 transition-colors duration-200">
-                        <div class="flex items-start justify-between">
-                            <div>
-                                <p class="font-medium text-gray-800 text-lg">{{ $passenger->name }}</p>
-                                <p class="text-gray-600">Seat {{ $passenger->seat_code ?? 'TBA' }}</p>
-                            </div>
-                            <div class="bg-white p-2 rounded-lg shadow-sm">
-                                <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-
             <div class="flex flex-col sm:flex-row justify-center gap-4 mt-10 pt-6 border-t border-gray-100">
-                <a href="{{ route('dashboard.index') }}" class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-200 font-medium">
+                <a href="{{ route('dashboard-user.index') }}" class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-200 font-medium">
                     <i class="fas fa-home mr-2"></i>
                     Go to Dashboard
                 </a>
-                <a href="{{ route('home') }}" class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-gray-700 bg-gray-100 hover:bg-gray-200 transition-colors duration-200 font-medium">
-                    <i class="fas fa-arrow-left mr-2"></i>
-                    Back to Home
+                <a href="{{ route('booking.check-ticket', $booking->id) }}" class="inline-flex items-center justify-center px-8 py-3 rounded-xl text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors duration-200 font-medium">
+                    <i class="fas fa-ticket-alt mr-2"></i>
+                    View E-Ticket
                 </a>
             </div>
         </div>
