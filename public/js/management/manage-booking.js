@@ -272,7 +272,7 @@ verifyManageBooking = (id) => {
                         HELPER.showMessage({
                             success: true,
                             title: 'Success',
-                            message: 'Manage booking has been deleted'
+                            message: 'Manage booking has been verified'
                         })
                     },
                     error: (err) => {

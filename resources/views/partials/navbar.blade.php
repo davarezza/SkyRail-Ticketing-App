@@ -21,7 +21,7 @@
                         @endif
                     </button>
                     <div class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300" id="profile-dropdown">
-                        @can('View User Dashboard')
+                        @can('User Dashboard')
                             <a href="{{ route('dashboard-user.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
                         @else
                             <a href="{{ route('dashboard.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
@@ -52,7 +52,7 @@
                 <a href="{{ route('home') }}" class="block font-medium {{ request()->routeIs('home') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600' }} transition-colors duration-300">Home</a>
                 <a href="{{ route('about') }}" class="block font-medium {{ request()->routeIs('about') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600' }} transition-colors duration-300">About</a>
                 <a href="{{ route('booking.page') }}" class="block font-medium {{ request()->routeIs('booking.page') || request()->is('booking/*') || request()->is('booking-passenger/*') ? 'text-blue-600' : 'text-gray-800 hover:text-blue-600' }} transition-colors duration-300">Booking</a>
-                <a href="#" class="block font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Destination</a>
+                {{-- <a href="#" class="block font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Destination</a> --}}
                 @auth
                     <div class="border-t pt-4 pb-2">
                         <a href="{{ route('dashboard.index') }}" class="block font-medium text-gray-800 hover:text-blue-600 transition-colors duration-300">Dashboard</a>

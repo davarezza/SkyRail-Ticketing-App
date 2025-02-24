@@ -37,7 +37,7 @@ Route::get('/', [MainController::class, 'home'])->name('home');
 Route::get('/search-travel', [MainController::class, 'searchTravel'])->name('search.travel');
 Route::get('/about', [MainController::class, 'about'])->name('about');
 
-Route::prefix('dashboard')->group(function () {
+Route::prefix('dashboard')->middleware('permission:Admin Dashboard')->group(function () {
     Route::get('/revenue-data', [DashboardController::class, 'getRevenueLast12Months']);
     Route::get('/ticket-sales', [DashboardController::class, 'getTicketSalesPerRoute']);
     Route::get('/ticket-class', [DashboardController::class, 'getTicketClassDistribution']);
@@ -47,7 +47,7 @@ Route::prefix('dashboard')->group(function () {
 Route::prefix('booking')->group(function () {
     Route::get('/', [BookingController::class, 'index'])->name('booking.page');
     Route::get('{id}/detail', [BookingController::class, 'detail'])->name('booking.detail');
-    Route::middleware('auth')->group(function () {
+    Route::middleware('permission:Booking Ticket')->group(function () {
         Route::get('payment/{id}', [BookingController::class, 'payment'])->name('booking.payment');
         Route::get('success-payment/{id}', [BookingController::class, 'successPayment'])->name('booking.success-payment');
         Route::get('e-ticket/{id}', [BookingController::class, 'checkTicket'])->name('booking.check-ticket');
@@ -60,13 +60,13 @@ Route::prefix('booking')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('permission:Admin Dashboard')->name('dashboard.index');
     Route::prefix('user')->group(function () {
         Route::get('/dashboard', [DashboardUserController::class, 'index'])->name('dashboard-user.index');
         Route::get('/booking-history', [BookingHistoryController::class, 'index'])->name('booking-history.index');
     });
     Route::prefix('master')->group(function () {
-        Route::prefix('/transportation')->group(function () {
+        Route::prefix('/transportation')->middleware('permission:Transportation')->group(function () {
             Route::get('/', [TransportationController::class, 'index'])->name('master.transportation.index');
             Route::post('table', [TransportationController::class, 'table'])->name('master.transportation.table');
             Route::post('store', [TransportationController::class, 'store'])->name('master.transportation.store');
@@ -77,7 +77,7 @@ Route::middleware('auth')->group(function () {
             Route::post('get-data-select', [TransportationController::class, 'getDataSelect'])->name('master.transportation.get-data-select');
         });
 
-        Route::prefix('/transport-class')->group(function () {
+        Route::prefix('/transport-class')->middleware('permission:Transport Class')->group(function () {
             Route::get('/', [TransportClassController::class, 'index'])->name('master.transport-class.index');
             Route::post('table', [TransportClassController::class, 'table'])->name('master.transport-class.table');
             Route::post('store', [TransportClassController::class, 'store'])->name('master.transport-class.store');
@@ -86,7 +86,7 @@ Route::middleware('auth')->group(function () {
             Route::post('update', [TransportClassController::class, 'update'])->name('master.transport-class.update');
         });
 
-        Route::prefix('/transport-type')->group(function () {
+        Route::prefix('/transport-type')->middleware('permission:Transportation')->group(function () {
             Route::post('table', [TransportTypeController::class, 'table'])->name('transport-type.table');
             Route::post('store', [TransportTypeController::class, 'store'])->name('transport-type.store');
             Route::post('edit', [TransportTypeController::class, 'edit'])->name('transport-type.edit');
@@ -95,7 +95,7 @@ Route::middleware('auth')->group(function () {
             Route::get('detail/{id}', [TransportTypeController::class, 'detail'])->name('master.transport-type.detail');
         });
 
-        Route::prefix('/travel-route')->group(function () {
+        Route::prefix('/travel-route')->middleware('permission:Travel Route')->group(function () {
             Route::get('/', [TravelRouteController::class, 'index'])->name('master.travel-route.index');
             Route::post('table', [TravelRouteController::class, 'table'])->name('master.travel-route.table');
             Route::post('store', [TravelRouteController::class, 'store'])->name('master.travel-route.store');
@@ -106,7 +106,7 @@ Route::middleware('auth')->group(function () {
             Route::post('get-data-select', [TravelRouteController::class, 'getDataSelect'])->name('master.travel-route.get-data-select');
         });
 
-        Route::prefix('/destination')->group(function () {
+        Route::prefix('/destination')->middleware('permission:Destination')->group(function () {
             Route::get('/', [DestinationController::class, 'index'])->name('master.destination.index');
             Route::post('table', [DestinationController::class, 'table'])->name('master.destination.table');
             Route::post('store', [DestinationController::class, 'store'])->name('master.destination.store');
@@ -116,7 +116,7 @@ Route::middleware('auth')->group(function () {
             Route::get('detail/{id}', [DestinationController::class, 'detail'])->name('master.destination.detail');
         });
 
-        Route::prefix('/officer')->group(function () {
+        Route::prefix('/officer')->middleware('permission:Officer')->group(function () {
             Route::get('/', [OfficerController::class, 'index'])->name('master.officer.index');
             Route::post('table', [OfficerController::class, 'table'])->name('master.officer.table');
             Route::post('store', [OfficerController::class, 'store'])->name('master.officer.store');
@@ -127,7 +127,7 @@ Route::middleware('auth')->group(function () {
             Route::post('get-data-select', [OfficerController::class, 'getDataSelect'])->name('master.officer.get-data-select');
         });
 
-        Route::prefix('/passenger')->group(function () {
+        Route::prefix('/passenger')->middleware('permission:Passenger')->group(function () {
             Route::get('/', [PassengerController::class, 'index'])->name('master.passenger.index');
             Route::post('table', [PassengerController::class, 'table'])->name('master.passenger.table');
             Route::post('delete', [PassengerController::class, 'delete'])->name('master.passenger.delete');
@@ -138,7 +138,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('management')->group(function () {
-        Route::prefix('role')->group(function () {
+        Route::prefix('role')->middleware('permission:Role Access')->group(function () {
             Route::get('/', [RoleController::class, 'index'])->name('management.role.index');
             Route::post('/table', [RoleController::class, 'table'])->name('management.role.table');
             Route::post('/store', [RoleController::class, 'store'])->name('management.role.store');
@@ -154,7 +154,7 @@ Route::middleware('auth')->group(function () {
             Route::put('/change-password', [ProfileController::class, 'changePassword'])->name('management.profile.changePassword');
         });
 
-        Route::prefix('manage-booking')->group(function () {
+        Route::prefix('manage-booking')->middleware('permission:View Manage Booking')->group(function () {
             Route::get('/', [ManageBookingController::class, 'index'])->name('management.manage-booking.index');
             Route::post('/table', [ManageBookingController::class, 'table'])->name('management.manage-booking.table');
             Route::post('/store', [ManageBookingController::class, 'store'])->name('management.manage-booking.store');
@@ -167,7 +167,7 @@ Route::middleware('auth')->group(function () {
         });
     });
 
-    Route::prefix('booking-passenger')->group(function () {
+    Route::prefix('booking-passenger')->middleware('permission:Booking Ticket')->group(function () {
         Route::get('/{id}', [BookingPassengerController::class, 'detail'])->name('booking-passenger.detail');
         Route::get('/select-seat/{id}', [BookingPassengerController::class, 'bookingSeat'])->name('booking-passenger.booking-seat');
     });
