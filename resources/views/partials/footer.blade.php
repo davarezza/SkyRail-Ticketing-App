@@ -1,4 +1,4 @@
-<footer class="mt-8 bg-slate-50 dark:bg-black">
+<footer class="mt-8 bg-slate-50 no-print dark:bg-black">
     <div
       class="container mx-auto flex flex-col items-start space-y-12 px-8 pb-8 pt-12 md:flex-row md:space-y-0 md:space-x-12 md:px-12"
     >
@@ -14,7 +14,7 @@
           SkyFlight is your trusted partner for booking flights worldwide. Travel conveniently with affordable prices and excellent service.
         </p>
       </div>
-  
+
       <!-- Company Section -->
       <div class="w-full text-center text-slate-600 md:w-1/5 md:text-left">
         <div class="text-sm font-semibold">Company</div>
@@ -51,7 +51,7 @@
           </li>
         </ul>
       </div>
-  
+
       <!-- Services Section -->
       <div class="w-full text-center text-slate-600 md:w-1/5 md:text-left">
         <div class="text-sm font-semibold">Services</div>
@@ -88,7 +88,7 @@
           </li>
         </ul>
       </div>
-  
+
       <!-- Support Section -->
       <div class="w-full text-center text-slate-600 md:w-1/5 md:text-left">
         <div class="text-sm font-semibold text-slate-600">Support</div>
@@ -126,11 +126,11 @@
         </ul>
       </div>
     </div>
-  
+
     <!-- Footer Bottom -->
     <div
       class="container mx-auto border-t border-slate-200 p-8 text-center text-sm text-slate-600 dark:border-slate-900 md:flex-row md:px-12"
     >
       © 2025 SkyFlight. All rights reserved. | Made with ❤️ for travelers.
     </div>
-  </footer>  
+  </footer>

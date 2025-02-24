@@ -47,15 +47,16 @@ Route::prefix('dashboard')->group(function () {
 Route::prefix('booking')->group(function () {
     Route::get('/', [BookingController::class, 'index'])->name('booking.page');
     Route::get('{id}/detail', [BookingController::class, 'detail'])->name('booking.detail');
-    Route::get('payment/{id}', [BookingController::class, 'payment'])->name('booking.payment')->middleware('auth');
-    Route::get('success-payment/{id}', [BookingController::class, 'successPayment'])->name('booking.success-payment')->middleware('auth');
-    Route::get('e-ticket/{id}', [BookingController::class, 'checkTicket'])->name('booking.check-ticket')->middleware('auth');
+    Route::middleware('auth')->group(function () {
+        Route::get('payment/{id}', [BookingController::class, 'payment'])->name('booking.payment');
+        Route::get('success-payment/{id}', [BookingController::class, 'successPayment'])->name('booking.success-payment');
+        Route::get('e-ticket/{id}', [BookingController::class, 'checkTicket'])->name('booking.check-ticket');
+        Route::post('/first-booking', [BookingController::class, 'firstBooking'])->name('booking.first-booking');
+        Route::post('/second-booking', [BookingController::class, 'secondBooking'])->name('booking.second-booking');
+        Route::post('/third-booking', [BookingController::class, 'thirdBooking'])->name('booking.third-booking');
+        Route::post('/fourth-booking', [BookingController::class, 'fourthBooking'])->name('booking.fourth-booking');
+    });
     Route::get('detail-facilities/{id}', [BookingController::class, 'detailFacilities'])->name('master.transportation.detail-facilities');
-    Route::post('/first-booking', [BookingController::class, 'firstBooking'])->name('booking.first-booking')->middleware('auth');
-    Route::post('/second-booking', [BookingController::class, 'secondBooking'])->name('booking.second-booking')->middleware('auth');
-    Route::post('/third-booking', [BookingController::class, 'thirdBooking'])->name('booking.third-booking')->middleware('auth');
-    Route::post('/fourth-booking', [BookingController::class, 'fourthBooking'])->name('booking.fourth-booking')->middleware('auth');
-    Route::get('/download-ticket/{id}', [BookingController::class, 'downloadTicket'])->name('booking.download-ticket')->middleware('auth');
 });
 
 Route::middleware('auth')->group(function () {

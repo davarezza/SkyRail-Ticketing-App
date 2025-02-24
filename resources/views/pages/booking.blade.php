@@ -21,7 +21,7 @@
         <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
             <div class="relative w-full md:flex-1">
                 <select name="from" class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white">
-                    <option value="" disabled selected>Pilih Kota Asal</option>
+                    <option value="" disabled selected>Select Departure City</option>
                     @foreach ($cities as $city)
                         <option value="{{ $city }}" {{ request('from') == $city ? 'selected' : '' }}>{{ $city }}</option>
                     @endforeach
@@ -37,7 +37,7 @@
 
             <div class="relative w-full md:flex-1">
                 <select name="to" class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white">
-                    <option value="" disabled selected>Pilih Kota Tujuan</option>
+                    <option value="" disabled selected>Select Destination City</option>
                     @foreach ($cities as $city)
                         <option value="{{ $city }}" {{ request('to') == $city ? 'selected' : '' }}>{{ $city }}</option>
                     @endforeach

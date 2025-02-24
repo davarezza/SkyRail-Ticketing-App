@@ -10,7 +10,7 @@
                     <div class="relative">
                         <i class="fas fa-plane absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                         <select name="from" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white">
-                            <option value="" disabled selected>Select location</option>
+                            <option value="" disabled selected>Select Departure City</option>
                             @foreach ($cities as $city)
                                 <option value="{{ $city }}" {{ request('from') == $city ? 'selected' : '' }}>{{ $city }}</option>
                             @endforeach
@@ -18,7 +18,7 @@
                     </div>
                 </div>
 
-                <button type="button" class="h-14 w-14 flex items-center justify-center bg-gray-100 rounded-full hover:bg-gray-200 transition transform hover:scale-105 self-center">
+                <button type="button" class="h-12 w-12 flex items-center justify-center bg-gray-100 rounded-full hover:bg-gray-200 transition transform hover:scale-105 self-center">
                     <i class="fas fa-exchange-alt text-gray-600"></i>
                 </button>
 
@@ -27,7 +27,7 @@
                     <div class="relative">
                         <i class="fas fa-map-marker-alt absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
                         <select name="to" class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-white">
-                            <option value="" disabled selected>Select location</option>
+                            <option value="" disabled selected>Select Destination City</option>
                             @foreach ($cities as $city)
                                 <option value="{{ $city }}" {{ request('to') == $city ? 'selected' : '' }}>{{ $city }}</option>
                             @endforeach

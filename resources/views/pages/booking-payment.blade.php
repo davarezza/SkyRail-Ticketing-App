@@ -119,7 +119,7 @@
                                 <img src="{{ asset('assets/img/payment_logo/' . strtolower($method) . '.png') }}" class="w-8 h-8 mr-3" alt="{{ $method }}">
                                 <span class="text-lg font-medium text-gray-800">{{ $method }}</span>
                                 <div class="ml-auto">
-                                    <div class="radio-indicator w-6 h-6 rounded-full border-2 border-gray-300 flex items-center justify-center transition duration-200">
+                                    <div class="radio-indicator w-6 h-6 rounded-full border-2 border-blue-300 flex items-center justify-center transition duration-200">
                                         <div class="inner-circle w-3 h-3 rounded-full hidden transition duration-200"></div>
                                     </div>
                                 </div>

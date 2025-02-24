@@ -8,6 +8,25 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
+    public function home()
+    {
+        $destination = Destination::take(4)->get();
+
+        $cities = TravelRouteView::select('departure_city')
+                    ->union(TravelRouteView::select('objective_city'))
+                    ->distinct()
+                    ->pluck('departure_city');
+
+        $flightClasses = TravelRouteView::select('class_name')->distinct()->pluck('class_name');
+
+        return view('home', [
+            'active' => 'home',
+            'destination' => $destination,
+            'cities' => $cities,
+            'flightClasses' => $flightClasses,
+        ]);
+    }
+
     public function searchTravel(Request $request)
     {
         $request->validate([

@@ -37,8 +37,8 @@
                                         'draft' => ['text' => 'Draft', 'color' => 'bg-gray-100 text-gray-600 ring-gray-200'],
                                         'select_seat' => ['text' => 'Select Seat', 'color' => 'bg-yellow-100 text-yellow-600 ring-yellow-200'],
                                         'waiting_payment' => ['text' => 'Waiting Payment', 'color' => 'bg-orange-100 text-orange-600 ring-orange-200'],
-                                        'paid' => ['text' => 'Paid', 'color' => 'bg-blue-100 text-blue-600 ring-blue-200'],
-                                        'verified' => ['text' => 'Verified', 'color' => 'bg-green-100 text-green-600 ring-green-200'],
+                                        'paid' => ['text' => 'Paid', 'color' => 'bg-green-100 text-green-600 ring-green-200'],
+                                        'verified' => ['text' => 'Verified', 'color' => 'bg-blue-100 text-blue-600 ring-blue-200'],
                                         'expired' => ['text' => 'Expired', 'color' => 'bg-red-100 text-red-600 ring-red-200'],
                                     ];
                                 @endphp
@@ -65,7 +65,7 @@
                                 </h2>
                                 @if (in_array($booking->status, ['paid', 'verified']))
                                 <a href="{{ route('booking.check-ticket', $booking->id) }}" class="text-blue-500 text-sm font-medium hover:text-blue-600 flex items-center gap-1 group">
-                                    See details
+                                    See Detail
                                 </a>
                                 @endif
                             </div>

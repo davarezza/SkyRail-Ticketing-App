@@ -1,4 +1,4 @@
-<nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white shadow-md" id="navbar">
+<nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white shadow-md no-print" id="navbar">
     <div class="max-w-screen-lg mx-auto px-4">
         <div class="flex items-center justify-between h-16">
             <div class="text-2xl font-semibold text-black" id="logo">{{ config('app.name') }}</div>
@@ -19,7 +19,7 @@
                         @else
                             <img src="{{ asset('assets/img/user/dava.jpg') }}" class="w-12 h-12 rounded-full" alt="Profile">
                         @endif
-                    </button>                        
+                    </button>
                     <div class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300" id="profile-dropdown">
                         @can('View User Dashboard')
                             <a href="{{ route('dashboard-user.index') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">Dashboard</a>
