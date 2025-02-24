@@ -3,17 +3,38 @@
 namespace App\Http\Controllers;
 
 use App\Models\Destination;
+use App\Models\ViewModels\TravelRouteView;
 use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
-    public function home()
+    public function searchTravel(Request $request)
     {
-        $destination = Destination::take(4)->get();
+        $request->validate([
+            'from' => 'required|string',
+            'to' => 'required|string',
+            'departure_date' => 'required|date',
+            'flight_class' => 'required|string'
+        ]);
 
-        return view('home', [
-            'active' => 'home',
-            'destination' => $destination,
+        $cities = TravelRouteView::select('departure_city')
+                    ->union(TravelRouteView::select('objective_city'))
+                    ->distinct()
+                    ->pluck('departure_city');
+
+        $booking = TravelRouteView::where('departure_city', $request->from)
+                    ->where('objective_city', $request->to)
+                    ->where('departure_date', $request->departure_date)
+                    ->where('class_name', $request->flight_class)
+                    ->get();
+
+        return view('pages.booking', [
+            'booking' => $booking,
+            'from' => $request->from,
+            'to' => $request->to,
+            'departure_date' => $request->departure_date,
+            'flight_class' => $request->flight_class,
+            'cities' => $cities,
         ]);
     }
 

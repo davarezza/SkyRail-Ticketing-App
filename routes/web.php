@@ -34,6 +34,7 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::get('/', [MainController::class, 'home'])->name('home');
+Route::get('/search-travel', [MainController::class, 'searchTravel'])->name('search.travel');
 Route::get('/about', [MainController::class, 'about'])->name('about');
 
 Route::prefix('dashboard')->group(function () {

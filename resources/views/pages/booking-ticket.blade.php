@@ -49,8 +49,8 @@
                                 <span class="font-medium text-gray-800">{{ $booking->objective_city }}</span>
                             </div>
                             <div class="flex justify-between border-t border-blue-200/60 pt-3">
-                                <span class="text-gray-600">Booker Telephone</span>
-                                <span class="font-medium text-gray-800">{{ $booking->booker_telephone }}</span>
+                                <span class="text-gray-600">Booker Email</span>
+                                <span class="font-medium text-gray-800">{{ $booking->booker_email }}</span>
                             </div>
                             <div class="flex justify-between border-t border-blue-200/60 pt-3">
                                 <span class="text-gray-600">Total Amount</span>

@@ -18,12 +18,31 @@ class BookingController extends Controller
     {
         $this->service = new BookingService();
     }
-    public function index()
+    public function index(Request $request)
     {
-        $booking = TravelRouteView::all();
+        $cities = TravelRouteView::select('departure_city')
+                    ->union(TravelRouteView::select('objective_city'))
+                    ->distinct()
+                    ->pluck('departure_city');
+
+        $query = TravelRouteView::query();
+
+        if ($request->has(['from', 'to', 'departure_date', 'flight_class'])) {
+            $query->where('departure_city', $request->from)
+                  ->where('objective_city', $request->to)
+                  ->where('departure_date', $request->departure_date)
+                  ->where('class_name', $request->flight_class);
+        }
+
+        $booking = $query->get();
 
         return view('pages.booking', [
             'booking' => $booking,
+            'from' => $request->from,
+            'to' => $request->to,
+            'departure_date' => $request->departure_date,
+            'flight_class' => $request->flight_class,
+            'cities' => $cities
         ]);
     }
 
