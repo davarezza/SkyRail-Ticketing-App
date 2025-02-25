@@ -98,8 +98,10 @@
         </div>
 
         <h2 class="text-2xl font-bold mb-4">Enter Payment Amount</h2>
-        <input type="text" name="total_amount" id="total-amount" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter amount" min="1">
-        <input type="hidden" name="total_amount_input" id="total-amount-input">
+        <div>
+            <input type="text" name="total_amount" id="total-amount" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Enter amount" min="1">
+            <input type="hidden" name="total_amount_input" id="total-amount-input">
+        </div>
         <div class="flex justify-end mt-4 space-x-4">
             <button type="button" id="cancel-modal" class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg text-gray-700 transition-colors duration-200">Cancel</button>
             <button type="button" id="confirm-payment" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200">Confirm</button>

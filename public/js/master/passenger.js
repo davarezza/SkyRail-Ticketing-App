@@ -65,12 +65,6 @@ initTablePassenger = () => {
                     orderable: false,
                     className: "align-middle",
                 },
-                {
-                    data: "id",
-                    searchable: false,
-                    orderable: false,
-                    className: "align-middle",
-                },
             ],
             columnDefs: [
                 {
@@ -88,38 +82,25 @@ initTablePassenger = () => {
                     render: function (data, type, full, meta) {
                         return full.name;
                     },
-                },             
+                },
                 {
                     targets: 2,
                     render: function (data, type, full, meta) {
                         return full.email;
                     },
-                },             
+                },
                 {
                     targets: 3,
                     render: function (data, type, full, meta) {
                         return full.address;
                     },
-                },                                       
+                },
                 {
                     targets: 4,
                     render: function (data, type, full, meta) {
                         return full.telephone;
                     },
-                },             
-                {
-                    targets: 5,
-                    render: function (data, type, full, meta) {
-                        var html = `
-                            <div class="d-flex justify-content-center gap-2">
-                                <button class="btn btn-sm btn-icon btn-outline btn-outline-danger" onclick="deletePassenger('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete">
-                                    <i class="bx bx-trash"></i>
-                                </button>
-                            </div>
-                        `;
-                        return html;
-                    },
-                }
+                },
             ],
             fnCreatedRow: function (nRow, aData, iDataIndex) {
                 $(nRow).attr("id", aData[0]);

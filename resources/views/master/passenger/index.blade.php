@@ -36,7 +36,7 @@
                                     <th>Email</th>
                                     <th>Address</th>
                                     <th>Telephone</th>
-                                    <th class="text-center">Action</th>
+                                    {{-- <th class="text-center">Action</th> --}}
                                 </tr>
                             </thead>
                             <tbody>

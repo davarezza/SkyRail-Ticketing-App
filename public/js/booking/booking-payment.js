@@ -55,6 +55,16 @@ $(document).ready(function () {
         }, 300);
     }
 
+    $(document).on("click", function (event) {
+        if ($(event.target).is("#modal-payment")) {
+            hideModal();
+        }
+    });
+
+    $modalContent.on("click", function (event) {
+        event.stopPropagation();
+    });
+
     $payButton.on("click", function () {
         showModal();
     });
@@ -88,7 +98,7 @@ $(document).ready(function () {
     });
 
     $modal.on("click", function (e) {
-        if ($(e.target).is($modal)) {
+        if (!$(e.target).closest(".bg-white").length) {
             hideModal();
         }
     });

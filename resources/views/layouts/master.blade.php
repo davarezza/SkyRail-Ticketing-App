@@ -45,7 +45,7 @@
                                 @if ($image)
                                 <img src="{{ asset('assets/img/user/' . $image) }}" class="avatar img-fluid rounded-circle" alt="User Avatar" style="width: 50px; height: 50px; border: 2px solid #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
                                 @else
-                                    <img src="{{ asset('assets/img/user/dava.jpg') }}" class="avatar img-fluid rounded-circle" alt="User Avatar" style="width: 50px; height: 50px; border: 2px solid #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
+                                    <img src="{{ asset('assets/img/user/default.jpg') }}" class="avatar img-fluid rounded-circle" alt="User Avatar" style="width: 50px; height: 50px; border: 2px solid #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
                                 @endif
                             </a>
                             <div class="dropdown-menu dropdown-menu-end shadow-lg" style="border: none; border-radius: 10px; padding: 10px; min-width: 200px;">

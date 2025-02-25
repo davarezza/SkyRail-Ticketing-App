@@ -25,6 +25,8 @@ class BookingController extends Controller
                     ->distinct()
                     ->pluck('departure_city');
 
+        $flightClasses = TravelRouteView::select('class_name')->distinct()->pluck('class_name');
+
         $query = TravelRouteView::query();
 
         if ($request->has(['from', 'to', 'departure_date', 'flight_class'])) {
@@ -42,7 +44,8 @@ class BookingController extends Controller
             'to' => $request->to,
             'departure_date' => $request->departure_date,
             'flight_class' => $request->flight_class,
-            'cities' => $cities
+            'cities' => $cities,
+            'flightClasses' => $flightClasses,
         ]);
     }
 

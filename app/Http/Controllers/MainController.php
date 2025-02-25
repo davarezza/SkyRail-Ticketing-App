@@ -41,6 +41,8 @@ class MainController extends Controller
                     ->distinct()
                     ->pluck('departure_city');
 
+        $flightClasses = TravelRouteView::select('class_name')->distinct()->pluck('class_name');
+
         $booking = TravelRouteView::where('departure_city', $request->from)
                     ->where('objective_city', $request->to)
                     ->where('departure_date', $request->departure_date)
@@ -54,6 +56,7 @@ class MainController extends Controller
             'departure_date' => $request->departure_date,
             'flight_class' => $request->flight_class,
             'cities' => $cities,
+            'flightClasses' => $flightClasses,
         ]);
     }
 

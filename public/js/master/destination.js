@@ -98,31 +98,31 @@ initTableDestination = () => {
                     render: function (data, type, full, meta) {
                         return `<img src="/assets/img/destination/${full.image}" alt="Destination Image" width="120" height="auto" class="rounded">`;
                     },
-                },                           
+                },
                 {
                     targets: 2,
                     render: function (data, type, full, meta) {
                         return full.name;
                     },
-                },             
+                },
                 {
                     targets: 3,
                     render: function (data, type, full, meta) {
                         return full.location;
                     },
-                },                                       
+                },
                 {
                     targets: 4,
                     render: function (data, type, full, meta) {
                         return full.link;
                     },
-                },             
+                },
                 {
                     targets: 5,
                     render: function (data, type, full, meta) {
                         return full.popularity;
                     },
-                },             
+                },
                 {
                     targets: 6,
                     render: function (data, type, full, meta) {
@@ -194,7 +194,7 @@ formValidationAddDestination = () => {
         console.error('Form #form-add-destination not found');
         return;
     }
-    
+
     if (!submitButton) {
         console.error('Button #btn-save-destination not found');
         return;
@@ -233,6 +233,10 @@ formValidationAddDestination = () => {
                     validators: {
                         notEmpty: {
                             message: 'Priority is required'
+                        },
+                        regexp: {
+                            regexp: /^[1-5]$/,
+                            message: 'Only 1,2,3,4,5 is allowed'
                         }
                     }
                 },

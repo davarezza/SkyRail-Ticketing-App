@@ -74,8 +74,9 @@ Route::middleware('auth')->group(function () {
             Route::post('edit', [TransportationController::class, 'edit'])->name('master.transportation.edit');
             Route::post('update', [TransportationController::class, 'update'])->name('master.transportation.update');
             Route::get('detail/{id}', [TransportationController::class, 'detail'])->name('master.transportation.detail');
-            Route::post('get-data-select', [TransportationController::class, 'getDataSelect'])->name('master.transportation.get-data-select');
         });
+
+        Route::post('/transportation/get-data-select', [TransportationController::class, 'getDataSelect'])->name('master.transportation.get-data-select');
 
         Route::prefix('/transport-class')->middleware('permission:Transport Class')->group(function () {
             Route::get('/', [TransportClassController::class, 'index'])->name('master.transport-class.index');
@@ -86,7 +87,7 @@ Route::middleware('auth')->group(function () {
             Route::post('update', [TransportClassController::class, 'update'])->name('master.transport-class.update');
         });
 
-        Route::prefix('/transport-type')->middleware('permission:Transportation')->group(function () {
+        Route::prefix('/transport-type')->group(function () {
             Route::post('table', [TransportTypeController::class, 'table'])->name('transport-type.table');
             Route::post('store', [TransportTypeController::class, 'store'])->name('transport-type.store');
             Route::post('edit', [TransportTypeController::class, 'edit'])->name('transport-type.edit');
@@ -103,8 +104,9 @@ Route::middleware('auth')->group(function () {
             Route::post('edit', [TravelRouteController::class, 'edit'])->name('master.travel-route.edit');
             Route::post('update', [TravelRouteController::class, 'update'])->name('master.travel-route.update');
             Route::get('detail/{id}', [TravelRouteController::class, 'detail'])->name('master.travel-route.detail');
-            Route::post('get-data-select', [TravelRouteController::class, 'getDataSelect'])->name('master.travel-route.get-data-select');
         });
+
+        Route::post('/travel-route/get-data-select', [TravelRouteController::class, 'getDataSelect'])->name('master.travel-route.get-data-select');
 
         Route::prefix('/destination')->middleware('permission:Destination')->group(function () {
             Route::get('/', [DestinationController::class, 'index'])->name('master.destination.index');
@@ -124,14 +126,18 @@ Route::middleware('auth')->group(function () {
             Route::post('edit', [OfficerController::class, 'edit'])->name('master.officer.edit');
             Route::post('update', [OfficerController::class, 'update'])->name('master.officer.update');
             Route::get('detail/{id}', [OfficerController::class, 'detail'])->name('master.officer.detail');
-            Route::post('get-data-select', [OfficerController::class, 'getDataSelect'])->name('master.officer.get-data-select');
         });
+
+        Route::post('/officer/get-data-select', [OfficerController::class, 'getDataSelect'])->name('master.officer.get-data-select');
 
         Route::prefix('/passenger')->middleware('permission:Passenger')->group(function () {
             Route::get('/', [PassengerController::class, 'index'])->name('master.passenger.index');
             Route::post('table', [PassengerController::class, 'table'])->name('master.passenger.table');
             Route::post('delete', [PassengerController::class, 'delete'])->name('master.passenger.delete');
             Route::get('detail/{id}', [PassengerController::class, 'detail'])->name('master.passenger.detail');
+        });
+
+        Route::prefix('/passenger')->group(function () {
             Route::post('get-data-login', [PassengerController::class, 'getDataLogin'])->name('passenger.get-data-login');
             Route::post('save-data-profile', [PassengerController::class, 'saveDataProfile'])->name('passenger.save-data-profile');
         });

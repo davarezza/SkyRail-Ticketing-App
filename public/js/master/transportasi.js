@@ -107,31 +107,31 @@ initTableTransportation = () => {
                     render: function (data, type, full, meta) {
                         return `<img src="/assets/img/transport_logo/${full.logo}" alt="Transport Image" width="60" height="auto" class="rounded">`;
                     },
-                },             
+                },
                 {
                     targets: 2,
                     render: function (data, type, full, meta) {
                         return full.kode;
                     },
-                },             
+                },
                 {
                     targets: 3,
                     render: function (data, type, full, meta) {
                         return full.name;
                     },
-                },             
+                },
                 {
                     targets: 4,
                     render: function (data, type, full, meta) {
                         return full.type_name;
                     },
-                },             
+                },
                 {
                     targets: 5,
                     render: function (data, type, full, meta) {
                         return full.keterangan.length > 40 ? full.keterangan.substring(0, 40) + '...' : full.keterangan;
                     },
-                },             
+                },
                 {
                     targets: 6,
                     render: function (data, type, full, meta) {
@@ -251,7 +251,7 @@ formValidationAddTransport = () => {
         console.error('Form #form-add-transport not found');
         return;
     }
-    
+
     if (!submitButton) {
         console.error('Button #btn-save-transport not found');
         return;
@@ -771,16 +771,13 @@ initTableTransportType = () => {
                             </div>
                         `;
                     },
-                },                
+                },
                 {
                     targets: 2,
                     render: function (data, type, full, meta) {
                         var html = `
                             <button type="button" class="btn btn-sm btn-icon btn-outline btn-outline-warning" onclick="EditTransportType('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Transportation Type">
                                 <i class="ki-outline ki-pencil"></i>
-                            </button>
-                            <button class="btn btn-sm btn-icon btn-outline btn-outline-info" onclick="detailTransportType('${full.id}')" data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
-                                <i class="fa-solid fa-eye"></i>
                             </button>
                             <button type="button" class="btn btn-sm btn-icon btn-outline btn-outline-danger" onclick="deleteTransportType('${full.id}')">
                                 <i class="ki-outline ki-trash"></i>

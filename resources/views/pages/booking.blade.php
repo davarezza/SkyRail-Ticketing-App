@@ -20,7 +20,7 @@
     <form action="{{ route('search.travel') }}" method="GET" class="rounded-lg shadow-lg p-4 mb-4 border-2 border-gray-200/50 backdrop-blur-sm">
         <div class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4">
             <div class="relative w-full md:flex-1">
-                <select name="from" class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white">
+                <select id="booking-from" name="from" class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white">
                     <option value="" disabled selected>Select Departure City</option>
                     @foreach ($cities as $city)
                         <option value="{{ $city }}" {{ request('from') == $city ? 'selected' : '' }}>{{ $city }}</option>
@@ -31,12 +31,12 @@
                 </span>
             </div>
 
-            <button class="p-3 bg-gray-100 rounded-full hover:bg-gray-200 transition transform hover:scale-105">
+            <button type="button" id="swap-button" class="p-3 bg-gray-100 rounded-full hover:bg-gray-200 transition transform hover:scale-105">
                 <i class="fas fa-exchange text-gray-600"></i>
             </button>
 
             <div class="relative w-full md:flex-1">
-                <select name="to" class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white">
+                <select id="booking-to" name="to" class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white">
                     <option value="" disabled selected>Select Destination City</option>
                     @foreach ($cities as $city)
                         <option value="{{ $city }}" {{ request('to') == $city ? 'selected' : '' }}>{{ $city }}</option>
@@ -48,7 +48,7 @@
             </div>
 
             <div class="relative w-full md:flex-1">
-                <input type="date" name="departure_date" class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
+                <input id="booking-date" type="date" name="departure_date" class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"
                     value="{{ request('departure_date', '') }}" />
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                     <i class="fas fa-calendar-alt text-gray-400"></i>
@@ -56,16 +56,20 @@
             </div>
 
             <div class="relative w-full md:flex-1">
-                <select name="flight_class" class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white">
-                    <option value="economy" {{ request('flight_class') == 'economy' ? 'selected' : '' }}>Economy</option>
-                    <option value="business" {{ request('flight_class') == 'business' ? 'selected' : '' }}>Business</option>
+                <select id="booking-class" name="flight_class" class="w-full p-3 pl-10 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none bg-white">
+                    <option value="" disabled selected>Select Flight Class</option>
+                    @foreach ($flightClasses as $class)
+                        <option value="{{ $class }}" {{ request('flight_class') == $class ? 'selected' : '' }}>
+                            {{ ucfirst($class) }}
+                        </option>
+                    @endforeach
                 </select>
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3">
                     <i class="fas fa-couch text-gray-400 h-3 w-5"></i>
                 </span>
             </div>
 
-            <button type="submit" class="w-full md:w-auto p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition flex items-center justify-center transform hover:scale-105">
+            <button id="booking-search-btn" type="submit" class="w-full md:w-auto p-3 bg-gray-300 text-gray-500 rounded-lg cursor-not-allowed transition-all duration-300 ease-in-out flex items-center justify-center transform" disabled>
                 <i class="fas fa-search h-5 w-5"></i>
             </button>
         </div>
@@ -95,9 +99,6 @@
         <h2 class="text-2xl font-semibold text-gray-800">Oops! Route Not Found</h2>
         <p class="text-gray-600 mt-2">We couldn't find any flights that match your search.</p>
         <p class="text-gray-600">Try changing the date or flight class for more results.</p>
-        <a href="{{ route('home') }}" class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg shadow-md">
-            Back to Home
-        </a>
     </div>
     @else
     @foreach ($booking as $book)
@@ -154,4 +155,39 @@
 @endsection
 
 @push('scripts')
+<script>
+    $(document).ready(function () {
+        const $from = $("#booking-from");
+        const $to = $("#booking-to");
+        const $departureDate = $("#booking-date");
+        const $flightClass = $("#booking-class");
+        const $searchButton = $("#booking-search-btn");
+        const $swapButton = $("#swap-button");
+
+        $swapButton.on("click", function () {
+            let fromValue = $from.val();
+            let toValue = $to.val();
+
+            $from.val(toValue).trigger("change");
+            $to.val(fromValue).trigger("change");
+        });
+
+        function checkForm() {
+            if ($from.val() && $to.val() && $departureDate.val() && $flightClass.val()) {
+                $searchButton.prop("disabled", false);
+                $searchButton.removeClass("bg-gray-300 text-gray-500 cursor-not-allowed");
+                $searchButton.addClass("bg-blue-500 text-white hover:bg-blue-600 shadow-lg scale-105");
+            } else {
+                $searchButton.prop("disabled", true);
+                $searchButton.removeClass("bg-blue-500 text-white hover:bg-blue-600 shadow-lg scale-105");
+                $searchButton.addClass("bg-gray-300 text-gray-500 cursor-not-allowed");
+            }
+        }
+
+        $from.on("change", checkForm);
+        $to.on("change", checkForm);
+        $departureDate.on("input", checkForm);
+        $flightClass.on("change", checkForm);
+    });
+</script>
 @endpush

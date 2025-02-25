@@ -17,7 +17,7 @@
                         @if ($image)
                             <img src="{{ asset('assets/img/user/' . $image) }}" class="w-12 h-12 rounded-full" alt="Profile">
                         @else
-                            <img src="{{ asset('assets/img/user/dava.jpg') }}" class="w-12 h-12 rounded-full" alt="Profile">
+                            <img src="{{ asset('assets/img/user/default.jpg') }}" class="w-12 h-12 rounded-full" alt="Profile">
                         @endif
                     </button>
                     <div class="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg opacity-0 invisible transition-all duration-300" id="profile-dropdown">

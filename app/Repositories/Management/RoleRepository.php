@@ -69,13 +69,13 @@ class RoleRepository extends BaseRepository
     public function delete($request)
     {
         $role = $this->model->find($request);
-    
+
         if ($role) {
             $role->permissions()->detach();
             $opr = $role->delete();
             return $opr;
         }
-    
+
         return false;
     }
 
@@ -113,7 +113,7 @@ class RoleRepository extends BaseRepository
     }
 
     public function getData($request){
-        $opr = $this->model->get();
+        $opr = $this->model->where('id', 1)->get();
 
         return $opr;
     }

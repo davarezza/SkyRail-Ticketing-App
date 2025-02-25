@@ -50,7 +50,7 @@
                             @if($image)
                                 <img src="{{ asset('assets/img/user/' . $image) }}" alt="Profile" class="w-full h-full object-cover object-center">
                             @else
-                            <img src="{{ asset('assets/img/user/dava.jpg') }}" alt="Profile" class="w-full h-full object-cover object-center">
+                            <img src="{{ asset('assets/img/user/default.jpg') }}" alt="Profile" class="w-full h-full object-cover object-center">
                             @endif
                         </div>
                         <label for="imageInput" class="absolute bottom-0 right-0 p-2 bg-blue-500 rounded-full cursor-pointer hover:bg-blue-600 transition-colors">
@@ -77,20 +77,20 @@
                 <form action="{{ route('management.profile.update') }}" method="POST" class="space-y-4">
                     @csrf
                     @method('PATCH')
-        
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-base font-semibold text-gray-700">Full Name</label>
-                            <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="Full Name" 
+                            <input type="text" name="name" id="name" value="{{ old('name') }}" placeholder="Full Name"
                                 class="mt-2 block w-full px-3 py-2 text-base rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-blue-500 shadow-sm hover:border-gray-400 transition-colors bg-white">
                             @error('name')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
-        
+
                         <div>
                             <label class="block text-base font-semibold text-gray-700">Username</label>
-                            <input type="text" name="username" id="username" value="{{ old('username') }}" placeholder="Username" 
+                            <input type="text" name="username" id="username" value="{{ old('username') }}" placeholder="Username"
                                 class="mt-2 block w-full px-3 py-2 text-base rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:ring-blue-500 shadow-sm hover:border-gray-400 transition-colors bg-white">
                             @error('username')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
@@ -107,7 +107,7 @@
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
-                    
+
                         <div>
                             <label class="block text-base font-semibold text-gray-700">Birth Date</label>
                             <input type="date" name="birth_date" id="birth_date" value="{{ old('birth_date') }}"
@@ -116,8 +116,8 @@
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
-                    </div>                    
-        
+                    </div>
+
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-base font-semibold text-gray-700">Gender</label>
@@ -129,7 +129,7 @@
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
-        
+
                         <div>
                             <label class="block text-base font-semibold text-gray-700">Phone Number</label>
                             <input type="tel" name="telephone" id="telephone" value="{{ old('telephone') }}" placeholder="08xxxxxxxxxx"
@@ -148,13 +148,13 @@
                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
-        
+
                     <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all font-semibold text-base shadow-md hover:shadow-lg">
                         Save Changes
                     </button>
                 </form>
             </div>
-        </div>        
+        </div>
 
         <!-- Password Change Section -->
         <div class="bg-white rounded-lg shadow-lg border-2 border-gray-200/50 backdrop-blur-sm md:col-span-2">
@@ -163,7 +163,7 @@
                 <form action="{{ route('management.profile.changePassword') }}" method="POST" class="space-y-4">
                     @csrf
                     @method('PUT')
-                    
+
                     <div class="grid gap-4 md:grid-cols-3">
                         <div>
                             <label class="block text-base font-semibold text-gray-700">Current Password</label>
@@ -178,7 +178,7 @@
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
-        
+
                         <div>
                             <label class="block text-base font-semibold text-gray-700">New Password</label>
                             <div class="relative">
@@ -192,7 +192,7 @@
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
-        
+
                         <div>
                             <label class="block text-base font-semibold text-gray-700">Confirm New Password</label>
                             <div class="relative">
@@ -204,7 +204,7 @@
                             </div>
                         </div>
                     </div>
-        
+
                     <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all font-semibold text-base shadow-md hover:shadow-lg">
                         Update Password
                     </button>
@@ -229,11 +229,11 @@
         function togglePasswordVisibility(buttonId, inputId) {
             const button = document.getElementById(buttonId);
             const input = document.getElementById(inputId);
-            
+
             button.addEventListener('click', function() {
                 const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
                 input.setAttribute('type', type);
-                
+
                 button.textContent = type === 'password' ? '👁' : '🙈';
             });
         }
